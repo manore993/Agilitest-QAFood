@@ -10,4 +10,4 @@ created -> 2024-07-24 at 17:32:07
 
 callscript -> subscripts.AccessWebsiteAndLogin -> assets:///data/data_construction_de_commande/AccessWebsiteLogin.csv
 click -> A [href = https://pprod.aldemia.fr/]
-callscript -> subscripts.ChoisserLesArticles
+callscript -> subscripts.ChoisserLesArticles -> assets:///data/data_construction_de_commande/ChoissirLesArticles.csv

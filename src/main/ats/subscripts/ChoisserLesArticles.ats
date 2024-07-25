@@ -6,12 +6,13 @@ created -> 2024-07-24 at 15:22:37
 [ats-variables]
 
 var -> propertyVar1
+var -> FoodItem -> 12 wings
 
 [ats-actions]
 
-click -> A [@index = 2, data-title = ]
-property-get -> display => propertyVar1 -> a -> li [class = cart_item rpress_checkout]
-property-get -> display => propertyVar1
-callscript [if(propertyVar1 != block)] -> subscripts.ParametreDeCommande -> assets:///data/data_construction_de_commande/ParametreDeCommande.csv
-callscript -> subscripts.ChoissirLesToppings -> assets:///data/data_construction_de_commande/ChoissirLesTopping.csv
+click [try = 24] -> A [@index = 2, data-title = $param(FoodItem)]
+property-get [nofail] -> text => propertyVar1 -> H2 [text = Vos paramètres de commande]
+callscript [if(propertyVar1 == Vos paramètres de commande)] -> subscripts.ParametreDeCommande -> assets:///data/data_construction_de_commande/ParametreDeCommande.csv
+click [try = 2] -> INPUT [type = button, value = +]
+click [nofail, delay = 6] -> LABEL [class = checkbox-container, text = $param(Toppings)] -> FORM [id = fooditem-details]
 click -> A [href = javascript:void(0);]
