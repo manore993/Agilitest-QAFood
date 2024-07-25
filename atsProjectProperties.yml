@@ -1,0 +1,11 @@
+variables:
+  suites: ConstructionDeCommande,suite
+  domain: com.functional
+  name: QAFOOD
+  description: Testing food ordering website.
+  scriptPrefix: Tc
+  logsType: term
+  version: 0.0.1
+  useProjectDomain: 'false'
+  uuid: 6F5263FF-9AB2-03EE-6227-DAD693CB9170
+  useMaven: 'false'

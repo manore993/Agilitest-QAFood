@@ -1,0 +1,16 @@
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
+<suite name="ConstructionDeCommande" verbose="0" id="AGT-8A2E94F4-2617-A54A-57E3-DAE6A6295CEB" version="ats2">
+  <parameter name="ats.suite.date.order" value=""/>
+  <parameter name="ats.suite.description" value=""/>
+  <parameter name="ats.log.level" value="silent"/>
+  <test name="ParametrDeCommandApparisePourPremierArticle">
+    <classes>
+      <class name="ParametrDeCommandApparisePourPremierArticle"/>
+    </classes>
+  </test>
+  <test name="AjouterMultipleArticleAvecMultipleToppings">
+    <classes>
+      <class name="AjouterMultipleArticleAvecMultipleToppings"/>
+    </classes>
+  </test>
+</suite>

@@ -1,0 +1,16 @@
+<?xml version = '1.0' encoding = 'UTF-8' ?>
+<atsProject>
+  <domain>com.functional</domain>
+  <name>QAFOOD</name>
+  <version>0.0.1</version>
+  <description>Testing food ordering website.</description>
+  <useMaven>false</useMaven>
+  <useProjectDomain>false</useProjectDomain>
+  <uuid>6F5263FF-9AB2-03EE-6227-DAD693CB9170</uuid>
+  <scriptPrefix>Tc</scriptPrefix>
+  <logsType>term</logsType>
+  <groups>
+    <group tag="DEF" color="green" description="">default</group>
+  </groups>
+  <environment/>
+</atsProject>

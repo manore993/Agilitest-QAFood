@@ -1,0 +1,17 @@
+[ats-header]
+
+author -> AishwaryaMANORE
+created -> 2024-07-24 at 15:22:37
+
+[ats-variables]
+
+var -> propertyVar1
+
+[ats-actions]
+
+click -> A [@index = 2, data-title = ]
+property-get -> display => propertyVar1 -> a -> li [class = cart_item rpress_checkout]
+property-get -> display => propertyVar1
+callscript [if(propertyVar1 != block)] -> subscripts.ParametreDeCommande -> assets:///data/data_construction_de_commande/ParametreDeCommande.csv
+callscript -> subscripts.ChoissirLesToppings -> assets:///data/data_construction_de_commande/ChoissirLesTopping.csv
+click -> A [href = javascript:void(0);]

@@ -1,0 +1,15 @@
+[ats-header]
+
+author -> AishwaryaMANORE
+created -> 2024-07-24 at 10:02:17
+
+[ats-variables]
+
+var -> LiversionOuEmporter -> Livraison
+var -> Temps -> 19:00
+
+[ats-actions]
+
+click -> A [text = $param(LiveraisonOuEmporter)]
+select -> text =~ $param(Temps) -> SELECT [id = rpress-delivery-hours]
+click -> A [text = Mettre à jour]

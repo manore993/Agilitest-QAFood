@@ -1,0 +1,17 @@
+[ats-header]
+
+author -> AishwaryaMANORE
+created -> 2024-07-22 at 17:00:50
+
+[ats-variables]
+
+var -> FoodItem -> Feuilletés poulet bacon
+
+[ats-actions]
+
+callscript -> subscripts.AccessWebsiteAndLogin -> assets:///data/data_construction_de_commande/AccessWebsiteLogin.csv
+click -> A [href = https://pprod.aldemia.fr/]
+click -> A [@index = 2, data-title = $var(FoodItem)]
+callscript -> subscripts.ParametreDeCommande -> assets:///data/data_construction_de_commande/ParametreDeCommande.csv
+click -> LABEL [class = checkbox-container, text = Sauce douce]
+click -> A [href = javascript:void(0);]

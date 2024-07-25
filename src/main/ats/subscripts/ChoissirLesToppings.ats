@@ -1,0 +1,12 @@
+[ats-header]
+
+author -> AishwaryaMANORE
+created -> 2024-07-24 at 17:53:08
+
+[ats-variables]
+
+var -> Toppings -> Sauce douce
+
+[ats-actions]
+
+click -> LABEL [class = checkbox-container, text = $param(Toppings)]
