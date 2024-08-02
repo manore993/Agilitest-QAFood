@@ -1,0 +1,26 @@
+[ats-header]
+
+author -> AishwaryaMANORE
+created -> 2024-07-31 at 14:22:12
+
+[ats-variables]
+
+var -> FoodItem
+
+[ats-actions]
+
+channel-start -> new-channel -> $param(Browser)
+goto-url -> https://pprod.aldemia.fr/
+click [left = 96, top = 37] -> A [href = https://pprod.aldemia.fr/login/]
+keyboard -> $param(EmailID) -> INPUT [name = rpress_user_login, type = text]
+keyboard -> $param(Password) -> INPUT [name = rpress_user_pass, type = password]
+click -> INPUT [type = submit, value = Connexion]
+click -> A [href = https://pprod.aldemia.fr/]
+click -> A [@index = 2, data-title = $param(FoodItem)]
+click -> A [text = $param(LiveraisonOuEmporter)]
+select [nofail, keep-select] -> text =~ $param(Temps) -> SELECT [id = rpress-delivery-hours]
+select [nofail] -> text =~ $param(Temps) -> SELECT [id = rpress-pickup-hours]
+click -> A [text = Mettre à jour]
+click -> LABEL [class = checkbox-container, text = $param(Toppings)]
+click -> A [href = javascript:void(0);]
+channel-close -> new-channel

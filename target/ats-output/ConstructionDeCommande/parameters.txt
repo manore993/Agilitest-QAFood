@@ -1,0 +1,6 @@
+#Fri Aug 02 16:06:13 CEST 2024
+ats.log.level=all
+ats.suite.date.order=
+ats.suite.description=
+visual.report=1
+xml.report=true

@@ -1,0 +1,12 @@
+[ats-header]
+
+author -> AishwaryaMANORE
+created -> 2024-07-31 at 14:15:23
+
+[ats-variables]
+
+var -> FoodItem
+
+[ats-actions]
+
+callscript -> subscripts.TesterLeParametreDeCommandeSubscript -> assets:///data/data_construction_de_commande/TesterParametreDeCommand.csv

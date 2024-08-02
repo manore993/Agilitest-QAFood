@@ -1,0 +1,11 @@
+[ats-header]
+
+author -> AishwaryaMANORE
+created -> 2024-07-31 at 17:34:09
+
+[ats-variables]
+
+
+[ats-actions]
+
+callscript -> subscripts.TesterAjouterMultipleArticleAvecMultipleToppingsSubscript -> assets:///data/data_construction_de_commande/TesterAjouterMultipleArticleAvecMultipleToppings.csv
