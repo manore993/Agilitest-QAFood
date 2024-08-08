@@ -12,5 +12,9 @@
   <groups>
     <group tag="DEF" color="green" description="">default</group>
   </groups>
-  <environment/>
+  <environment>
+    <property>Browser</property>
+    <property>username</property>
+    <property>password</property>
+  </environment>
 </atsProject>

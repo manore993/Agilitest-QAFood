@@ -1,0 +1,19 @@
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
+<suite name="ConstructionDeCommandeSuite3" verbose="0" id="AGT-D12D17C5-28C1-6A43-826B-321F79D433FF" version="ats2">
+  <parameter name="password" value="user1"/>
+  <parameter name="username" value="user1@test.com"/>
+  <parameter name="Browser" value="firefox"/>
+  <parameter name="ats.suite.date.order" value=""/>
+  <parameter name="ats.suite.description" value=""/>
+  <parameter name="ats.log.level" value="silent"/>
+  <test name="construction_de_commande.TesterLeParametreDeCommand">
+    <classes>
+      <class name="construction_de_commande.TesterLeParametreDeCommand"/>
+    </classes>
+  </test>
+  <test name="construction_de_commande.TesterAjouterMultipleArticleAvecMultipleToppings">
+    <classes>
+      <class name="construction_de_commande.TesterAjouterMultipleArticleAvecMultipleToppings"/>
+    </classes>
+  </test>
+</suite>

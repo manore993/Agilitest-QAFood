@@ -20,23 +20,23 @@
       <![CDATA[- Subscript -> {"called":"subscripts.TesterLeParametreDeCommandeSubscript","iteration":"2/2","type":"dataFile","url":"C:\\Users\\AishwaryaMANORE\\Documents\\AgilitestProjects\\QAFOOD\\target\\classes\\assets\\data\\data_construction_de_commande\\TesterParametreDeCommand.csv","parameters":[{"Browser":"chrome"},{"EmailID":"aishwarya.manore@aldemia.fr"},{"Password":"Password"},{"FoodItem":"12 wings"},{"LiveraisonOuEmporter":"À emporter"},{"Temps":"18:30"},{"Toppings":"Ketchup"}],"name":"construction_de_commande.TesterLeParametreDeCommand","line":0}]]>
     </line>
   </reporter-output>
-  <suite started-at="2024-08-02T16:03:52 CEST" name="ConstructionDeCommande" finished-at="2024-08-02T16:08:04 CEST" duration-ms="252368">
+  <suite started-at="2024-08-07T15:20:57 CEST" name="ConstructionDeCommande" finished-at="2024-08-07T15:25:12 CEST" duration-ms="254361">
     <groups>
     </groups>
-    <test started-at="2024-08-02T16:03:52 CEST" name="construction_de_commande.TesterAjouterMultipleArticleAvecMultipleToppings" finished-at="2024-08-02T16:06:13 CEST" duration-ms="140875">
+    <test started-at="2024-08-07T15:20:57 CEST" name="construction_de_commande.TesterAjouterMultipleArticleAvecMultipleToppings" finished-at="2024-08-07T15:23:21 CEST" duration-ms="144007">
       <class name="construction_de_commande.TesterAjouterMultipleArticleAvecMultipleToppings">
-        <test-method is-config="true" signature="beforeClass(org.testng.ITestContext)[pri:0, instance:construction_de_commande.TesterAjouterMultipleArticleAvecMultipleToppings@431cd9b2]" started-at="2024-08-02T16:03:52 CEST" name="beforeClass" test-instance-name="construction_de_commande.TesterAjouterMultipleArticleAvecMultipleToppings" finished-at="2024-08-02T16:03:52 CEST" duration-ms="22" status="PASS">
+        <test-method is-config="true" signature="beforeClass(org.testng.ITestContext)[pri:0, instance:construction_de_commande.TesterAjouterMultipleArticleAvecMultipleToppings@5c7933ad]" started-at="2024-08-07T15:20:57 CEST" name="beforeClass" test-instance-name="construction_de_commande.TesterAjouterMultipleArticleAvecMultipleToppings" finished-at="2024-08-07T15:20:57 CEST" duration-ms="25" status="PASS">
           <params>
             <param index="0">
               <value>
-                <![CDATA[org.testng.TestRunner@4ae2c01b]]>
+                <![CDATA[org.testng.TestRunner@2d7aa291]]>
               </value>
             </param>
           </params>
           <reporter-output>
           </reporter-output>
         </test-method> <!-- beforeClass -->
-        <test-method signature="TcTesterAjouterMultipleArticleAvecMultipleToppings()[pri:0, instance:construction_de_commande.TesterAjouterMultipleArticleAvecMultipleToppings@431cd9b2]" started-at="2024-08-02T16:03:52 CEST" name="TcTesterAjouterMultipleArticleAvecMultipleToppings" test-instance-name="construction_de_commande.TesterAjouterMultipleArticleAvecMultipleToppings" finished-at="2024-08-02T16:05:49 CEST" duration-ms="116584" status="PASS">
+        <test-method signature="TcTesterAjouterMultipleArticleAvecMultipleToppings()[pri:0, instance:construction_de_commande.TesterAjouterMultipleArticleAvecMultipleToppings@5c7933ad]" started-at="2024-08-07T15:20:57 CEST" name="TcTesterAjouterMultipleArticleAvecMultipleToppings" test-instance-name="construction_de_commande.TesterAjouterMultipleArticleAvecMultipleToppings" finished-at="2024-08-07T15:22:55 CEST" duration-ms="117552" status="PASS">
           <reporter-output>
             <line>
               <![CDATA[- Subscript -> {"called":"subscripts.TesterAjouterMultipleArticleAvecMultipleToppingsSubscript","iteration":"1/2","type":"dataFile","url":"C:\\Users\\AishwaryaMANORE\\Documents\\AgilitestProjects\\QAFOOD\\target\\classes\\assets\\data\\data_construction_de_commande\\TesterAjouterMultipleArticleAvecMultipleToppings.csv","parameters":[{"FoodItem":"12 wings"},{"Topping1":"Ketchup"},{"Topping2":"Sauce douce"},{"Topping3":"Sauce piquante"}],"name":"construction_de_commande.TesterAjouterMultipleArticleAvecMultipleToppings","line":0}]]>
@@ -52,15 +52,15 @@
             </line>
           </reporter-output>
         </test-method> <!-- TcTesterAjouterMultipleArticleAvecMultipleToppings -->
-        <test-method is-config="true" signature="cleanup()[pri:0, instance:construction_de_commande.TesterAjouterMultipleArticleAvecMultipleToppings@431cd9b2]" started-at="2024-08-02T16:05:49 CEST" name="cleanup" test-instance-name="construction_de_commande.TesterAjouterMultipleArticleAvecMultipleToppings" finished-at="2024-08-02T16:06:13 CEST" duration-ms="24195" status="PASS">
+        <test-method is-config="true" signature="cleanup()[pri:0, instance:construction_de_commande.TesterAjouterMultipleArticleAvecMultipleToppings@5c7933ad]" started-at="2024-08-07T15:22:55 CEST" name="cleanup" test-instance-name="construction_de_commande.TesterAjouterMultipleArticleAvecMultipleToppings" finished-at="2024-08-07T15:23:21 CEST" duration-ms="26339" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- cleanup -->
-        <test-method is-config="true" signature="afterClass(org.testng.ITestContext)[pri:0, instance:construction_de_commande.TesterAjouterMultipleArticleAvecMultipleToppings@431cd9b2]" started-at="2024-08-02T16:06:13 CEST" name="afterClass" test-instance-name="construction_de_commande.TesterAjouterMultipleArticleAvecMultipleToppings" finished-at="2024-08-02T16:06:13 CEST" duration-ms="8" status="PASS">
+        <test-method is-config="true" signature="afterClass(org.testng.ITestContext)[pri:0, instance:construction_de_commande.TesterAjouterMultipleArticleAvecMultipleToppings@5c7933ad]" started-at="2024-08-07T15:23:21 CEST" name="afterClass" test-instance-name="construction_de_commande.TesterAjouterMultipleArticleAvecMultipleToppings" finished-at="2024-08-07T15:23:21 CEST" duration-ms="12" status="PASS">
           <params>
             <param index="0">
               <value>
-                <![CDATA[org.testng.TestRunner@4ae2c01b]]>
+                <![CDATA[org.testng.TestRunner@2d7aa291]]>
               </value>
             </param>
           </params>
@@ -69,24 +69,24 @@
         </test-method> <!-- afterClass -->
       </class> <!-- construction_de_commande.TesterAjouterMultipleArticleAvecMultipleToppings -->
     </test> <!-- construction_de_commande.TesterAjouterMultipleArticleAvecMultipleToppings -->
-    <test started-at="2024-08-02T16:06:13 CEST" name="construction_de_commande.TesterLeParametreDeCommand" finished-at="2024-08-02T16:08:04 CEST" duration-ms="111380">
+    <test started-at="2024-08-07T15:23:21 CEST" name="construction_de_commande.TesterLeParametreDeCommand" finished-at="2024-08-07T15:25:12 CEST" duration-ms="110243">
       <class name="construction_de_commande.TesterLeParametreDeCommand">
-        <test-method is-config="true" signature="beforeSuite()[pri:0, instance:construction_de_commande.TesterLeParametreDeCommand@416c58f5]" started-at="2024-08-02T16:03:52 CEST" name="beforeSuite" test-instance-name="construction_de_commande.TesterLeParametreDeCommand" finished-at="2024-08-02T16:03:52 CEST" duration-ms="122" status="PASS">
+        <test-method is-config="true" signature="beforeSuite()[pri:0, instance:construction_de_commande.TesterLeParametreDeCommand@2bb3058]" started-at="2024-08-07T15:20:57 CEST" name="beforeSuite" test-instance-name="construction_de_commande.TesterLeParametreDeCommand" finished-at="2024-08-07T15:20:57 CEST" duration-ms="140" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- beforeSuite -->
-        <test-method is-config="true" signature="beforeClass(org.testng.ITestContext)[pri:0, instance:construction_de_commande.TesterLeParametreDeCommand@416c58f5]" started-at="2024-08-02T16:06:13 CEST" name="beforeClass" test-instance-name="construction_de_commande.TesterLeParametreDeCommand" finished-at="2024-08-02T16:06:13 CEST" duration-ms="10" status="PASS">
+        <test-method is-config="true" signature="beforeClass(org.testng.ITestContext)[pri:0, instance:construction_de_commande.TesterLeParametreDeCommand@2bb3058]" started-at="2024-08-07T15:23:21 CEST" name="beforeClass" test-instance-name="construction_de_commande.TesterLeParametreDeCommand" finished-at="2024-08-07T15:23:21 CEST" duration-ms="9" status="PASS">
           <params>
             <param index="0">
               <value>
-                <![CDATA[org.testng.TestRunner@1cab19e2]]>
+                <![CDATA[org.testng.TestRunner@1ba7db2a]]>
               </value>
             </param>
           </params>
           <reporter-output>
           </reporter-output>
         </test-method> <!-- beforeClass -->
-        <test-method signature="TcTesterLeParametreDeCommand()[pri:0, instance:construction_de_commande.TesterLeParametreDeCommand@416c58f5]" started-at="2024-08-02T16:06:13 CEST" name="TcTesterLeParametreDeCommand" test-instance-name="construction_de_commande.TesterLeParametreDeCommand" finished-at="2024-08-02T16:07:39 CEST" duration-ms="85605" status="PASS">
+        <test-method signature="TcTesterLeParametreDeCommand()[pri:0, instance:construction_de_commande.TesterLeParametreDeCommand@2bb3058]" started-at="2024-08-07T15:23:21 CEST" name="TcTesterLeParametreDeCommand" test-instance-name="construction_de_commande.TesterLeParametreDeCommand" finished-at="2024-08-07T15:24:44 CEST" duration-ms="82201" status="PASS">
           <reporter-output>
             <line>
               <![CDATA[- Subscript -> {"called":"subscripts.TesterLeParametreDeCommandeSubscript","iteration":"1/2","type":"dataFile","url":"C:\\Users\\AishwaryaMANORE\\Documents\\AgilitestProjects\\QAFOOD\\target\\classes\\assets\\data\\data_construction_de_commande\\TesterParametreDeCommand.csv","parameters":[{"Browser":"chrome"},{"EmailID":"aishwarya.manore@aldemia.fr"},{"Password":"Password"},{"FoodItem":"Feuilletés poulet bacon"},{"LiveraisonOuEmporter":"Livraison"},{"Temps":"19:30"},{"Toppings":"Sauce douce"}],"name":"construction_de_commande.TesterLeParametreDeCommand","line":0}]]>
@@ -96,22 +96,22 @@
             </line>
           </reporter-output>
         </test-method> <!-- TcTesterLeParametreDeCommand -->
-        <test-method is-config="true" signature="cleanup()[pri:0, instance:construction_de_commande.TesterLeParametreDeCommand@416c58f5]" started-at="2024-08-02T16:07:39 CEST" name="cleanup" test-instance-name="construction_de_commande.TesterLeParametreDeCommand" finished-at="2024-08-02T16:08:04 CEST" duration-ms="25736" status="PASS">
+        <test-method is-config="true" signature="cleanup()[pri:0, instance:construction_de_commande.TesterLeParametreDeCommand@2bb3058]" started-at="2024-08-07T15:24:44 CEST" name="cleanup" test-instance-name="construction_de_commande.TesterLeParametreDeCommand" finished-at="2024-08-07T15:25:12 CEST" duration-ms="28001" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- cleanup -->
-        <test-method is-config="true" signature="afterClass(org.testng.ITestContext)[pri:0, instance:construction_de_commande.TesterLeParametreDeCommand@416c58f5]" started-at="2024-08-02T16:08:04 CEST" name="afterClass" test-instance-name="construction_de_commande.TesterLeParametreDeCommand" finished-at="2024-08-02T16:08:04 CEST" duration-ms="6" status="PASS">
+        <test-method is-config="true" signature="afterClass(org.testng.ITestContext)[pri:0, instance:construction_de_commande.TesterLeParametreDeCommand@2bb3058]" started-at="2024-08-07T15:25:12 CEST" name="afterClass" test-instance-name="construction_de_commande.TesterLeParametreDeCommand" finished-at="2024-08-07T15:25:12 CEST" duration-ms="7" status="PASS">
           <params>
             <param index="0">
               <value>
-                <![CDATA[org.testng.TestRunner@1cab19e2]]>
+                <![CDATA[org.testng.TestRunner@1ba7db2a]]>
               </value>
             </param>
           </params>
           <reporter-output>
           </reporter-output>
         </test-method> <!-- afterClass -->
-        <test-method is-config="true" signature="afterSuite()[pri:0, instance:construction_de_commande.TesterLeParametreDeCommand@416c58f5]" started-at="2024-08-02T16:08:04 CEST" name="afterSuite" test-instance-name="construction_de_commande.TesterLeParametreDeCommand" finished-at="2024-08-02T16:08:04 CEST" duration-ms="23" status="PASS">
+        <test-method is-config="true" signature="afterSuite()[pri:0, instance:construction_de_commande.TesterLeParametreDeCommand@2bb3058]" started-at="2024-08-07T15:25:12 CEST" name="afterSuite" test-instance-name="construction_de_commande.TesterLeParametreDeCommand" finished-at="2024-08-07T15:25:12 CEST" duration-ms="21" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- afterSuite -->

@@ -1,2 +1,2 @@
-{"name":"construction_de_commande.TesterAjouterMultipleArticleAvecMultipleToppings","suite":"ConstructionDeCommande","duration":"140819","passed":true,"actions":23}
-{"name":"construction_de_commande.TesterLeParametreDeCommand","suite":"ConstructionDeCommande","duration":"111359","passed":true,"actions":30}
+{"name":"construction_de_commande.TesterAjouterMultipleArticleAvecMultipleToppings","suite":"ConstructionDeCommande","duration":"143951","passed":true,"actions":23}
+{"name":"construction_de_commande.TesterLeParametreDeCommand","suite":"ConstructionDeCommande","duration":"110218","passed":true,"actions":30}

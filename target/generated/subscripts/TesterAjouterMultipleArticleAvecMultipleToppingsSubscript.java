@@ -29,8 +29,8 @@ public class TesterAjouterMultipleArticleAvecMultipleToppingsSubscript extends A
 
 	/**
 	* Test Name : <b>subscripts.TesterAjouterMultipleArticleAvecMultipleToppingsSubscript</b>
-	* Generated at : <b>2 août 2024, 16:03:01</b>
-	* Script created at : 2 août 2024, 16:03:01
+	* Generated at : <b>7 août 2024, 15:20:47</b>
+	* Script created at : 1 août 2002, 10:23:03
 	* 
 	* @author	AishwaryaMANORE
 	*/

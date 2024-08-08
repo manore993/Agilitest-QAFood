@@ -29,8 +29,8 @@ public class TesterAjouterMultipleArticleAvecMultipleToppings extends ActionTest
 
 	/**
 	* Test Name : <b>construction_de_commande.TesterAjouterMultipleArticleAvecMultipleToppings</b>
-	* Generated at : <b>2 août 2024, 16:03:01</b>
-	* Script created at : 31 juil. 2220, 17:00:09
+	* Generated at : <b>7 août 2024, 15:20:47</b>
+	* Script created at : 31 juil. 2024, 17:34:09
 	* 
 	* @author	AishwaryaMANORE
 	*/

@@ -29,7 +29,7 @@ public class AjouterMultipleArticleAvecMultipleToppings extends ActionTestScript
 
 	/**
 	* Test Name : <b>construction_de_commande.AjouterMultipleArticleAvecMultipleToppings</b>
-	* Generated at : <b>2 août 2024, 16:03:01</b>
+	* Generated at : <b>7 août 2024, 15:20:47</b>
 	* Script created at : 24 juil. 2024, 17:32:07
 	* 
 	* @author	AishwaryaMANORE

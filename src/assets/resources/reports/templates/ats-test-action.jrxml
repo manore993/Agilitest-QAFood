@@ -1,0 +1,408 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.21.2.final using JasperReports Library version 6.21.2-8434a0bd7c3bbc37cbf916f2968d35e4b165821a  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="ats-action" pageWidth="1000" pageHeight="1000" columnWidth="1000" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0" uuid="8cbf351f-5191-4cc1-8af0-7c9f249183de">
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="AtsDataAdapter.jrdax"/>
+	<property name="com.jaspersoft.studio.unit." value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.pageHeight" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.pageWidth" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.topMargin" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.bottomMargin" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.leftMargin" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.rightMargin" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.columnWidth" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.columnSpacing" value="pixel"/>
+	<import value="java.nio.file.Files"/>
+	<import value="java.nio.file.Paths"/>
+	<import value="java.lang.String"/>
+	<import value="java.nio.file.Path"/>
+	<style name="ats-default" isDefault="true" mode="Opaque" forecolor="#5E5E5E" fontName="DejaVu Sans" fontSize="12" isBold="true"/>
+	<style name="alternate">
+		<conditionalStyle>
+			<conditionExpression><![CDATA[$V{REPORT_COUNT}%2 == 1]]></conditionExpression>
+			<style mode="Opaque" backcolor="#E3E3E8"/>
+		</conditionalStyle>
+		<conditionalStyle>
+			<conditionExpression><![CDATA[$V{REPORT_COUNT}%2 == 0]]></conditionExpression>
+			<style mode="Opaque" backcolor="#F2F2F2"/>
+		</conditionalStyle>
+	</style>
+	<style name="action_status" mode="Opaque" backcolor="#C47776">
+		<conditionalStyle>
+			<conditionExpression><![CDATA[$F{type}.contains("ActionComment") || $F{type}.contains("ActionCallscript")]]></conditionExpression>
+			<style mode="Opaque" backcolor="#A3A3A3"/>
+		</conditionalStyle>
+		<conditionalStyle>
+			<conditionExpression><![CDATA[$F{passed}==true]]></conditionExpression>
+			<style mode="Opaque" backcolor="#9CBF3F"/>
+		</conditionalStyle>
+		<conditionalStyle>
+			<conditionExpression><![CDATA[!$F{passed} && $F{stop}]]></conditionExpression>
+			<style/>
+		</conditionalStyle>
+		<conditionalStyle>
+			<conditionExpression><![CDATA[!$F{passed} && !$F{stop}]]></conditionExpression>
+			<style backcolor="#C8BD57"/>
+		</conditionalStyle>
+	</style>
+	<parameter name="projectId" class="java.lang.String" isForPrompting="false">
+		<defaultValueExpression><![CDATA["o"]]></defaultValueExpression>
+	</parameter>
+	<parameter name="reportLevel" class="java.lang.String"/>
+	<queryString language="xPath">
+		<![CDATA[/]]>
+	</queryString>
+	<field name="type" class="java.lang.String">
+		<property name="net.sf.jasperreports.xpath.field.expression" value="@type"/>
+		<fieldDescription><![CDATA[@type]]></fieldDescription>
+	</field>
+	<field name="line" class="java.lang.Integer">
+		<property name="net.sf.jasperreports.xpath.field.expression" value="line"/>
+		<fieldDescription><![CDATA[line]]></fieldDescription>
+	</field>
+	<field name="duration" class="java.lang.Long">
+		<fieldDescription><![CDATA[duration]]></fieldDescription>
+	</field>
+	<field name="imgData" class="java.lang.String">
+		<fieldDescription><![CDATA[img/@src]]></fieldDescription>
+	</field>
+	<field name="imgType" class="java.lang.String">
+		<fieldDescription><![CDATA[img/@type]]></fieldDescription>
+	</field>
+	<field name="imgWidth" class="java.lang.Integer">
+		<fieldDescription><![CDATA[img/@width]]></fieldDescription>
+	</field>
+	<field name="imgHeight" class="java.lang.Integer">
+		<fieldDescription><![CDATA[img/@height]]></fieldDescription>
+	</field>
+	<field name="script" class="java.lang.String">
+		<fieldDescription><![CDATA[script]]></fieldDescription>
+	</field>
+	<field name="passed" class="java.lang.Boolean">
+		<fieldDescription><![CDATA[passed]]></fieldDescription>
+	</field>
+	<field name="stop" class="java.lang.Boolean">
+		<fieldDescription><![CDATA[stop]]></fieldDescription>
+	</field>
+	<field name="value" class="java.lang.String">
+		<fieldDescription><![CDATA[value]]></fieldDescription>
+	</field>
+	<field name="data" class="java.lang.String">
+		<fieldDescription><![CDATA[data]]></fieldDescription>
+	</field>
+	<field name="appName" class="java.lang.String">
+		<fieldDescription><![CDATA[dataJson/parameter[@type='app']/@value]]></fieldDescription>
+	</field>
+	<field name="appIcon" class="java.lang.String">
+		<fieldDescription><![CDATA[dataJson/parameter[@type='appIcon']/@value]]></fieldDescription>
+	</field>
+	<field name="appVersion" class="java.lang.String">
+		<fieldDescription><![CDATA[dataJson/parameter[@type='appVersion']/@value]]></fieldDescription>
+	</field>
+	<field name="elementTag" class="java.lang.String">
+		<fieldDescription><![CDATA[element/@tag]]></fieldDescription>
+	</field>
+	<field name="elementCriterias" class="java.lang.String">
+		<fieldDescription><![CDATA[element/criterias]]></fieldDescription>
+	</field>
+	<field name="channelName" class="java.lang.String">
+		<fieldDescription><![CDATA[dataJson/parameter[@type='name']/@value]]></fieldDescription>
+	</field>
+	<field name="assetFile" class="java.lang.String">
+		<fieldDescription><![CDATA[dataJson/parameter[@type='asset']/@value]]></fieldDescription>
+	</field>
+	<field name="imgId" class="java.lang.String">
+		<fieldDescription><![CDATA[img/@id]]></fieldDescription>
+	</field>
+	<variable name="duration" class="java.lang.Integer" calculation="Sum">
+		<variableExpression><![CDATA[$F{duration}]]></variableExpression>
+		<initialValueExpression><![CDATA[0]]></initialValueExpression>
+	</variable>
+	<variable name="actionType" class="java.lang.String" incrementType="Report">
+		<variableExpression><![CDATA[$F{type}.split( "\\." )[4]]]></variableExpression>
+		<initialValueExpression><![CDATA["..."]]></initialValueExpression>
+	</variable>
+	<variable name="screenId" class="java.lang.String">
+		<variableExpression><![CDATA["screen_" + $V{REPORT_COUNT}]]></variableExpression>
+	</variable>
+	<variable name="reportLevel" class="java.lang.String"/>
+	<detail>
+		<band height="192" splitType="Prevent">
+			<property name="com.jaspersoft.studio.unit.height" value="px"/>
+			<rectangle radius="8">
+				<reportElement style="alternate" mode="Opaque" x="20" y="10" width="979" height="170" uuid="25e11946-b998-4338-a471-35b602ec5594">
+					<property name="com.jaspersoft.studio.unit.x" value="px"/>
+					<property name="com.jaspersoft.studio.unit.y" value="px"/>
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<graphicElement>
+					<pen lineWidth="0.0"/>
+				</graphicElement>
+			</rectangle>
+			<componentElement>
+				<reportElement mode="Transparent" x="730" y="90" width="40" height="45" uuid="fcea83df-6bc0-4324-b129-53f273887e35"/>
+				<hc:html xmlns:hc="http://jasperreports.sourceforge.net/htmlcomponent" xsi:schemaLocation="http://jasperreports.sourceforge.net/htmlcomponent http://jasperreports.sourceforge.net/xsd/htmlcomponent.xsd" scaleType="Clip" horizontalAlign="Left" verticalAlign="Middle">
+					<hc:htmlContentExpression><![CDATA["<div id=component-info style='display: none'>"+$V{actionType}+"</div>"]]></hc:htmlContentExpression>
+				</hc:html>
+			</componentElement>
+			<rectangle radius="3">
+				<reportElement style="action_status" x="32" y="20" width="748" height="30" uuid="8f41bcc6-c1a8-41f0-94c4-803efa3b434e">
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+					<property name="com.jaspersoft.studio.unit.x" value="px"/>
+					<property name="com.jaspersoft.studio.unit.y" value="px"/>
+				</reportElement>
+				<graphicElement>
+					<pen lineWidth="0.0"/>
+				</graphicElement>
+			</rectangle>
+			<rectangle radius="3">
+				<reportElement style="action_status" x="32" y="20" width="957" height="30" uuid="05f42c95-6b48-4b36-a425-7c8936b1b402">
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+					<property name="com.jaspersoft.studio.unit.x" value="px"/>
+					<property name="com.jaspersoft.studio.unit.y" value="px"/>
+					<printWhenExpression><![CDATA[!$P{reportLevel}.equals( "3" )]]></printWhenExpression>
+				</reportElement>
+				<graphicElement>
+					<pen lineWidth="0.0"/>
+				</graphicElement>
+			</rectangle>
+			<textField>
+				<reportElement style="action_status" mode="Transparent" x="40" y="25" width="654" height="30" forecolor="#FAFAFA" backcolor="#6E6B6B" uuid="f486cee5-b5ea-4af2-82fa-ea7fa898223d">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="062faa0e-56de-411d-81b5-e0c06e58efdf"/>
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+					<property name="com.jaspersoft.studio.unit.y" value="px"/>
+					<property name="com.jaspersoft.studio.unit.x" value="px"/>
+				</reportElement>
+				<box topPadding="0" leftPadding="0"/>
+				<textElement markup="styled">
+					<font size="18" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{actionType} +($F{duration} ==0L?"":" <style forecolor='#efefef' size='12' isItalic='true' isBold='false'>(executed in " + $F{duration}  + " ms)</style>")]]></textFieldExpression>
+			</textField>
+			<textField textAdjust="ScaleFont" hyperlinkType="Reference" hyperlinkTarget="Blank">
+				<reportElement style="ats-default" mode="Transparent" x="32" y="55" width="748" height="15" forecolor="#5E5E5E" uuid="854b79cc-8c1b-4300-834c-98f7b862772a">
+					<printWhenExpression><![CDATA[$P{reportLevel}.equals( "3" )]]></printWhenExpression>
+				</reportElement>
+				<box leftPadding="6"/>
+				<textElement>
+					<font size="12" isBold="true" isItalic="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{script} + " (" + $F{line} + ")"]]></textFieldExpression>
+				<hyperlinkReferenceExpression><![CDATA["ats://"+$P{projectId} + "/script/" + $F{script} +"/" + $F{line}]]></hyperlinkReferenceExpression>
+			</textField>
+			<frame>
+				<reportElement mode="Transparent" x="40" y="80" width="650" height="50" uuid="f8a25330-78d3-4e0c-ae10-e32fb2543f4d">
+					<property name="com.jaspersoft.studio.unit.x" value="px"/>
+					<property name="com.jaspersoft.studio.unit.y" value="px"/>
+					<printWhenExpression><![CDATA[$F{type}.contains( "ActionChannelStart" ) && !$P{reportLevel}.equals( "1" )]]></printWhenExpression>
+				</reportElement>
+				<textField>
+					<reportElement mode="Transparent" x="55" y="3" width="408" height="23" uuid="51f5d591-dc19-44ef-b209-2d7f042960a1"/>
+					<textElement markup="styled">
+						<font size="14" isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{channelName}]]></textFieldExpression>
+				</textField>
+				<componentElement>
+					<reportElement style="ats-default" stretchType="ElementGroupHeight" mode="Transparent" x="14" y="5" width="32" height="32" backcolor="#FFFFFF" uuid="02b251d9-912b-4c08-a2be-1fbbe31a8f98">
+						<property name="com.jaspersoft.studio.unit.width" value="px"/>
+						<property name="com.jaspersoft.studio.unit.height" value="px"/>
+						<property name="com.jaspersoft.studio.unit.x" value="px"/>
+						<property name="com.jaspersoft.studio.unit.y" value="px"/>
+					</reportElement>
+					<hc:html xmlns:hc="http://jasperreports.sourceforge.net/htmlcomponent" xsi:schemaLocation="http://jasperreports.sourceforge.net/htmlcomponent http://jasperreports.sourceforge.net/xsd/htmlcomponent.xsd" scaleType="Clip" horizontalAlign="Left" verticalAlign="Middle">
+						<hc:htmlContentExpression><![CDATA["<div><img src='data:image/png;base64,"+$F{appIcon}+"' alt='loading...' height='"+"32"+"' width='"+"32"+"'><div onclick='clicme()'></div></div>"]]></hc:htmlContentExpression>
+					</hc:html>
+				</componentElement>
+				<textField>
+					<reportElement mode="Transparent" x="55" y="22" width="408" height="16" uuid="ef24a302-3272-4968-8236-2deca9251f34"/>
+					<textElement>
+						<font size="11" isBold="false" isItalic="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{appName} + ($F{appVersion}==null ? "":" - " +$F{appVersion})]]></textFieldExpression>
+				</textField>
+			</frame>
+			<frame>
+				<reportElement mode="Transparent" x="40" y="75" width="650" height="50" uuid="b9b8ca9b-1bb5-42bf-a217-a82b205ac32f">
+					<property name="com.jaspersoft.studio.unit.y" value="px"/>
+					<property name="com.jaspersoft.studio.unit.x" value="px"/>
+					<printWhenExpression><![CDATA[$F{type}.contains( "ActionMouse" ) && !$P{reportLevel}.equals( "1" )]]></printWhenExpression>
+				</reportElement>
+				<textField hyperlinkType="Reference" hyperlinkTarget="Blank">
+					<reportElement style="ats-default" mode="Transparent" x="20" y="26" width="630" height="23" uuid="3d8921e0-0bf3-4f9c-81d4-9eb16a7552bd">
+						<property name="com.jaspersoft.studio.unit.y" value="px"/>
+						<property name="com.jaspersoft.studio.unit.x" value="px"/>
+					</reportElement>
+					<textFieldExpression><![CDATA[$F{value}]]></textFieldExpression>
+					<hyperlinkReferenceExpression><![CDATA[$F{value}]]></hyperlinkReferenceExpression>
+				</textField>
+				<staticText>
+					<reportElement mode="Transparent" x="19" y="10" width="200" height="16" forecolor="#35535E" uuid="3da58803-9a7d-40c1-817b-96e4bd52b04b">
+						<property name="com.jaspersoft.studio.unit.height" value="px"/>
+						<property name="com.jaspersoft.studio.unit.x" value="px"/>
+						<property name="com.jaspersoft.studio.unit.y" value="px"/>
+					</reportElement>
+					<box topPadding="0"/>
+					<textElement>
+						<font size="11" isBold="true"/>
+					</textElement>
+					<text><![CDATA[Mouse action:]]></text>
+				</staticText>
+			</frame>
+			<componentElement>
+				<reportElement mode="Transparent" x="50" y="85" width="650" height="70" uuid="9208a8c3-7b0b-4338-a07c-db6b5884f8a1">
+					<property name="com.jaspersoft.studio.unit.y" value="px"/>
+					<property name="com.jaspersoft.studio.unit.x" value="px"/>
+					<printWhenExpression><![CDATA[$F{type}.contains( "ActionComment" )]]></printWhenExpression>
+				</reportElement>
+				<hc:html xmlns:hc="http://jasperreports.sourceforge.net/htmlcomponent" xsi:schemaLocation="http://jasperreports.sourceforge.net/htmlcomponent http://jasperreports.sourceforge.net/xsd/htmlcomponent.xsd" scaleType="Clip" horizontalAlign="Left" verticalAlign="Middle">
+					<hc:htmlContentExpression><![CDATA["<div id='action-comment-section'>"+$F{data}+"</div>"]]></hc:htmlContentExpression>
+				</hc:html>
+			</componentElement>
+			<frame>
+				<reportElement mode="Transparent" x="45" y="80" width="650" height="50" uuid="113efa77-61a3-4b3d-8c1f-c8a99a8cc6c4">
+					<property name="com.jaspersoft.studio.unit.y" value="px"/>
+					<property name="com.jaspersoft.studio.unit.x" value="px"/>
+					<printWhenExpression><![CDATA[$F{type}.contains( "ActionCallscript" ) && !$P{reportLevel}.equals( "1" )]]></printWhenExpression>
+				</reportElement>
+				<textField textAdjust="StretchHeight" hyperlinkType="" hyperlinkTarget="">
+					<reportElement style="ats-default" mode="Transparent" x="20" y="10" width="630" height="26" uuid="65c7adca-782d-49dd-a675-a23b10d50c22">
+						<property name="com.jaspersoft.studio.unit.x" value="px"/>
+						<property name="com.jaspersoft.studio.unit.y" value="px"/>
+					</reportElement>
+					<textFieldExpression><![CDATA[$F{value}]]></textFieldExpression>
+					<hyperlinkReferenceExpression><![CDATA[$F{value}]]></hyperlinkReferenceExpression>
+				</textField>
+				<textField textAdjust="StretchHeight" hyperlinkType="" hyperlinkTarget="">
+					<reportElement style="ats-default" mode="Transparent" x="20" y="35" width="630" height="26" uuid="f8149230-48ce-483a-8b7d-2ac92b733479">
+						<property name="com.jaspersoft.studio.unit.x" value="px"/>
+						<property name="com.jaspersoft.studio.unit.y" value="px"/>
+					</reportElement>
+					<textFieldExpression><![CDATA[$F{assetFile}]]></textFieldExpression>
+					<hyperlinkReferenceExpression><![CDATA[$F{value}]]></hyperlinkReferenceExpression>
+				</textField>
+			</frame>
+			<frame>
+				<reportElement mode="Transparent" x="32" y="120" width="648" height="59" uuid="dd9c279d-5af0-44b8-b292-14908ce9035a">
+					<printWhenExpression><![CDATA[$F{elementTag}!=null && !$P{reportLevel}.equals( "1" )]]></printWhenExpression>
+				</reportElement>
+				<textField>
+					<reportElement style="ats-default" mode="Transparent" x="20" y="26" width="625" height="24" uuid="ba9d4b74-7d5d-4a7b-bde9-25e3a2e87bf2">
+						<property name="com.jaspersoft.studio.unit.x" value="px"/>
+					</reportElement>
+					<textFieldExpression><![CDATA[$F{elementCriterias}]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement mode="Transparent" x="19" y="10" width="200" height="16" forecolor="#35535E" uuid="354935bb-16bc-4302-8d19-a7d372e977ba">
+						<property name="com.jaspersoft.studio.unit.height" value="px"/>
+						<property name="com.jaspersoft.studio.unit.y" value="px"/>
+						<property name="com.jaspersoft.studio.unit.x" value="px"/>
+					</reportElement>
+					<box topPadding="0"/>
+					<textElement>
+						<font size="11" isBold="true"/>
+					</textElement>
+					<text><![CDATA[Element:]]></text>
+				</staticText>
+			</frame>
+			<frame>
+				<reportElement mode="Transparent" x="32" y="75" width="650" height="50" uuid="17cc3d0e-432d-4f9f-b326-776c50e63c3d">
+					<property name="com.jaspersoft.studio.unit.x" value="px"/>
+					<property name="com.jaspersoft.studio.unit.y" value="px"/>
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+					<printWhenExpression><![CDATA[$F{type}.contains( "ActionGotoUrl" ) && !$P{reportLevel}.equals( "1" )]]></printWhenExpression>
+				</reportElement>
+				<staticText>
+					<reportElement mode="Transparent" x="19" y="10" width="200" height="16" forecolor="#35535E" uuid="340f4954-0580-408a-97f1-b24bd62bb166">
+						<property name="com.jaspersoft.studio.unit.height" value="px"/>
+						<property name="com.jaspersoft.studio.unit.x" value="px"/>
+						<property name="com.jaspersoft.studio.unit.y" value="px"/>
+					</reportElement>
+					<box topPadding="0"/>
+					<textElement>
+						<font size="11" isBold="true"/>
+					</textElement>
+					<text><![CDATA[Goto Url:]]></text>
+				</staticText>
+				<textField hyperlinkType="Reference" hyperlinkTarget="Blank">
+					<reportElement style="ats-default" mode="Transparent" x="19" y="26" width="630" height="23" uuid="46316f85-6e34-4292-b53d-814b6562b87e">
+						<property name="com.jaspersoft.studio.unit.x" value="px"/>
+						<property name="com.jaspersoft.studio.unit.y" value="px"/>
+					</reportElement>
+					<textFieldExpression><![CDATA[$F{value}]]></textFieldExpression>
+					<hyperlinkReferenceExpression><![CDATA[$F{value}]]></hyperlinkReferenceExpression>
+				</textField>
+			</frame>
+			<image>
+				<reportElement stretchType="ContainerHeight" isPrintRepeatedValues="false" mode="Transparent" x="790" y="20" width="200" height="150" isPrintWhenDetailOverflows="true" uuid="bc478d3b-2519-4a8e-be86-f7638d9a2ee0">
+					<printWhenExpression><![CDATA[!$F{imgType}.contains(  "mpeg"  ) && !$F{imgType}.contains( "api" ) && $P{reportLevel}.equals( "3" )]]></printWhenExpression>
+				</reportElement>
+				<imageExpression><![CDATA[$F{imgData}]]></imageExpression>
+				<hyperlinkTooltipExpression><![CDATA[$V{screenId}]]></hyperlinkTooltipExpression>
+			</image>
+			<textField>
+				<reportElement mode="Transparent" x="790" y="20" width="200" height="150" backcolor="rgba(255, 255, 255, 0.0)" uuid="16c03e28-59c9-4539-9dd4-36504b00a6fd">
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+					<printWhenExpression><![CDATA[$F{imgData} == null && !$F{imgType}.contains( "api" ) && $P{reportLevel}.equals( "3" )]]></printWhenExpression>
+				</reportElement>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="24"/>
+				</textElement>
+				<textFieldExpression><![CDATA["No Image"]]></textFieldExpression>
+			</textField>
+			<componentElement>
+				<reportElement x="790" y="20" width="200" height="150" uuid="aaf9503a-d5a9-446d-b15e-9e2e4e0f11f2">
+					<printWhenExpression><![CDATA[$F{imgType}.contains( "mpeg" ) && $P{reportLevel}.equals( "3" )]]></printWhenExpression>
+				</reportElement>
+				<hc:html xmlns:hc="http://jasperreports.sourceforge.net/htmlcomponent" xsi:schemaLocation="http://jasperreports.sourceforge.net/htmlcomponent http://jasperreports.sourceforge.net/xsd/htmlcomponent.xsd" scaleType="Clip" horizontalAlign="Left" verticalAlign="Middle">
+					<hc:htmlContentExpression><![CDATA["<div class='overlay-video'><video style='width: 200px' class='cursor image-style image video' alt='video unavailable or loading ...' loading='lazy' src='data:video/mp4;base64,videoPlaceholder"+$F{imgId}+"' id='"+$F{imgId}+"' controls='controls'></video><div class='hover cursor' onclick='openModalVid(&quot;"+$F{imgId}+"&quot;)'></div></div>"]]></hc:htmlContentExpression>
+				</hc:html>
+			</componentElement>
+			<componentElement>
+				<reportElement mode="Transparent" x="790" y="20" width="200" height="150" uuid="aaf9503a-d5a9-446d-b15e-9e2e4e0f11f2">
+					<printWhenExpression><![CDATA[$F{imgType}.contains( "api" ) && $P{reportLevel}.equals( "3" )]]></printWhenExpression>
+				</reportElement>
+				<hc:html xmlns:hc="http://jasperreports.sourceforge.net/htmlcomponent" xsi:schemaLocation="http://jasperreports.sourceforge.net/htmlcomponent http://jasperreports.sourceforge.net/xsd/htmlcomponent.xsd" scaleType="Clip" horizontalAlign="Left" verticalAlign="Middle">
+					<hc:htmlContentExpression><![CDATA["<span class='api-icon'></span>"]]></hc:htmlContentExpression>
+				</hc:html>
+			</componentElement>
+			<textField textAdjust="ScaleFont" hyperlinkType="Reference" hyperlinkTarget="Blank">
+				<reportElement style="ats-default" mode="Transparent" x="32" y="55" width="956" height="15" forecolor="#5E5E5E" uuid="4de8bf76-7456-4ce6-b4e3-d1fbce0d6d3c">
+					<printWhenExpression><![CDATA[!$P{reportLevel}.equals( "3" )]]></printWhenExpression>
+				</reportElement>
+				<box leftPadding="6"/>
+				<textElement>
+					<font size="12" isBold="true" isItalic="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{script} + " (" + $F{line} + ")"]]></textFieldExpression>
+				<hyperlinkReferenceExpression><![CDATA["ats://"+$P{projectId} + "/script/" + $F{script} +"/" + $F{line}]]></hyperlinkReferenceExpression>
+			</textField>
+			<componentElement>
+				<reportElement mode="Transparent" x="757" y="20" width="25" height="25" uuid="c889e8b5-3a9e-49ab-bcce-15ff6997aaae">
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+					<property name="com.jaspersoft.studio.unit.x" value="px"/>
+					<printWhenExpression><![CDATA[!$F{type}.contains( "ActionComment" ) && $P{reportLevel}.equals( "3" )]]></printWhenExpression>
+				</reportElement>
+				<hc:html xmlns:hc="http://jasperreports.sourceforge.net/htmlcomponent" xsi:schemaLocation="http://jasperreports.sourceforge.net/htmlcomponent http://jasperreports.sourceforge.net/xsd/htmlcomponent.xsd" scaleType="Clip" horizontalAlign="Left" verticalAlign="Middle">
+					<hc:htmlContentExpression><![CDATA["<div style='display: none;' id='header-icon-div'>" +$F{type}+" "+$F{passed} +" "+$F{stop} +"</div>"]]></hc:htmlContentExpression>
+				</hc:html>
+			</componentElement>
+			<componentElement>
+				<reportElement mode="Transparent" x="965" y="20" width="25" height="25" uuid="153d107b-ef78-4289-a1ae-4b817fdb6535">
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+					<printWhenExpression><![CDATA[!$F{type}.contains( "ActionComment" ) && !$P{reportLevel}.equals( "3" )]]></printWhenExpression>
+				</reportElement>
+				<hc:html xmlns:hc="http://jasperreports.sourceforge.net/htmlcomponent" xsi:schemaLocation="http://jasperreports.sourceforge.net/htmlcomponent http://jasperreports.sourceforge.net/xsd/htmlcomponent.xsd" scaleType="Clip" horizontalAlign="Left" verticalAlign="Middle">
+					<hc:htmlContentExpression><![CDATA["<div style='display: none;' id='header-icon-div'>" +$F{type}+" "+$F{passed} +" "+$F{stop} +"</div>"]]></hc:htmlContentExpression>
+				</hc:html>
+			</componentElement>
+		</band>
+	</detail>
+</jasperReport>

@@ -9,7 +9,7 @@ var -> propertyVar1
 
 [ats-actions]
 
-channel-start -> new-channel -> chrome
+channel-start -> new-channel -> $env(Browser)
 goto-url -> https://pprod.aldemia.fr/
 click -> A [href = https://pprod.aldemia.fr/]
 click [try = 1] -> A [@index = 2, data-title = $param(FoodItem)]

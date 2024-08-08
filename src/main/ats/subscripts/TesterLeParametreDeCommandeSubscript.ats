@@ -9,11 +9,11 @@ var -> FoodItem
 
 [ats-actions]
 
-channel-start -> new-channel -> $param(Browser)
+channel-start -> new-channel -> $env(Browser)
 goto-url -> https://pprod.aldemia.fr/
 click [left = 96, top = 37] -> A [href = https://pprod.aldemia.fr/login/]
-keyboard -> $param(EmailID) -> INPUT [name = rpress_user_login, type = text]
-keyboard -> $param(Password) -> INPUT [name = rpress_user_pass, type = password]
+keyboard -> $param(EmailID) -> INPUT [name = rpress_user_login, type = $env(username)]
+keyboard -> $param(Password) -> INPUT [name = rpress_user_pass, type = $env(password)]
 click -> INPUT [type = submit, value = Connexion]
 click -> A [href = https://pprod.aldemia.fr/]
 click -> A [@index = 2, data-title = $param(FoodItem)]

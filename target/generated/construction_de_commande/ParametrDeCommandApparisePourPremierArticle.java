@@ -29,8 +29,8 @@ public class ParametrDeCommandApparisePourPremierArticle extends ActionTestScrip
 
 	/**
 	* Test Name : <b>construction_de_commande.ParametrDeCommandApparisePourPremierArticle</b>
-	* Generated at : <b>2 août 2024, 16:03:01</b>
-	* Script created at : 31 juil. 2220, 17:00:09
+	* Generated at : <b>7 août 2024, 15:20:47</b>
+	* Script created at : 22 juil. 2002, 17:00:50
 	* 
 	* @author	AishwaryaMANORE
 	*/

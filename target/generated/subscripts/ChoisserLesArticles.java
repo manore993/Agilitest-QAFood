@@ -29,8 +29,8 @@ public class ChoisserLesArticles extends ActionTestScript{
 
 	/**
 	* Test Name : <b>subscripts.ChoisserLesArticles</b>
-	* Generated at : <b>2 août 2024, 16:03:01</b>
-	* Script created at : 2 août 2024, 16:03:01
+	* Generated at : <b>7 août 2024, 15:20:47</b>
+	* Script created at : 24 juil. 2002, 15:22:37
 	* 
 	* @author	AishwaryaMANORE
 	*/

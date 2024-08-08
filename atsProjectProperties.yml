@@ -1,5 +1,5 @@
 variables:
-  suites: ConstructionDeCommande,suite
+  suites: ConstructionDeCommandeSuite1,ConstructionDeCommandeSuite2,ConstructionDeCommandeSuite3,ConstructionDeCommandeSuite4,suite
   domain: com.functional
   name: QAFOOD
   description: Testing food ordering website.
