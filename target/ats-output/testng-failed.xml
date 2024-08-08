@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
+<suite name="Failed suite [ConstructionDeCommandeSuite1]" guice-stage="DEVELOPMENT" verbose="10">
+  <parameter name="password" value="user1"/>
+  <parameter name="ats.suite.date.order" value=""/>
+  <parameter name="ats.log.level" value="all"/>
+  <parameter name="ats.suite.description" value="On browser Chrome with user1"/>
+  <parameter name="username" value="user1@test.com"/>
+  <parameter name="Browser" value="chrome"/>
+  <test thread-count="5" name="construction_de_commande.TesterLeParametreDeCommand(failed)" verbose="10">
+    <classes>
+      <class name="construction_de_commande.TesterLeParametreDeCommand">
+        <methods>
+          <include name="cleanup"/>
+          <include name="beforeClass"/>
+          <include name="afterClass"/>
+          <include name="beforeSuite"/>
+          <include name="TcTesterLeParametreDeCommand"/>
+          <include name="afterSuite"/>
+        </methods>
+      </class> <!-- construction_de_commande.TesterLeParametreDeCommand -->
+    </classes>
+  </test> <!-- construction_de_commande.TesterLeParametreDeCommand(failed) -->
+</suite> <!-- Failed suite [ConstructionDeCommandeSuite1] -->

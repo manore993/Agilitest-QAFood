@@ -6,17 +6,19 @@ created -> 2024-08-01 at 10:23:03
 [ats-variables]
 
 var -> propertyVar1
+var -> iter -> $iteration
 
 [ats-actions]
 
 channel-start -> new-channel -> $env(Browser)
 goto-url -> https://pprod.aldemia.fr/
-click -> A [href = https://pprod.aldemia.fr/]
 click [try = 1] -> A [@index = 2, data-title = $param(FoodItem)]
-property-get [nofail] -> text => propertyVar1 -> H2 [text = Vos paramètres de commande]
-callscript [if(propertyVar1 == Vos paramètres de commande)] -> subscripts.ParametreDeCommande -> assets:///data/data_construction_de_commande/ParametreDeCommande.csv
+callscript [if(iter == 1)] -> subscripts.ParametreDeCommande -> assets:///data/data_construction_de_commande/ParametreDeCommande.csv
 click [try = 2] -> INPUT [type = button, value = +]
-click [nofail, delay = 6] -> LABEL [class = checkbox-container, text = $param(Topping1)] -> FORM [id = fooditem-details]
-click [nofail, delay = 6] -> LABEL [class = checkbox-container, text = $param(Topping2)] -> FORM [id = fooditem-details]
-click [nofail, delay = 6] -> LABEL [class = checkbox-container, text = $param(Topping3)] -> FORM [id = fooditem-details]
+click [nofail] -> LABEL [class = checkbox-container, text = $param(Topping1)] -> FORM [id = fooditem-details]
+click [nofail] -> LABEL [class = checkbox-container, text = $param(Topping2)] -> FORM [id = fooditem-details]
+click [nofail] -> LABEL [class = checkbox-container, text = $param(Topping3)] -> FORM [id = fooditem-details]
 click -> A [href = javascript:void(0);]
+//click -> A [href = https://pprod.aldemia.fr/]
+//property-get [nofail] -> text => propertyVar1 -> H2 [text = Vos paramètres de commande]
+//callscript [if(propertyVar1 == Vos paramètres de commande)] -> subscripts.ParametreDeCommande -> assets:///data/data_construction_de_commande/ParametreDeCommande.csv

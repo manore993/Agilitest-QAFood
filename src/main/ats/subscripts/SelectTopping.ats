@@ -1,0 +1,11 @@
+[ats-header]
+
+author -> AishwaryaMANORE
+created -> 2024-08-08 at 17:10:42
+
+[ats-variables]
+
+
+[ats-actions]
+
+click [nofail] -> LABEL [class = checkbox-container, text = $param(Topping)] -> FORM [id = fooditem-details]
