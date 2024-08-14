@@ -1,11 +1,11 @@
 <!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
-<suite name="ConstructionDeCommandeSuite4" verbose="0" id="AGT-5B7D363E-B1EE-EE54-DF6B-321F928AC9A3" version="ats2">
+<suite name="ConstructionDeCommandeSuite4" verbose="1" id="AGT-5B7D363E-B1EE-EE54-DF6B-321F928AC9A3" version="ats2">
   <parameter name="password" value="user2"/>
   <parameter name="username" value="user2@test.com"/>
   <parameter name="Browser" value="firefox"/>
   <parameter name="ats.suite.date.order" value=""/>
   <parameter name="ats.suite.description" value=""/>
-  <parameter name="ats.log.level" value="silent"/>
+  <parameter name="ats.log.level" value="error"/>
   <test name="construction_de_commande.TesterLeParametreDeCommand">
     <classes>
       <class name="construction_de_commande.TesterLeParametreDeCommand"/>

@@ -1,11 +1,11 @@
 <!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
-<suite name="ConstructionDeCommandeSuite2" verbose="0" id="AGT-F61170F5-D4EC-BAA2-DFBE-321F3726F563" version="ats2">
+<suite name="ConstructionDeCommandeSuite2" verbose="1" id="AGT-F61170F5-D4EC-BAA2-DFBE-321F3726F563" version="ats2">
   <parameter name="password" value="user2"/>
   <parameter name="username" value="user2@test.com"/>
   <parameter name="Browser" value="chrome"/>
   <parameter name="ats.suite.date.order" value=""/>
   <parameter name="ats.suite.description" value=""/>
-  <parameter name="ats.log.level" value="silent"/>
+  <parameter name="ats.log.level" value="error"/>
   <test name="construction_de_commande.TesterLeParametreDeCommand">
     <classes>
       <class name="construction_de_commande.TesterLeParametreDeCommand"/>

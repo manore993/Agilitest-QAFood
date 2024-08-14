@@ -1,6 +1,14 @@
 <!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
-<suite name="suite" verbose="5" id="AGT-2531E18F-2E4D-D526-B794-3D4FA09C9955" version="ats2">
+<suite name="suite" verbose="1" id="AGT-2531E18F-2E4D-D526-B794-3D4FA09C9955" version="ats2">
+  <parameter name="password" value="user123"/>
+  <parameter name="username" value="user1@gmail.com"/>
+  <parameter name="Browser" value="chrome"/>
   <parameter name="ats.suite.date.order" value=""/>
   <parameter name="ats.suite.description" value=""/>
-  <parameter name="ats.log.level" value="warning"/>
+  <parameter name="ats.log.level" value="error"/>
+  <test name="construction_de_commande.TesterLeParametreDeCommand">
+    <classes>
+      <class name="construction_de_commande.TesterLeParametreDeCommand"/>
+    </classes>
+  </test>
 </suite>

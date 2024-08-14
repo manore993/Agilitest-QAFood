@@ -1,7 +1,0 @@
-#Thu Aug 08 16:29:43 CEST 2024
-Browser=chrome
-ats.log.level=all
-ats.suite.date.order=
-ats.suite.description=On browser Chrome with user1
-password=user1
-username=AishwaryaMANORE

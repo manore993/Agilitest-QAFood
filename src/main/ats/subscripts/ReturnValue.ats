@@ -1,0 +1,14 @@
+[ats-header]
+
+author -> AishwaryaMANORE
+created -> 2024-08-12 at 11:47:37
+
+[ats-variables]
+
+
+[ats-actions]
+
+
+[ats-returns]
+
+return -> $param(0)

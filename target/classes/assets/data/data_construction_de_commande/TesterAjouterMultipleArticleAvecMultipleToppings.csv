@@ -1,3 +1,3 @@
-"<FoodItem>",<Topping1>,<Topping2>,<Topping3>,<ToppingFilePath>
-12 wings,Ketchup,Sauce douce,Sauce piquante,Topping1.csv
-Feuilletés poulet bacon,Ketchup,,,Topping2.csv
+"<FoodItem>",<Toppings>,<ToppingFilePath>
+12 wings,Ketchup;Sauce douce;Sauce piquante,Topping1.csv
+Feuilletés poulet bacon,Ketchup,Topping2.csv

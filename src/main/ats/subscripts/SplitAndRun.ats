@@ -1,0 +1,15 @@
+[ats-header]
+
+author -> AishwaryaMANORE
+created -> 2024-08-10 at 15:02:28
+
+[ats-variables]
+
+var -> split -> eval [javascript] ->  "$param(0)".split(";")[$var(iter)-1]
+var -> size -> eval [javascript] ->  "$param(0)".split(";").length
+var -> iter -> $iteration
+var -> should_run -> eval [javascript] -> $var(iter) <= $var(size)
+
+[ats-actions]
+
+callscript [if(should_run == true)] -> $param(1) [$var(split)]

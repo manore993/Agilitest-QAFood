@@ -8,4 +8,4 @@ created -> 2024-08-08 at 17:10:42
 
 [ats-actions]
 
-click [nofail] -> LABEL [class = checkbox-container, text = $param(Topping)] -> FORM [id = fooditem-details]
+click [nofail] -> LABEL [class = checkbox-container, text = $param(0)] -> FORM [id = fooditem-details]

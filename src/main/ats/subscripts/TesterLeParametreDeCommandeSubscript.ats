@@ -5,15 +5,15 @@ created -> 2024-07-31 at 14:22:12
 
 [ats-variables]
 
-var -> FoodItem
 
 [ats-actions]
 
+comment-summary -> <i>$param(FoodItem);$param(LiveraisonOuEmporter);$param(Temps);$param(Toppings)</i>
 channel-start -> new-channel -> $env(Browser)
 goto-url -> https://pprod.aldemia.fr/
 click [left = 96, top = 37] -> A [href = https://pprod.aldemia.fr/login/]
-keyboard -> $param(EmailID) -> INPUT [name = rpress_user_login, type = $env(username)]
-keyboard -> $param(Password) -> INPUT [name = rpress_user_pass, type = $env(password)]
+keyboard -> $env(username) -> INPUT [id = rpress_user_login]
+keyboard -> $env(password) -> INPUT [id = rpress_user_pass]
 click -> INPUT [type = submit, value = Connexion]
 click -> A [href = https://pprod.aldemia.fr/]
 click -> A [@index = 2, data-title = $param(FoodItem)]

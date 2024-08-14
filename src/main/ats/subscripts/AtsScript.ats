@@ -5,7 +5,6 @@ created -> 2024-08-08 at 17:08:30
 
 [ats-variables]
 
-var -> propertyVar1
 var -> article_iter -> $iteration
 
 [ats-actions]
@@ -13,13 +12,7 @@ var -> article_iter -> $iteration
 channel-start -> new-channel -> $env(Browser)
 goto-url -> https://pprod.aldemia.fr/
 click [try = 1] -> A [@index = 2, data-title = $param(FoodItem)]
-comment-summary -> $var(article_iter) iteration A
 callscript [if(article_iter == 1)] -> subscripts.ParametreDeCommande -> assets:///data/data_construction_de_commande/ParametreDeCommande.csv
 click [try = 2] -> INPUT [type = button, value = +]
-comment-summary -> $var(article_iter) iteration Z
-callscript -> subscripts.SelectTopping -> assets:///data/data_construction_de_commande/$param(ToppingFilePath)
-comment-summary -> $var(article_iter) iteration E
+callscript [loop = 10] -> subscripts.SplitAndRun [$param(Toppings),subscripts.SelectTopping]
 click -> A [href = javascript:void(0);]
-//click [nofail] -> LABEL [class = checkbox-container, text = $param(Topping1)] -> FORM [id = fooditem-details]
-//click [nofail] -> LABEL [class = checkbox-container, text = $param(Topping2)] -> FORM [id = fooditem-details]
-//click [nofail] -> LABEL [class = checkbox-container, text = $param(Topping3)] -> FORM [id = fooditem-details]

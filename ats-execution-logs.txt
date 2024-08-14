@@ -1,0 +1,1043 @@
+
+C:\Users\AishwaryaMANORE\Documents\AgilitestProjects\QAFOOD>CLS
+[ATS-LAUNCHER] AtsLauncher script version -> 2.7.9
+[ATS-LAUNCHER] Operating system detected -> windows
+[ATS-LAUNCHER] Java JDK version -> 21
+[ATS-LAUNCHER] Current user -> AishwaryaMANORE
+[ATS-LAUNCHER] Current folder -> C:\Users\AishwaryaMANORE\Documents\AgilitestProjects\QAFOOD
+[ATS-LAUNCHER] ATS project folder -> C:\Users\AishwaryaMANORE\Documents\AgilitestProjects\QAFOOD
+[ATS-LAUNCHER] ATS library version -> 3.2.7
+[ATS-LAUNCHER] Delete directory: C:\Users\AishwaryaMANORE\Documents\AgilitestProjects\QAFOOD\target
+[ATS-LAUNCHER] Empty directory: C:\Users\AishwaryaMANORE\Documents\AgilitestProjects\QAFOOD\target\ats-output
+[ATS-LAUNCHER] Delete directory: C:\Users\AishwaryaMANORE\Documents\AgilitestProjects\QAFOOD\test-output
+[ATS-LAUNCHER] Set environment variable [ATS_HOME] -> C:\Users\AishwaryaMANORE\AppData\Roaming\ats\cache\3.2.7
+[ATS-LAUNCHER] Set environment variable [JDK_HOME] -> C:\Users\AishwaryaMANORE\AppData\Roaming\ats\tools\jdk-21
+[ATS-LAUNCHER] Generate java files -> C:\Users\AishwaryaMANORE\Documents\AgilitestProjects\QAFOOD\target\generated
+[INFO] Java version : 21
+[INFO] ------------------------------------------------------------------------
+[INFO] Using ATS project folder -> C:\Users\AishwaryaMANORE\Documents\AgilitestProjects\QAFOOD
+[WARN] Destination folder exists ! (java files will be deleted)
+[INFO] Using destination folder -> C:\Users\AishwaryaMANORE\Documents\AgilitestProjects\QAFOOD\target\generated
+[INFO] ------------------------------------------------------------------------
+[INFO] ATS Generator finished :
+[INFO] - Java files generated -> 11
+[INFO] - Ellapsed time -> 665 ms
+[INFO] ------------------------------------------------------------------------
+[ATS-LAUNCHER] Compile classes to folder -> C:\Users\AishwaryaMANORE\Documents\AgilitestProjects\QAFOOD\target\classes
+[ATS-LAUNCHER] Launch suite(s) execution -> ConstructionDeCommandeSuite1.xml,ConstructionDeCommandeSuite2.xml,ConstructionDeCommandeSuite3.xml,ConstructionDeCommandeSuite4.xml
+...
+... TestNG 7.10.2 by Cédric Beust (cedric@beust.com)
+...
+
+----------------------------------------------------
+     ATS 3.2.7   ( [94mhttps://actiontestscript.org[0m )
+----------------------------------------------------
+[[97mATS-LOGGER[0m] [Terminal Color] Logger level -> Error + Info + Warning + Details
+[[38;5;81mATS-SUITE[0m] Start suite -> {"name":"ConstructionDeCommandeSuite1","tests":2}
+[[97mATS-LOGGER[0m] [Terminal Color] Logger level -> Error + Info + Warning + Details
+[ATS-TEST] Start test -> {"name":"construction_de_commande.TesterAjouterMultipleArticleAvecMultipleToppings","suite":"ConstructionDeCommandeSuite1","xmlReport":true,"visualQuality":3,"parameters":{"password":"user1","ats.log.level":"all","ats.suite.description":"On browser Chrome with user1","ats.suite.date.order":"","username":"AishwaryaMANORE","Browser":"chrome"}}
+[[92mATS-SCRIPT[0m] Subscript -> {"called":"subscripts.AtsScript","iteration":"1/2","type":"dataFile","url":"C:\\Users\\AishwaryaMANORE\\Documents\\AgilitestProjects\\QAFOOD\\target\\classes\\assets\\data\\data_construction_de_commande\\TesterAjouterMultipleArticleAvecMultipleToppings.csv","parameters":[{"FoodItem":"12 wings"},{"Topping1":"Ketchup"},{"Topping2":"Sauce douce"},{"Topping3":"Sauce piquante"},{"ToppingFilePath":"Topping1.csv"}],"name":"construction_de_commande.TesterAjouterMultipleArticleAvecMultipleToppings","line":1}
+[[94mATS-INFO[0m] ATS system driver version -> 1.8.2
+[[94mATS-INFO[0m] ATS drivers folder -> C:\Users\AishwaryaMANORE\AppData\Roaming\ats\cache\3.2.7\drivers
+[[38;5;150mATS-DRIVER-OUTPUT[0m] Starting ATS Windows Desktop Driver 1.8.2.0 on port 9700
+[[38;5;150mATS-DRIVER-OUTPUT[0m] Only local connections are allowed.
+[[38;5;150mATS-DRIVER-OUTPUT[0m] Websocket server started with port 9800
+[[38;5;150mATS-DRIVER-OUTPUT[0m] WindowsDriver was started successfully.
+[[38;5;150mATS-DRIVER-OUTPUT[0m] chromedriver (ver. 127.0.6533.72) is matching application chrome (ver. 127.0.6533.100)
+[[94mATS-DRIVER-INFO[0m] chromedriver (ver. 127.0.6533.72) started on port 9710
+[[94mATS-INFO[0m] ATS-AGENT system driver version -> 127.0.6533.72
+[[38;5;150mATS-DRIVER-OUTPUT[0m] record-create -> name=new-channel, bound=[10,10,1280,960]
+[[38;5;150mATS-DRIVER-OUTPUT[0m] record-data -> v1 and v2
+[[38;5;140mATS-ACTION[0m] ActionChannelStart -> {"name":"new-channel","app":"chrome","appVersion":"127.0.6533.100","os":"Microsoft Windows 10 Professionnel (2009)","passed":true,"duration":5297,"script":{"name":"subscripts.AtsScript","line":0}}
+[[38;5;150mATS-DRIVER-OUTPUT[0m] record-create -> name=new-channel, bound=[10,10,1280,960]
+[[38;5;150mATS-DRIVER-OUTPUT[0m] record-value -> v1
+[[38;5;150mATS-DRIVER-OUTPUT[0m] record-image -> bound=[10,10,1280,960]
+[[38;5;140mATS-ACTION[0m] ActionGotoUrl -> {"url":"https://pprod.aldemia.fr/","passed":true,"duration":935,"script":{"name":"subscripts.AtsScript","line":1}}
+[[38;5;150mATS-DRIVER-OUTPUT[0m] record-create -> name=new-channel, bound=[10,10,1280,960]
+[[93mATS-WARNING[0m] Element not found, wait and try again -> 15
+[[93mATS-WARNING[0m] Element not found, wait and try again -> 14
+[[93mATS-WARNING[0m] Element not found, wait and try again -> 13
+[[93mATS-WARNING[0m] Element not found, wait and try again -> 12
+[[93mATS-WARNING[0m] Element not found, wait and try again -> 11
+[[38;5;150mATS-DRIVER-OUTPUT[0m] record-element -> tag=A
+[[38;5;150mATS-DRIVER-OUTPUT[0m] record-image -> bound=[10,10,1280,960]
+[[38;5;150mATS-DRIVER-OUTPUT[0m] record-element -> tag=A
+[[38;5;150mATS-DRIVER-OUTPUT[0m] record-value -> v1
+[[38;5;150mATS-DRIVER-OUTPUT[0m] record-position -> hpos=0, vpos=0
+[[38;5;150mATS-DRIVER-OUTPUT[0m] record-image -> bound=[10,10,1280,960]
+[[38;5;150mATS-DRIVER-OUTPUT[0m] record-image -> bound=[10,10,1280,960]
+[[38;5;140mATS-ACTION[0m] ActionMouseKey -> {"type":"click","searchDuration":125,"delay":0,"occurrences":2,"passed":true,"duration":4387,"script":{"name":"subscripts.AtsScript","line":2}}
+[[38;5;140mATS-ACTION[0m] ActionComment -> {"type":"summary","value":"1 iteration A","passed":true,"duration":0,"script":{"name":"subscripts.AtsScript","line":3}}
+[[38;5;150mATS-DRIVER-OUTPUT[0m] record-create -> name=new-channel, bound=[10,10,1280,960]
+[[38;5;150mATS-DRIVER-OUTPUT[0m] record-value -> v1
+[[38;5;150mATS-DRIVER-OUTPUT[0m] record-data -> v1 and v2
+[[38;5;150mATS-DRIVER-OUTPUT[0m] record-data -> v1 and v2
+[[92mATS-SCRIPT[0m] Subscript -> {"condition":{"variable":{"article_iter":"1"},"compare":{"operator":"==","value":"1"},"continue":true},"called":"subscripts.ParametreDeCommande","iteration":"1/1","type":"dataFile","url":"C:\\Users\\AishwaryaMANORE\\Documents\\AgilitestProjects\\QAFOOD\\target\\classes\\assets\\data\\data_construction_de_commande\\ParametreDeCommande.csv","parameters":[{"LiveraisonOuEmporter":"Livraison"},{"Temps":"19:00"}],"name":"subscripts.AtsScript","line":4}
+[[38;5;150mATS-DRIVER-OUTPUT[0m] record-create -> name=new-channel, bound=[10,10,1280,960]
+[[93mATS-WARNING[0m] Element not found, wait and try again -> 14
+[[93mATS-WARNING[0m] Element not found, wait and try again -> 13
+[[93mATS-WARNING[0m] Element not found, wait and try again -> 12
+[[93mATS-WARNING[0m] Element not found, wait and try again -> 11
+[[93mATS-WARNING[0m] Element not found, wait and try again -> 10
+[[93mATS-WARNING[0m] Element not found, wait and try again -> 9
+[[38;5;150mATS-DRIVER-OUTPUT[0m] record-element -> tag=A
+[[38;5;150mATS-DRIVER-OUTPUT[0m] record-image -> bound=[10,10,1280,960]
+[[38;5;150mATS-DRIVER-OUTPUT[0m] record-element -> tag=A
+[[38;5;150mATS-DRIVER-OUTPUT[0m] record-value -> v1
+[[38;5;150mATS-DRIVER-OUTPUT[0m] record-position -> hpos=0, vpos=0
+[[38;5;150mATS-DRIVER-OUTPUT[0m] record-image -> bound=[10,10,1280,960]
+[[38;5;150mATS-DRIVER-OUTPUT[0m] record-image -> bound=[10,10,1280,960]
+[[38;5;140mATS-ACTION[0m] ActionMouseKey -> {"type":"click","searchDuration":37,"delay":0,"occurrences":1,"passed":true,"duration":4029,"script":{"name":"subscripts.ParametreDeCommande","line":0}}
+[[38;5;150mATS-DRIVER-OUTPUT[0m] record-create -> name=new-channel, bound=[10,10,1280,960]
+[[38;5;150mATS-DRIVER-OUTPUT[0m] record-element -> tag=SELECT
+[[38;5;150mATS-DRIVER-OUTPUT[0m] record-image -> bound=[10,10,1280,960]
+[[38;5;150mATS-DRIVER-OUTPUT[0m] record-element -> tag=SELECT
+[[38;5;150mATS-DRIVER-OUTPUT[0m] record-image -> bound=[10,10,1280,960]
+[[38;5;150mATS-DRIVER-OUTPUT[0m] record-data -> v1 and v2
+[[38;5;150mATS-DRIVER-OUTPUT[0m] record-image -> bound=[10,10,1280,960]
+[[38;5;140mATS-ACTION[0m] ActionSelect -> {"select":"19:00","regexp":true,"name":"text","searchDuration":13,"delay":0,"occurrences":1,"passed":true,"duration":1809,"script":{"name":"subscripts.ParametreDeCommande","line":1}}
+[[38;5;150mATS-DRIVER-OUTPUT[0m] record-create -> name=new-channel, bound=[10,10,1280,960]
+[[38;5;150mATS-DRIVER-OUTPUT[0m] record-element -> tag=A
+[[38;5;150mATS-DRIVER-OUTPUT[0m] record-image -> bound=[10,10,1280,960]
+[[38;5;150mATS-DRIVER-OUTPUT[0m] record-element -> tag=A
+[[38;5;150mATS-DRIVER-OUTPUT[0m] record-value -> v1
+[[38;5;150mATS-DRIVER-OUTPUT[0m] record-position -> hpos=0, vpos=0
+[[38;5;150mATS-DRIVER-OUTPUT[0m] record-image -> bound=[10,10,1280,960]
+[[38;5;150mATS-DRIVER-OUTPUT[0m] record-image -> bound=[10,10,1280,960]
+[[38;5;140mATS-ACTION[0m] ActionMouseKey -> {"type":"click","searchDuration":24,"delay":0,"occurrences":1,"passed":true,"duration":1592,"script":{"name":"subscripts.ParametreDeCommande","line":2}}
+[[38;5;140mATS-ACTION[0m] ActionCallscript -> {"status":"terminated","passed":true,"duration":7575,"script":{"name":"subscripts.AtsScript","line":4}}
+[[38;5;150mATS-DRIVER-OUTPUT[0m] record-create -> name=new-channel, bound=[10,10,1280,960]
+[[38;5;150mATS-DRIVER-OUTPUT[0m] record-element -> tag=INPUT
+[[93mATS-WARNING[0m] Element size is 0, wait before execute action -> 19
+[[93mATS-WARNING[0m] Element size is 0, wait before execute action -> 18
+[[93mATS-WARNING[0m] Element size is 0, wait before execute action -> 17
+[[93mATS-WARNING[0m] Element size is 0, wait before execute action -> 16
+[[93mATS-WARNING[0m] Element size is 0, wait before execute action -> 15
+[[93mATS-WARNING[0m] Element is moving, wait before execute action -> 14
+[[93mATS-WARNING[0m] Element is moving, wait before execute action -> 13
+[[38;5;150mATS-DRIVER-OUTPUT[0m] record-image -> bound=[10,10,1280,960]
+[[38;5;150mATS-DRIVER-OUTPUT[0m] record-element -> tag=INPUT
+[[38;5;150mATS-DRIVER-OUTPUT[0m] record-value -> v1
+[[38;5;150mATS-DRIVER-OUTPUT[0m] record-position -> hpos=0, vpos=0
+[[38;5;150mATS-DRIVER-OUTPUT[0m] record-image -> bound=[10,10,1280,960]
+[[38;5;150mATS-DRIVER-OUTPUT[0m] record-image -> bound=[10,10,1280,960]
+[[38;5;140mATS-ACTION[0m] ActionMouseKey -> {"type":"click","searchDuration":32,"delay":0,"occurrences":1,"passed":true,"duration":3409,"script":{"name":"subscripts.AtsScript","line":5}}
+[[38;5;140mATS-ACTION[0m] ActionComment -> {"type":"summary","value":"1 iteration Z","passed":true,"duration":0,"script":{"name":"subscripts.AtsScript","line":6}}
+[[38;5;150mATS-DRIVER-OUTPUT[0m] record-create -> name=new-channel, bound=[10,10,1280,960]
+[[38;5;150mATS-DRIVER-OUTPUT[0m] record-value -> v1
+[[38;5;150mATS-DRIVER-OUTPUT[0m] record-data -> v1 and v2
+[[38;5;150mATS-DRIVER-OUTPUT[0m] record-data -> v1 and v2
+[[92mATS-SCRIPT[0m] Subscript -> {"called":"subscripts.SelectTopping","iteration":"1/2","type":"dataFile","url":"C:\\Users\\AishwaryaMANORE\\Documents\\AgilitestProjects\\QAFOOD\\target\\classes\\assets\\data\\data_construction_de_commande\\Topping1.csv","parameters":[{"Topping":"Ketchup"}],"name":"subscripts.AtsScript","line":7}
+[[38;5;150mATS-DRIVER-OUTPUT[0m] record-create -> name=new-channel, bound=[10,10,1280,960]
+[[38;5;150mATS-DRIVER-OUTPUT[0m] record-element -> tag=LABEL
+[[38;5;150mATS-DRIVER-OUTPUT[0m] record-image -> bound=[10,10,1280,960]
+[[38;5;150mATS-DRIVER-OUTPUT[0m] record-element -> tag=LABEL
+[[38;5;150mATS-DRIVER-OUTPUT[0m] record-value -> v1
+[[38;5;150mATS-DRIVER-OUTPUT[0m] record-position -> hpos=0, vpos=0
+[[38;5;150mATS-DRIVER-OUTPUT[0m] record-image -> bound=[10,10,1280,960]
+[[38;5;150mATS-DRIVER-OUTPUT[0m] record-image -> bound=[10,10,1280,960]
+[[38;5;140mATS-ACTION[0m] ActionMouseKey -> {"type":"click","searchDuration":28,"delay":0,"occurrences":1,"passed":true,"duration":1586,"script":{"name":"subscripts.SelectTopping","line":0}}
+[[92mATS-SCRIPT[0m] Subscript -> {"called":"subscripts.SelectTopping","iteration":"2/2","type":"dataFile","url":"C:\\Users\\AishwaryaMANORE\\Documents\\AgilitestProjects\\QAFOOD\\target\\classes\\assets\\data\\data_construction_de_commande\\Topping1.csv","parameters":[{"Topping":"Sauce douce"}],"name":"subscripts.AtsScript","line":7}
+[[38;5;150mATS-DRIVER-OUTPUT[0m] record-create -> name=new-channel, bound=[10,10,1280,960]
+[[38;5;150mATS-DRIVER-OUTPUT[0m] record-element -> tag=LABEL
+[[38;5;150mATS-DRIVER-OUTPUT[0m] record-image -> bound=[10,10,1280,960]
+[[38;5;150mATS-DRIVER-OUTPUT[0m] record-element -> tag=LABEL
+[[38;5;150mATS-DRIVER-OUTPUT[0m] record-value -> v1
+[[38;5;150mATS-DRIVER-OUTPUT[0m] record-position -> hpos=0, vpos=0
+[[38;5;150mATS-DRIVER-OUTPUT[0m] record-image -> bound=[10,10,1280,960]
+[[38;5;150mATS-DRIVER-OUTPUT[0m] record-image -> bound=[10,10,1280,960]
+[[38;5;140mATS-ACTION[0m] ActionMouseKey -> {"type":"click","searchDuration":26,"delay":0,"occurrences":1,"passed":true,"duration":1640,"script":{"name":"subscripts.SelectTopping","line":0}}
+[[38;5;140mATS-ACTION[0m] ActionCallscript -> {"status":"terminated","passed":true,"duration":3341,"script":{"name":"subscripts.AtsScript","line":7}}
+[[38;5;140mATS-ACTION[0m] ActionComment -> {"type":"summary","value":"1 iteration E","passed":true,"duration":0,"script":{"name":"subscripts.AtsScript","line":8}}
+[[38;5;150mATS-DRIVER-OUTPUT[0m] record-create -> name=new-channel, bound=[10,10,1280,960]
+[[38;5;150mATS-DRIVER-OUTPUT[0m] record-element -> tag=A
+[[38;5;150mATS-DRIVER-OUTPUT[0m] record-image -> bound=[10,10,1280,960]
+[[38;5;150mATS-DRIVER-OUTPUT[0m] record-element -> tag=A
+[[38;5;150mATS-DRIVER-OUTPUT[0m] record-value -> v1
+[[38;5;150mATS-DRIVER-OUTPUT[0m] record-position -> hpos=0, vpos=0
+[[38;5;150mATS-DRIVER-OUTPUT[0m] record-image -> bound=[10,10,1280,960]
+[[38;5;150mATS-DRIVER-OUTPUT[0m] record-image -> bound=[10,10,1280,960]
+[[38;5;140mATS-ACTION[0m] ActionMouseKey -> {"type":"click","searchDuration":21,"delay":0,"occurrences":1,"passed":true,"duration":1655,"script":{"name":"subscripts.AtsScript","line":9}}
+[[92mATS-SCRIPT[0m] Subscript -> {"called":"subscripts.AtsScript","iteration":"2/2","type":"dataFile","url":"C:\\Users\\AishwaryaMANORE\\Documents\\AgilitestProjects\\QAFOOD\\target\\classes\\assets\\data\\data_construction_de_commande\\TesterAjouterMultipleArticleAvecMultipleToppings.csv","parameters":[{"FoodItem":"Feuilletés poulet bacon"},{"Topping1":"Ketchup"},{"Topping2":""},{"Topping3":""},{"ToppingFilePath":"Topping2.csv"}],"name":"construction_de_commande.TesterAjouterMultipleArticleAvecMultipleToppings","line":1}
+[[38;5;140mATS-ACTION[0m] ActionChannelStart -> {"name":"new-channel","app":"chrome","appVersion":"127.0.6533.100","os":"Microsoft Windows 10 Professionnel (2009)","passed":true,"duration":730,"script":{"name":"subscripts.AtsScript","line":0}}
+[[38;5;150mATS-DRIVER-OUTPUT[0m] record-create -> name=new-channel, bound=[10,10,1280,960]
+[[38;5;150mATS-DRIVER-OUTPUT[0m] record-value -> v1
+[[38;5;150mATS-DRIVER-OUTPUT[0m] record-image -> bound=[10,10,1280,960]
+[[38;5;140mATS-ACTION[0m] ActionGotoUrl -> {"url":"https://pprod.aldemia.fr/","passed":true,"duration":932,"script":{"name":"subscripts.AtsScript","line":1}}
+[[38;5;150mATS-DRIVER-OUTPUT[0m] record-create -> name=new-channel, bound=[10,10,1280,960]
+[[93mATS-WARNING[0m] Element not found, wait and try again -> 15
+[[93mATS-WARNING[0m] Element not found, wait and try again -> 14
+[[38;5;150mATS-DRIVER-OUTPUT[0m] record-element -> tag=A
+[[38;5;150mATS-DRIVER-OUTPUT[0m] record-image -> bound=[10,10,1280,960]
+[[38;5;150mATS-DRIVER-OUTPUT[0m] record-element -> tag=A
+[[38;5;150mATS-DRIVER-OUTPUT[0m] record-value -> v1
+[[38;5;150mATS-DRIVER-OUTPUT[0m] record-position -> hpos=0, vpos=0
+[[38;5;150mATS-DRIVER-OUTPUT[0m] record-image -> bound=[10,10,1280,960]
+[[38;5;150mATS-DRIVER-OUTPUT[0m] record-image -> bound=[10,10,1280,960]
+[[38;5;140mATS-ACTION[0m] ActionMouseKey -> {"type":"click","searchDuration":211,"delay":0,"occurrences":2,"passed":true,"duration":3383,"script":{"name":"subscripts.AtsScript","line":2}}
+[[38;5;140mATS-ACTION[0m] ActionComment -> {"type":"summary","value":"2 iteration A","passed":true,"duration":0,"script":{"name":"subscripts.AtsScript","line":3}}
+[[92mATS-SCRIPT[0m] Subscript -> {"condition":{"variable":{"article_iter":"2"},"compare":{"operator":"==","value":"1"},"continue":false},"name":"subscripts.AtsScript","line":4}
+[[38;5;150mATS-DRIVER-OUTPUT[0m] record-create -> name=new-channel, bound=[10,10,1280,960]
+[[38;5;150mATS-DRIVER-OUTPUT[0m] record-element -> tag=INPUT
+[[93mATS-WARNING[0m] Element size is 0, wait before execute action -> 19
+[[93mATS-WARNING[0m] Element is moving, wait before execute action -> 18
+[[93mATS-WARNING[0m] Element is moving, wait before execute action -> 17
+[[38;5;150mATS-DRIVER-OUTPUT[0m] record-image -> bound=[10,10,1280,960]
+[[38;5;150mATS-DRIVER-OUTPUT[0m] record-element -> tag=INPUT
+[[38;5;150mATS-DRIVER-OUTPUT[0m] record-value -> v1
+[[38;5;150mATS-DRIVER-OUTPUT[0m] record-position -> hpos=0, vpos=0
+[[38;5;150mATS-DRIVER-OUTPUT[0m] record-image -> bound=[10,10,1280,960]
+[[38;5;150mATS-DRIVER-OUTPUT[0m] record-image -> bound=[10,10,1280,960]
+[[38;5;140mATS-ACTION[0m] ActionMouseKey -> {"type":"click","searchDuration":35,"delay":0,"occurrences":1,"passed":true,"duration":2403,"script":{"name":"subscripts.AtsScript","line":5}}
+[[38;5;140mATS-ACTION[0m] ActionComment -> {"type":"summary","value":"2 iteration Z","passed":true,"duration":0,"script":{"name":"subscripts.AtsScript","line":6}}
+[[38;5;150mATS-DRIVER-OUTPUT[0m] record-create -> name=new-channel, bound=[10,10,1280,960]
+[[38;5;150mATS-DRIVER-OUTPUT[0m] record-value -> v1
+[[38;5;150mATS-DRIVER-OUTPUT[0m] record-data -> v1 and v2
+[[38;5;150mATS-DRIVER-OUTPUT[0m] record-data -> v1 and v2
+[[92mATS-SCRIPT[0m] Subscript -> {"called":"subscripts.SelectTopping","iteration":"1/1","type":"dataFile","url":"C:\\Users\\AishwaryaMANORE\\Documents\\AgilitestProjects\\QAFOOD\\target\\classes\\assets\\data\\data_construction_de_commande\\Topping2.csv","parameters":[{"Topping":"Ketchup"}],"name":"subscripts.AtsScript","line":7}
+[[38;5;150mATS-DRIVER-OUTPUT[0m] record-create -> name=new-channel, bound=[10,10,1280,960]
+[[38;5;150mATS-DRIVER-OUTPUT[0m] record-element -> tag=LABEL
+[[38;5;150mATS-DRIVER-OUTPUT[0m] record-image -> bound=[10,10,1280,960]
+[[38;5;150mATS-DRIVER-OUTPUT[0m] record-element -> tag=LABEL
+[[38;5;150mATS-DRIVER-OUTPUT[0m] record-value -> v1
+[[38;5;150mATS-DRIVER-OUTPUT[0m] record-position -> hpos=0, vpos=0
+[[38;5;150mATS-DRIVER-OUTPUT[0m] record-image -> bound=[10,10,1280,960]
+[[38;5;150mATS-DRIVER-OUTPUT[0m] record-image -> bound=[10,10,1280,960]
+[[38;5;140mATS-ACTION[0m] ActionMouseKey -> {"type":"click","searchDuration":25,"delay":0,"occurrences":1,"passed":true,"duration":1625,"script":{"name":"subscripts.SelectTopping","line":0}}
+[[38;5;140mATS-ACTION[0m] ActionCallscript -> {"status":"terminated","passed":true,"duration":1749,"script":{"name":"subscripts.AtsScript","line":7}}
+[[38;5;140mATS-ACTION[0m] ActionComment -> {"type":"summary","value":"2 iteration E","passed":true,"duration":0,"script":{"name":"subscripts.AtsScript","line":8}}
+[[38;5;150mATS-DRIVER-OUTPUT[0m] record-create -> name=new-channel, bound=[10,10,1280,960]
+[[38;5;150mATS-DRIVER-OUTPUT[0m] record-element -> tag=A
+[[38;5;150mATS-DRIVER-OUTPUT[0m] record-image -> bound=[10,10,1280,960]
+[[38;5;150mATS-DRIVER-OUTPUT[0m] record-element -> tag=A
+[[38;5;150mATS-DRIVER-OUTPUT[0m] record-value -> v1
+[[38;5;150mATS-DRIVER-OUTPUT[0m] record-position -> hpos=0, vpos=0
+[[38;5;150mATS-DRIVER-OUTPUT[0m] record-image -> bound=[10,10,1280,960]
+[[38;5;150mATS-DRIVER-OUTPUT[0m] record-image -> bound=[10,10,1280,960]
+[[38;5;140mATS-ACTION[0m] ActionMouseKey -> {"type":"click","searchDuration":18,"delay":0,"occurrences":1,"passed":true,"duration":1523,"script":{"name":"subscripts.AtsScript","line":9}}
+[[38;5;140mATS-ACTION[0m] ActionCallscript -> {"status":"terminated","passed":true,"duration":47703,"script":{"name":"construction_de_commande.TesterAjouterMultipleArticleAvecMultipleToppings","line":1}}
+[[94mATS-INFO[0m] Close web browser -> chrome
+[[94mATS-INFO[0m] Stop visual recording -> construction_de_commande.TesterAjouterMultipleArticleAvecMultipleToppings
+[[38;5;150mATS-DRIVER-OUTPUT[0m] record-error-summary -> test=construction_de_commande.TesterAjouterMultipleArticleAvecMultipleToppings, suite=ConstructionDeCommandeSuite1
+[[38;5;150mATS-DRIVER-OUTPUT[0m] record-stop
+[[38;5;150mATS-DRIVER-OUTPUT[0m] record-download -> C:\Users\AishwaryaMANORE\AppData\Local\Temp\ats_recorder\atsv_ddb22bdf-cffe-4622-903c-a5890218d33c.tmp
+[[94mATS-INFO[0m] Save ATSV file -> C:\Users\AishwaryaMANORE\Documents\AgilitestProjects\QAFOOD\target\ats-output\ConstructionDeCommandeSuite1\construction_de_commande.TesterAjouterMultipleArticleAvecMultipleToppings.atsv (5149 Ko)
+[[94mATS-INFO[0m] Create HTML player report -> C:\Users\AishwaryaMANORE\Documents\AgilitestProjects\QAFOOD\target\ats-output\ConstructionDeCommandeSuite1\construction_de_commande.TesterAjouterMultipleArticleAvecMultipleToppings_xml
+[[94mATS-INFO[0m] HTML_player generated -> C:\Users\AishwaryaMANORE\Documents\AgilitestProjects\QAFOOD\target\ats-output\ConstructionDeCommandeSuite1\construction_de_commande.TesterAjouterMultipleArticleAvecMultipleToppings_xml
+[[94mATS-INFO[0m] Create XML report -> C:\Users\AishwaryaMANORE\Documents\AgilitestProjects\QAFOOD\target\ats-output\ConstructionDeCommandeSuite1\construction_de_commande.TesterAjouterMultipleArticleAvecMultipleToppings_xml
+[[94mATS-INFO[0m] XML report generated -> C:\Users\AishwaryaMANORE\Documents\AgilitestProjects\QAFOOD\target\ats-output\ConstructionDeCommandeSuite1\construction_de_commande.TesterAjouterMultipleArticleAvecMultipleToppings_xml
+[ATS-TEST] Test terminated -> {"name":"construction_de_commande.TesterAjouterMultipleArticleAvecMultipleToppings","suite":"ConstructionDeCommandeSuite1","duration":"82754","passed":true,"actions":16}
+PASSED: construction_de_commande.TesterAjouterMultipleArticleAvecMultipleToppings.TcTesterAjouterMultipleArticleAvecMultipleToppings
+
+===============================================
+    construction_de_commande.TesterAjouterMultipleArticleAvecMultipleToppings
+    Tests run: 1, Failures: 0, Skips: 0
+===============================================
+
+[[97mATS-LOGGER[0m] [Terminal Color] Logger level -> Error + Info + Warning + Details
+[ATS-TEST] Start test -> {"name":"construction_de_commande.TesterLeParametreDeCommand","suite":"ConstructionDeCommandeSuite1","xmlReport":true,"visualQuality":3,"parameters":{"password":"user1","ats.log.level":"all","ats.suite.description":"On browser Chrome with user1","ats.suite.date.order":"","username":"AishwaryaMANORE","Browser":"chrome"}}
+[[92mATS-SCRIPT[0m] Subscript -> {"called":"subscripts.TesterLeParametreDeCommandeSubscript","iteration":"1/2","type":"dataFile","url":"C:\\Users\\AishwaryaMANORE\\Documents\\AgilitestProjects\\QAFOOD\\target\\classes\\assets\\data\\data_construction_de_commande\\TesterParametreDeCommand.csv","parameters":[{"Browser":"chrome"},{"EmailID":"aishwarya.manore@aldemia.fr"},{"Password":"Password"},{"FoodItem":"Feuilletés poulet bacon"},{"LiveraisonOuEmporter":"Livraison"},{"Temps":"19:30"},{"Toppings":"Sauce douce"}],"name":"construction_de_commande.TesterLeParametreDeCommand","line":0}
+[[94mATS-INFO[0m] ATS-AGENT system driver version -> 127.0.6533.72
+[[38;5;150mATS-DRIVER-OUTPUT[0m] record-create -> name=new-channel, bound=[10,10,1280,960]
+[[38;5;150mATS-DRIVER-OUTPUT[0m] record-data -> v1 and v2
+[[38;5;140mATS-ACTION[0m] ActionChannelStart -> {"name":"new-channel","app":"chrome","appVersion":"127.0.6533.100","os":"Microsoft Windows 10 Professionnel (2009)","passed":true,"duration":4900,"script":{"name":"subscripts.TesterLeParametreDeCommandeSubscript","line":0}}
+[[38;5;150mATS-DRIVER-OUTPUT[0m] record-create -> name=new-channel, bound=[10,10,1280,960]
+[[38;5;150mATS-DRIVER-OUTPUT[0m] record-value -> v1
+[[38;5;150mATS-DRIVER-OUTPUT[0m] record-image -> bound=[10,10,1280,960]
+[[38;5;140mATS-ACTION[0m] ActionGotoUrl -> {"url":"https://pprod.aldemia.fr/","passed":true,"duration":839,"script":{"name":"subscripts.TesterLeParametreDeCommandeSubscript","line":1}}
+[[38;5;150mATS-DRIVER-OUTPUT[0m] record-create -> name=new-channel, bound=[10,10,1280,960]
+[[93mATS-WARNING[0m] Element not found, wait and try again -> 14
+[[93mATS-WARNING[0m] Element not found, wait and try again -> 13
+[[93mATS-WARNING[0m] Element not found, wait and try again -> 12
+[[93mATS-WARNING[0m] Element not found, wait and try again -> 11
+[[38;5;150mATS-DRIVER-OUTPUT[0m] record-element -> tag=A
+[[38;5;150mATS-DRIVER-OUTPUT[0m] record-image -> bound=[10,10,1280,960]
+[[38;5;150mATS-DRIVER-OUTPUT[0m] record-element -> tag=A
+[[38;5;150mATS-DRIVER-OUTPUT[0m] record-value -> v1
+[[38;5;150mATS-DRIVER-OUTPUT[0m] record-position -> hpos=96, vpos=37
+[[38;5;150mATS-DRIVER-OUTPUT[0m] record-image -> bound=[10,10,1280,960]
+[[38;5;150mATS-DRIVER-OUTPUT[0m] record-image -> bound=[10,10,1280,960]
+[[38;5;140mATS-ACTION[0m] ActionMouseKey -> {"type":"click","searchDuration":291,"delay":0,"occurrences":1,"passed":true,"duration":4046,"script":{"name":"subscripts.TesterLeParametreDeCommandeSubscript","line":2}}
+[[38;5;150mATS-DRIVER-OUTPUT[0m] record-create -> name=new-channel, bound=[10,10,1280,960]
+[[93mATS-WARNING[0m] Element not found, wait and try again -> 14
+[[93mATS-WARNING[0m] Element not found, wait and try again -> 13
+[[38;5;150mATS-DRIVER-OUTPUT[0m] record-element -> tag=INPUT
+[[38;5;150mATS-DRIVER-OUTPUT[0m] record-image -> bound=[10,10,1280,960]
+[[38;5;150mATS-DRIVER-OUTPUT[0m] record-element -> tag=INPUT
+[[38;5;150mATS-DRIVER-OUTPUT[0m] record-data -> v1 and v2
+[[38;5;150mATS-DRIVER-OUTPUT[0m] record-image -> bound=[10,10,1280,960]
+[[38;5;140mATS-ACTION[0m] ActionText -> {"text":"AishwaryaMANORE","searchDuration":16,"delay":0,"occurrences":1,"passed":true,"duration":4720,"script":{"name":"subscripts.TesterLeParametreDeCommandeSubscript","line":3}}
+[[38;5;150mATS-DRIVER-OUTPUT[0m] record-create -> name=new-channel, bound=[10,10,1280,960]
+[[38;5;150mATS-DRIVER-OUTPUT[0m] record-element -> tag=INPUT
+[[38;5;150mATS-DRIVER-OUTPUT[0m] record-image -> bound=[10,10,1280,960]
+[[38;5;150mATS-DRIVER-OUTPUT[0m] record-element -> tag=INPUT
+[[38;5;150mATS-DRIVER-OUTPUT[0m] record-data -> v1 and v2
+[[38;5;150mATS-DRIVER-OUTPUT[0m] record-image -> bound=[10,10,1280,960]
+[[38;5;140mATS-ACTION[0m] ActionText -> {"text":"user1","searchDuration":17,"delay":0,"occurrences":1,"passed":true,"duration":2322,"script":{"name":"subscripts.TesterLeParametreDeCommandeSubscript","line":4}}
+[[38;5;150mATS-DRIVER-OUTPUT[0m] record-create -> name=new-channel, bound=[10,10,1280,960]
+[[38;5;150mATS-DRIVER-OUTPUT[0m] record-element -> tag=INPUT
+[[38;5;150mATS-DRIVER-OUTPUT[0m] record-image -> bound=[10,10,1280,960]
+[[38;5;150mATS-DRIVER-OUTPUT[0m] record-element -> tag=INPUT
+[[38;5;150mATS-DRIVER-OUTPUT[0m] record-value -> v1
+[[38;5;150mATS-DRIVER-OUTPUT[0m] record-position -> hpos=0, vpos=0
+[[38;5;150mATS-DRIVER-OUTPUT[0m] record-image -> bound=[10,10,1280,960]
+[[38;5;150mATS-DRIVER-OUTPUT[0m] record-image -> bound=[10,10,1280,960]
+[[38;5;140mATS-ACTION[0m] ActionMouseKey -> {"type":"click","searchDuration":12,"delay":0,"occurrences":1,"passed":true,"duration":2063,"script":{"name":"subscripts.TesterLeParametreDeCommandeSubscript","line":5}}
+[[38;5;150mATS-DRIVER-OUTPUT[0m] record-create -> name=new-channel, bound=[10,10,1280,960]
+[[38;5;150mATS-DRIVER-OUTPUT[0m] record-element -> tag=A
+[[38;5;150mATS-DRIVER-OUTPUT[0m] record-image -> bound=[10,10,1280,960]
+[[38;5;150mATS-DRIVER-OUTPUT[0m] record-element -> tag=A
+[[38;5;150mATS-DRIVER-OUTPUT[0m] record-value -> v1
+[[38;5;150mATS-DRIVER-OUTPUT[0m] record-position -> hpos=0, vpos=0
+[[38;5;150mATS-DRIVER-OUTPUT[0m] record-image -> bound=[10,10,1280,960]
+[[38;5;150mATS-DRIVER-OUTPUT[0m] record-image -> bound=[10,10,1280,960]
+[[38;5;140mATS-ACTION[0m] ActionMouseKey -> {"type":"click","searchDuration":605,"delay":0,"occurrences":3,"passed":true,"duration":2102,"script":{"name":"subscripts.TesterLeParametreDeCommandeSubscript","line":6}}
+[[38;5;150mATS-DRIVER-OUTPUT[0m] record-create -> name=new-channel, bound=[10,10,1280,960]
+[[38;5;150mATS-DRIVER-OUTPUT[0m] record-element -> tag=A
+[[38;5;150mATS-DRIVER-OUTPUT[0m] record-image -> bound=[10,10,1280,960]
+[[38;5;150mATS-DRIVER-OUTPUT[0m] record-element -> tag=A
+[[38;5;150mATS-DRIVER-OUTPUT[0m] record-value -> v1
+[[38;5;150mATS-DRIVER-OUTPUT[0m] record-position -> hpos=0, vpos=0
+[[38;5;150mATS-DRIVER-OUTPUT[0m] record-image -> bound=[10,10,1280,960]
+[[38;5;150mATS-DRIVER-OUTPUT[0m] record-image -> bound=[10,10,1280,960]
+[[38;5;140mATS-ACTION[0m] ActionMouseKey -> {"type":"click","searchDuration":1065,"delay":0,"occurrences":2,"passed":true,"duration":3113,"script":{"name":"subscripts.TesterLeParametreDeCommandeSubscript","line":7}}
+[[38;5;150mATS-DRIVER-OUTPUT[0m] record-create -> name=new-channel, bound=[10,10,1280,960]
+[[93mATS-WARNING[0m] Element not found, wait and try again -> 14
+[[93mATS-WARNING[0m] Element not found, wait and try again -> 13
+[[93mATS-WARNING[0m] Element not found, wait and try again -> 12
+[[38;5;150mATS-DRIVER-OUTPUT[0m] record-element -> tag=A
+[[38;5;150mATS-DRIVER-OUTPUT[0m] record-image -> bound=[10,10,1280,960]
+[[38;5;150mATS-DRIVER-OUTPUT[0m] record-element -> tag=A
+[[38;5;150mATS-DRIVER-OUTPUT[0m] record-value -> v1
+[[38;5;150mATS-DRIVER-OUTPUT[0m] record-position -> hpos=0, vpos=0
+[[38;5;150mATS-DRIVER-OUTPUT[0m] record-image -> bound=[10,10,1280,960]
+[[38;5;150mATS-DRIVER-OUTPUT[0m] record-image -> bound=[10,10,1280,960]
+[[38;5;140mATS-ACTION[0m] ActionMouseKey -> {"type":"click","searchDuration":24,"delay":0,"occurrences":1,"passed":true,"duration":2651,"script":{"name":"subscripts.TesterLeParametreDeCommandeSubscript","line":8}}
+[[38;5;150mATS-DRIVER-OUTPUT[0m] record-create -> name=new-channel, bound=[10,10,1280,960]
+[[38;5;150mATS-DRIVER-OUTPUT[0m] record-element -> tag=SELECT
+[[38;5;150mATS-DRIVER-OUTPUT[0m] record-image -> bound=[10,10,1280,960]
+[[38;5;150mATS-DRIVER-OUTPUT[0m] record-element -> tag=SELECT
+[[38;5;150mATS-DRIVER-OUTPUT[0m] record-image -> bound=[10,10,1280,960]
+[[38;5;150mATS-DRIVER-OUTPUT[0m] record-data -> v1 and v2
+[[38;5;150mATS-DRIVER-OUTPUT[0m] record-image -> bound=[10,10,1280,960]
+[[38;5;140mATS-ACTION[0m] ActionSelect -> {"select":"19:30","regexp":true,"name":"text","searchDuration":11,"delay":0,"occurrences":1,"passed":true,"duration":1672,"script":{"name":"subscripts.TesterLeParametreDeCommandeSubscript","line":9}}
+[[38;5;150mATS-DRIVER-OUTPUT[0m] record-create -> name=new-channel, bound=[10,10,1280,960]
+[[38;5;150mATS-DRIVER-OUTPUT[0m] record-element -> tag=SELECT
+[[93mATS-WARNING[0m] Element size is 0, wait before execute action -> 19
+[[93mATS-WARNING[0m] Element size is 0, wait before execute action -> 18
+[[93mATS-WARNING[0m] Element size is 0, wait before execute action -> 17
+[[93mATS-WARNING[0m] Element size is 0, wait before execute action -> 16
+[[93mATS-WARNING[0m] Element size is 0, wait before execute action -> 15
+[[93mATS-WARNING[0m] Element size is 0, wait before execute action -> 14
+[[93mATS-WARNING[0m] Element size is 0, wait before execute action -> 13
+[[93mATS-WARNING[0m] Element size is 0, wait before execute action -> 12
+[[93mATS-WARNING[0m] Element size is 0, wait before execute action -> 11
+[[93mATS-WARNING[0m] Element size is 0, wait before execute action -> 10
+[[93mATS-WARNING[0m] Element size is 0, wait before execute action -> 9
+[[93mATS-WARNING[0m] Element size is 0, wait before execute action -> 8
+[[93mATS-WARNING[0m] Element size is 0, wait before execute action -> 7
+[[93mATS-WARNING[0m] Element size is 0, wait before execute action -> 6
+[[93mATS-WARNING[0m] Element size is 0, wait before execute action -> 5
+[[93mATS-WARNING[0m] Element size is 0, wait before execute action -> 4
+[[93mATS-WARNING[0m] Element size is 0, wait before execute action -> 3
+[[93mATS-WARNING[0m] Element size is 0, wait before execute action -> 2
+[[93mATS-WARNING[0m] Element size is 0, wait before execute action -> 1
+[[93mATS-WARNING[0m] Element size is 0, wait before execute action -> 0
+[[38;5;150mATS-DRIVER-OUTPUT[0m] record-image -> bound=[10,10,1280,960]
+[[91mATS-ERROR[0m] org.openqa.selenium.JavascriptException -> javascript error: {"status":60,"value":"[object HTMLSelectElement] has no size and location"}
+  (Session info: chrome=127.0.6533.100)
+Build info: version: '4.22.0', revision: 'c5f3146703*'
+System info: os.name: 'Windows 10', os.arch: 'amd64', os.version: '10.0', java.version: '21'
+Driver info: com.ats.driver.AtsRemoteWebDriver
+Command: [b9edbcc153b02fd01ca21e4250561679, actions {actions=[org.openqa.selenium.interactions.Sequence@17d76ebb]}]
+Capabilities {acceptInsecureCerts: false, browserName: chrome, browserVersion: 127.0.6533.100, chrome: {chromedriverVersion: 127.0.6533.72 (9755e24ca85a..., userDataDir: C:\Users\AISHWA~1\AppData\L...}, fedcm:accounts: true, goog:chromeOptions: {debuggerAddress: localhost:52314}, networkConnectionEnabled: false, pageLoadStrategy: none, platformName: windows, proxy: Proxy(), setWindowRect: true, strictFileInteractability: false, timeouts: {implicit: 0, pageLoad: 300000, script: 30000}, unhandledPromptBehavior: dismiss and notify, webauthn:extension:credBlob: true, webauthn:extension:largeBlob: true, webauthn:extension:minPinLength: true, webauthn:extension:prf: true, webauthn:virtualAuthenticators: true}
+Session ID: b9edbcc153b02fd01ca21e4250561679
+[[38;5;150mATS-DRIVER-OUTPUT[0m] record-value -> v1
+[[38;5;140mATS-ACTION[0m] ActionSelect -> {"status":"non blocking action","message":"javascript error: {\"status\":60,\"value\":\"[object HTMLSelectElement] has no size and location\"}\n  (Session info: chrome=127.0.6533.100)\nBuild info: version: '4.22.0', revision: 'c5f3146703*'\nSystem info: os.name: 'Windows 10', os.arch: 'amd64', os.version: '10.0', java.version: '21'\nDriver info: com.ats.driver.AtsRemoteWebDriver\nCommand: [b9edbcc153b02fd01ca21e4250561679, actions {actions=[org.openqa.selenium.interactions.Sequence@17d76ebb]}]\nCapabilities {acceptInsecureCerts: false, browserName: chrome, browserVersion: 127.0.6533.100, chrome: {chromedriverVersion: 127.0.6533.72 (9755e24ca85a..., userDataDir: C:\\Users\\AISHWA~1\\AppData\\L...}, fedcm:accounts: true, goog:chromeOptions: {debuggerAddress: localhost:52314}, networkConnectionEnabled: false, pageLoadStrategy: none, platformName: windows, proxy: Proxy(), setWindowRect: true, strictFileInteractability: false, timeouts: {implicit: 0, pageLoad: 300000, script: 30000}, unhandledPromptBehavior: dismiss and notify, webauthn:extension:credBlob: true, webauthn:extension:largeBlob: true, webauthn:extension:minPinLength: true, webauthn:extension:prf: true, webauthn:virtualAuthenticators: true}\nSession ID: b9edbcc153b02fd01ca21e4250561679 after 5458 ms","passed":false,"duration":5461,"script":{"name":"subscripts.TesterLeParametreDeCommandeSubscript","line":10}}
+[[38;5;150mATS-DRIVER-OUTPUT[0m] record-create -> name=new-channel, bound=[10,10,1280,960]
+[[38;5;150mATS-DRIVER-OUTPUT[0m] record-element -> tag=A
+[[38;5;150mATS-DRIVER-OUTPUT[0m] record-image -> bound=[10,10,1280,960]
+[[38;5;150mATS-DRIVER-OUTPUT[0m] record-element -> tag=A
+[[38;5;150mATS-DRIVER-OUTPUT[0m] record-value -> v1
+[[38;5;150mATS-DRIVER-OUTPUT[0m] record-position -> hpos=0, vpos=0
+[[38;5;150mATS-DRIVER-OUTPUT[0m] record-image -> bound=[10,10,1280,960]
+[[38;5;150mATS-DRIVER-OUTPUT[0m] record-image -> bound=[10,10,1280,960]
+[[38;5;140mATS-ACTION[0m] ActionMouseKey -> {"type":"click","searchDuration":18,"delay":0,"occurrences":1,"passed":true,"duration":1570,"script":{"name":"subscripts.TesterLeParametreDeCommandeSubscript","line":11}}
+[[38;5;150mATS-DRIVER-OUTPUT[0m] record-create -> name=new-channel, bound=[10,10,1280,960]
+[[93mATS-WARNING[0m] Element not found, wait and try again -> 14
+[[93mATS-WARNING[0m] Element not found, wait and try again -> 13
+[[93mATS-WARNING[0m] Element not found, wait and try again -> 12
+[[93mATS-WARNING[0m] Element not found, wait and try again -> 11
+[[93mATS-WARNING[0m] Element not found, wait and try again -> 10
+[[38;5;150mATS-DRIVER-OUTPUT[0m] record-element -> tag=LABEL
+[[38;5;150mATS-DRIVER-OUTPUT[0m] record-image -> bound=[10,10,1280,960]
+[[38;5;150mATS-DRIVER-OUTPUT[0m] record-element -> tag=LABEL
+[[38;5;150mATS-DRIVER-OUTPUT[0m] record-value -> v1
+[[38;5;150mATS-DRIVER-OUTPUT[0m] record-position -> hpos=0, vpos=0
+[[38;5;150mATS-DRIVER-OUTPUT[0m] record-image -> bound=[10,10,1280,960]
+[[38;5;150mATS-DRIVER-OUTPUT[0m] record-image -> bound=[10,10,1280,960]
+[[38;5;140mATS-ACTION[0m] ActionMouseKey -> {"type":"click","searchDuration":184,"delay":0,"occurrences":1,"passed":true,"duration":3555,"script":{"name":"subscripts.TesterLeParametreDeCommandeSubscript","line":12}}
+[[38;5;150mATS-DRIVER-OUTPUT[0m] record-create -> name=new-channel, bound=[10,10,1280,960]
+[[38;5;150mATS-DRIVER-OUTPUT[0m] record-element -> tag=A
+[[38;5;150mATS-DRIVER-OUTPUT[0m] record-image -> bound=[10,10,1280,960]
+[[38;5;150mATS-DRIVER-OUTPUT[0m] record-element -> tag=A
+[[38;5;150mATS-DRIVER-OUTPUT[0m] record-value -> v1
+[[38;5;150mATS-DRIVER-OUTPUT[0m] record-position -> hpos=0, vpos=0
+[[38;5;150mATS-DRIVER-OUTPUT[0m] record-image -> bound=[10,10,1280,960]
+[[38;5;150mATS-DRIVER-OUTPUT[0m] record-image -> bound=[10,10,1280,960]
+[[38;5;140mATS-ACTION[0m] ActionMouseKey -> {"type":"click","searchDuration":16,"delay":0,"occurrences":1,"passed":true,"duration":1600,"script":{"name":"subscripts.TesterLeParametreDeCommandeSubscript","line":13}}
+[[38;5;150mATS-DRIVER-OUTPUT[0m] record-create -> name=new-channel, bound=[10,10,1280,960]
+[[38;5;150mATS-DRIVER-OUTPUT[0m] record-value -> v1
+[[94mATS-INFO[0m] Close web browser -> chrome
+[[38;5;150mATS-DRIVER-OUTPUT[0m] record-data -> v1 and v2
+[[38;5;150mATS-DRIVER-OUTPUT[0m] record-image -> bound=[10,10,1280,960]
+[[38;5;140mATS-ACTION[0m] ActionChannelClose -> {"name":"new-channel","warning":"channel does not exist","passed":true,"duration":115,"script":{"name":"subscripts.TesterLeParametreDeCommandeSubscript","line":14}}
+[[92mATS-SCRIPT[0m] Subscript -> {"called":"subscripts.TesterLeParametreDeCommandeSubscript","iteration":"2/2","type":"dataFile","url":"C:\\Users\\AishwaryaMANORE\\Documents\\AgilitestProjects\\QAFOOD\\target\\classes\\assets\\data\\data_construction_de_commande\\TesterParametreDeCommand.csv","parameters":[{"Browser":"chrome"},{"EmailID":"aishwarya.manore@aldemia.fr"},{"Password":"Password"},{"FoodItem":"12 wings"},{"LiveraisonOuEmporter":"À emporter"},{"Temps":"18:30"},{"Toppings":"Ketchup"}],"name":"construction_de_commande.TesterLeParametreDeCommand","line":0}
+[[94mATS-INFO[0m] ATS-AGENT system driver version -> 127.0.6533.72
+[[38;5;150mATS-DRIVER-OUTPUT[0m] record-create -> name=new-channel, bound=[10,10,1280,960]
+[[38;5;150mATS-DRIVER-OUTPUT[0m] record-data -> v1 and v2
+[[38;5;140mATS-ACTION[0m] ActionChannelStart -> {"name":"new-channel","app":"chrome","appVersion":"127.0.6533.100","os":"Microsoft Windows 10 Professionnel (2009)","passed":true,"duration":3533,"script":{"name":"subscripts.TesterLeParametreDeCommandeSubscript","line":0}}
+[[38;5;150mATS-DRIVER-OUTPUT[0m] record-create -> name=new-channel, bound=[10,10,1280,960]
+[[38;5;150mATS-DRIVER-OUTPUT[0m] record-value -> v1
+[[38;5;150mATS-DRIVER-OUTPUT[0m] record-image -> bound=[10,10,1280,960]
+[[38;5;140mATS-ACTION[0m] ActionGotoUrl -> {"url":"https://pprod.aldemia.fr/","passed":true,"duration":826,"script":{"name":"subscripts.TesterLeParametreDeCommandeSubscript","line":1}}
+[[38;5;150mATS-DRIVER-OUTPUT[0m] record-create -> name=new-channel, bound=[10,10,1280,960]
+[[93mATS-WARNING[0m] Element not found, wait and try again -> 14
+[[93mATS-WARNING[0m] Element not found, wait and try again -> 13
+[[93mATS-WARNING[0m] Element not found, wait and try again -> 12
+[[93mATS-WARNING[0m] Element not found, wait and try again -> 11
+[[38;5;150mATS-DRIVER-OUTPUT[0m] record-element -> tag=A
+[[38;5;150mATS-DRIVER-OUTPUT[0m] record-image -> bound=[10,10,1280,960]
+[[38;5;150mATS-DRIVER-OUTPUT[0m] record-element -> tag=A
+[[38;5;150mATS-DRIVER-OUTPUT[0m] record-value -> v1
+[[38;5;150mATS-DRIVER-OUTPUT[0m] record-position -> hpos=96, vpos=37
+[[38;5;150mATS-DRIVER-OUTPUT[0m] record-image -> bound=[10,10,1280,960]
+[[38;5;150mATS-DRIVER-OUTPUT[0m] record-image -> bound=[10,10,1280,960]
+[[38;5;140mATS-ACTION[0m] ActionMouseKey -> {"type":"click","searchDuration":53,"delay":0,"occurrences":1,"passed":true,"duration":3285,"script":{"name":"subscripts.TesterLeParametreDeCommandeSubscript","line":2}}
+[[38;5;150mATS-DRIVER-OUTPUT[0m] record-create -> name=new-channel, bound=[10,10,1280,960]
+[[93mATS-WARNING[0m] Element not found, wait and try again -> 14
+[[93mATS-WARNING[0m] Element not found, wait and try again -> 13
+[[38;5;150mATS-DRIVER-OUTPUT[0m] record-element -> tag=INPUT
+[[38;5;150mATS-DRIVER-OUTPUT[0m] record-image -> bound=[10,10,1280,960]
+[[38;5;150mATS-DRIVER-OUTPUT[0m] record-element -> tag=INPUT
+[[38;5;150mATS-DRIVER-OUTPUT[0m] record-data -> v1 and v2
+[[38;5;150mATS-DRIVER-OUTPUT[0m] record-image -> bound=[10,10,1280,960]
+[[38;5;140mATS-ACTION[0m] ActionText -> {"text":"AishwaryaMANORE","searchDuration":94,"delay":0,"occurrences":1,"passed":true,"duration":3147,"script":{"name":"subscripts.TesterLeParametreDeCommandeSubscript","line":3}}
+[[38;5;150mATS-DRIVER-OUTPUT[0m] record-create -> name=new-channel, bound=[10,10,1280,960]
+[[38;5;150mATS-DRIVER-OUTPUT[0m] record-element -> tag=INPUT
+[[38;5;150mATS-DRIVER-OUTPUT[0m] record-image -> bound=[10,10,1280,960]
+[[38;5;150mATS-DRIVER-OUTPUT[0m] record-element -> tag=INPUT
+[[38;5;150mATS-DRIVER-OUTPUT[0m] record-data -> v1 and v2
+[[38;5;150mATS-DRIVER-OUTPUT[0m] record-image -> bound=[10,10,1280,960]
+[[38;5;140mATS-ACTION[0m] ActionText -> {"text":"user1","searchDuration":17,"delay":0,"occurrences":1,"passed":true,"duration":2236,"script":{"name":"subscripts.TesterLeParametreDeCommandeSubscript","line":4}}
+[[38;5;150mATS-DRIVER-OUTPUT[0m] record-create -> name=new-channel, bound=[10,10,1280,960]
+[[38;5;150mATS-DRIVER-OUTPUT[0m] record-element -> tag=INPUT
+[[38;5;150mATS-DRIVER-OUTPUT[0m] record-image -> bound=[10,10,1280,960]
+[[38;5;150mATS-DRIVER-OUTPUT[0m] record-element -> tag=INPUT
+[[38;5;150mATS-DRIVER-OUTPUT[0m] record-value -> v1
+[[38;5;150mATS-DRIVER-OUTPUT[0m] record-position -> hpos=0, vpos=0
+[[38;5;150mATS-DRIVER-OUTPUT[0m] record-image -> bound=[10,10,1280,960]
+[[38;5;150mATS-DRIVER-OUTPUT[0m] record-image -> bound=[10,10,1280,960]
+[[38;5;140mATS-ACTION[0m] ActionMouseKey -> {"type":"click","searchDuration":20,"delay":0,"occurrences":1,"passed":true,"duration":2050,"script":{"name":"subscripts.TesterLeParametreDeCommandeSubscript","line":5}}
+[[38;5;150mATS-DRIVER-OUTPUT[0m] record-create -> name=new-channel, bound=[10,10,1280,960]
+[[38;5;150mATS-DRIVER-OUTPUT[0m] record-element -> tag=A
+[[38;5;150mATS-DRIVER-OUTPUT[0m] record-image -> bound=[10,10,1280,960]
+[[38;5;150mATS-DRIVER-OUTPUT[0m] record-element -> tag=A
+[[38;5;150mATS-DRIVER-OUTPUT[0m] record-value -> v1
+[[38;5;150mATS-DRIVER-OUTPUT[0m] record-position -> hpos=0, vpos=0
+[[38;5;150mATS-DRIVER-OUTPUT[0m] record-image -> bound=[10,10,1280,960]
+[[38;5;150mATS-DRIVER-OUTPUT[0m] record-image -> bound=[10,10,1280,960]
+[[38;5;140mATS-ACTION[0m] ActionMouseKey -> {"type":"click","searchDuration":596,"delay":0,"occurrences":3,"passed":true,"duration":2106,"script":{"name":"subscripts.TesterLeParametreDeCommandeSubscript","line":6}}
+[[38;5;150mATS-DRIVER-OUTPUT[0m] record-create -> name=new-channel, bound=[10,10,1280,960]
+[[38;5;150mATS-DRIVER-OUTPUT[0m] record-element -> tag=A
+[[38;5;150mATS-DRIVER-OUTPUT[0m] record-image -> bound=[10,10,1280,960]
+[[38;5;150mATS-DRIVER-OUTPUT[0m] record-element -> tag=A
+[[38;5;150mATS-DRIVER-OUTPUT[0m] record-value -> v1
+[[38;5;150mATS-DRIVER-OUTPUT[0m] record-position -> hpos=0, vpos=0
+[[38;5;150mATS-DRIVER-OUTPUT[0m] record-image -> bound=[10,10,1280,960]
+[[38;5;150mATS-DRIVER-OUTPUT[0m] record-image -> bound=[10,10,1280,960]
+[[38;5;140mATS-ACTION[0m] ActionMouseKey -> {"type":"click","searchDuration":636,"delay":0,"occurrences":2,"passed":true,"duration":2759,"script":{"name":"subscripts.TesterLeParametreDeCommandeSubscript","line":7}}
+[[38;5;150mATS-DRIVER-OUTPUT[0m] record-create -> name=new-channel, bound=[10,10,1280,960]
+[[93mATS-WARNING[0m] Element not found, wait and try again -> 14
+[[93mATS-WARNING[0m] Element not found, wait and try again -> 13
+[[93mATS-WARNING[0m] Element not found, wait and try again -> 12
+[[38;5;150mATS-DRIVER-OUTPUT[0m] record-element -> tag=A
+[[38;5;150mATS-DRIVER-OUTPUT[0m] record-image -> bound=[10,10,1280,960]
+[[38;5;150mATS-DRIVER-OUTPUT[0m] record-element -> tag=A
+[[38;5;150mATS-DRIVER-OUTPUT[0m] record-value -> v1
+[[38;5;150mATS-DRIVER-OUTPUT[0m] record-position -> hpos=0, vpos=0
+[[38;5;150mATS-DRIVER-OUTPUT[0m] record-image -> bound=[10,10,1280,960]
+[[38;5;150mATS-DRIVER-OUTPUT[0m] record-image -> bound=[10,10,1280,960]
+[[38;5;140mATS-ACTION[0m] ActionMouseKey -> {"type":"click","searchDuration":31,"delay":0,"occurrences":1,"passed":true,"duration":2642,"script":{"name":"subscripts.TesterLeParametreDeCommandeSubscript","line":8}}
+[[38;5;150mATS-DRIVER-OUTPUT[0m] record-create -> name=new-channel, bound=[10,10,1280,960]
+[[38;5;150mATS-DRIVER-OUTPUT[0m] record-element -> tag=SELECT
+[[93mATS-WARNING[0m] Element size is 0, wait before execute action -> 19
+[[93mATS-WARNING[0m] Element size is 0, wait before execute action -> 18
+[[93mATS-WARNING[0m] Element size is 0, wait before execute action -> 17
+[[93mATS-WARNING[0m] Element size is 0, wait before execute action -> 16
+[[93mATS-WARNING[0m] Element size is 0, wait before execute action -> 15
+[[93mATS-WARNING[0m] Element size is 0, wait before execute action -> 14
+[[93mATS-WARNING[0m] Element size is 0, wait before execute action -> 13
+[[93mATS-WARNING[0m] Element size is 0, wait before execute action -> 12
+[[93mATS-WARNING[0m] Element size is 0, wait before execute action -> 11
+[[93mATS-WARNING[0m] Element size is 0, wait before execute action -> 10
+[[93mATS-WARNING[0m] Element size is 0, wait before execute action -> 9
+[[93mATS-WARNING[0m] Element size is 0, wait before execute action -> 8
+[[93mATS-WARNING[0m] Element size is 0, wait before execute action -> 7
+[[93mATS-WARNING[0m] Element size is 0, wait before execute action -> 6
+[[93mATS-WARNING[0m] Element size is 0, wait before execute action -> 5
+[[93mATS-WARNING[0m] Element size is 0, wait before execute action -> 4
+[[93mATS-WARNING[0m] Element size is 0, wait before execute action -> 3
+[[93mATS-WARNING[0m] Element size is 0, wait before execute action -> 2
+[[93mATS-WARNING[0m] Element size is 0, wait before execute action -> 1
+[[93mATS-WARNING[0m] Element size is 0, wait before execute action -> 0
+[[38;5;150mATS-DRIVER-OUTPUT[0m] record-image -> bound=[10,10,1280,960]
+[[91mATS-ERROR[0m] org.openqa.selenium.JavascriptException -> javascript error: {"status":60,"value":"[object HTMLSelectElement] has no size and location"}
+  (Session info: chrome=127.0.6533.100)
+Build info: version: '4.22.0', revision: 'c5f3146703*'
+System info: os.name: 'Windows 10', os.arch: 'amd64', os.version: '10.0', java.version: '21'
+Driver info: com.ats.driver.AtsRemoteWebDriver
+Command: [17479981a9dc8902cdb183e869f2eff3, actions {actions=[org.openqa.selenium.interactions.Sequence@5c3710b3]}]
+Capabilities {acceptInsecureCerts: false, browserName: chrome, browserVersion: 127.0.6533.100, chrome: {chromedriverVersion: 127.0.6533.72 (9755e24ca85a..., userDataDir: C:\Users\AISHWA~1\AppData\L...}, fedcm:accounts: true, goog:chromeOptions: {debuggerAddress: localhost:52341}, networkConnectionEnabled: false, pageLoadStrategy: none, platformName: windows, proxy: Proxy(), setWindowRect: true, strictFileInteractability: false, timeouts: {implicit: 0, pageLoad: 300000, script: 30000}, unhandledPromptBehavior: dismiss and notify, webauthn:extension:credBlob: true, webauthn:extension:largeBlob: true, webauthn:extension:minPinLength: true, webauthn:extension:prf: true, webauthn:virtualAuthenticators: true}
+Session ID: 17479981a9dc8902cdb183e869f2eff3
+[[38;5;150mATS-DRIVER-OUTPUT[0m] record-value -> v1
+[[38;5;140mATS-ACTION[0m] ActionSelect -> {"status":"non blocking action","message":"javascript error: {\"status\":60,\"value\":\"[object HTMLSelectElement] has no size and location\"}\n  (Session info: chrome=127.0.6533.100)\nBuild info: version: '4.22.0', revision: 'c5f3146703*'\nSystem info: os.name: 'Windows 10', os.arch: 'amd64', os.version: '10.0', java.version: '21'\nDriver info: com.ats.driver.AtsRemoteWebDriver\nCommand: [17479981a9dc8902cdb183e869f2eff3, actions {actions=[org.openqa.selenium.interactions.Sequence@5c3710b3]}]\nCapabilities {acceptInsecureCerts: false, browserName: chrome, browserVersion: 127.0.6533.100, chrome: {chromedriverVersion: 127.0.6533.72 (9755e24ca85a..., userDataDir: C:\\Users\\AISHWA~1\\AppData\\L...}, fedcm:accounts: true, goog:chromeOptions: {debuggerAddress: localhost:52341}, networkConnectionEnabled: false, pageLoadStrategy: none, platformName: windows, proxy: Proxy(), setWindowRect: true, strictFileInteractability: false, timeouts: {implicit: 0, pageLoad: 300000, script: 30000}, unhandledPromptBehavior: dismiss and notify, webauthn:extension:credBlob: true, webauthn:extension:largeBlob: true, webauthn:extension:minPinLength: true, webauthn:extension:prf: true, webauthn:virtualAuthenticators: true}\nSession ID: 17479981a9dc8902cdb183e869f2eff3 after 5380 ms","passed":false,"duration":5388,"script":{"name":"subscripts.TesterLeParametreDeCommandeSubscript","line":9}}
+[[38;5;150mATS-DRIVER-OUTPUT[0m] record-create -> name=new-channel, bound=[10,10,1280,960]
+[[38;5;150mATS-DRIVER-OUTPUT[0m] record-element -> tag=SELECT
+[[38;5;150mATS-DRIVER-OUTPUT[0m] record-image -> bound=[10,10,1280,960]
+[[38;5;150mATS-DRIVER-OUTPUT[0m] record-element -> tag=SELECT
+[[38;5;150mATS-DRIVER-OUTPUT[0m] record-image -> bound=[10,10,1280,960]
+[[38;5;150mATS-DRIVER-OUTPUT[0m] record-data -> v1 and v2
+[[38;5;150mATS-DRIVER-OUTPUT[0m] record-image -> bound=[10,10,1280,960]
+[[38;5;140mATS-ACTION[0m] ActionSelect -> {"select":"18:30","regexp":true,"name":"text","searchDuration":9,"delay":0,"occurrences":1,"passed":true,"duration":1620,"script":{"name":"subscripts.TesterLeParametreDeCommandeSubscript","line":10}}
+[[38;5;150mATS-DRIVER-OUTPUT[0m] record-create -> name=new-channel, bound=[10,10,1280,960]
+[[38;5;150mATS-DRIVER-OUTPUT[0m] record-element -> tag=A
+[[38;5;150mATS-DRIVER-OUTPUT[0m] record-image -> bound=[10,10,1280,960]
+[[38;5;150mATS-DRIVER-OUTPUT[0m] record-element -> tag=A
+[[38;5;150mATS-DRIVER-OUTPUT[0m] record-value -> v1
+[[38;5;150mATS-DRIVER-OUTPUT[0m] record-position -> hpos=0, vpos=0
+[[38;5;150mATS-DRIVER-OUTPUT[0m] record-image -> bound=[10,10,1280,960]
+[[38;5;150mATS-DRIVER-OUTPUT[0m] record-image -> bound=[10,10,1280,960]
+[[38;5;140mATS-ACTION[0m] ActionMouseKey -> {"type":"click","searchDuration":16,"delay":0,"occurrences":1,"passed":true,"duration":1476,"script":{"name":"subscripts.TesterLeParametreDeCommandeSubscript","line":11}}
+[[38;5;150mATS-DRIVER-OUTPUT[0m] record-create -> name=new-channel, bound=[10,10,1280,960]
+[[93mATS-WARNING[0m] Element not found, wait and try again -> 14
+[[93mATS-WARNING[0m] Element not found, wait and try again -> 13
+[[93mATS-WARNING[0m] Element not found, wait and try again -> 12
+[[93mATS-WARNING[0m] Element not found, wait and try again -> 11
+[[93mATS-WARNING[0m] Element not found, wait and try again -> 10
+[[93mATS-WARNING[0m] Element not found, wait and try again -> 9
+[[38;5;150mATS-DRIVER-OUTPUT[0m] record-element -> tag=LABEL
+[[38;5;150mATS-DRIVER-OUTPUT[0m] record-image -> bound=[10,10,1280,960]
+[[38;5;150mATS-DRIVER-OUTPUT[0m] record-element -> tag=LABEL
+[[38;5;150mATS-DRIVER-OUTPUT[0m] record-value -> v1
+[[38;5;150mATS-DRIVER-OUTPUT[0m] record-position -> hpos=0, vpos=0
+[[38;5;150mATS-DRIVER-OUTPUT[0m] record-image -> bound=[10,10,1280,960]
+[[38;5;150mATS-DRIVER-OUTPUT[0m] record-image -> bound=[10,10,1280,960]
+[[38;5;140mATS-ACTION[0m] ActionMouseKey -> {"type":"click","searchDuration":20,"delay":0,"occurrences":1,"passed":true,"duration":3969,"script":{"name":"subscripts.TesterLeParametreDeCommandeSubscript","line":12}}
+[[38;5;150mATS-DRIVER-OUTPUT[0m] record-create -> name=new-channel, bound=[10,10,1280,960]
+[[38;5;150mATS-DRIVER-OUTPUT[0m] record-element -> tag=A
+[[38;5;150mATS-DRIVER-OUTPUT[0m] record-image -> bound=[10,10,1280,960]
+[[38;5;150mATS-DRIVER-OUTPUT[0m] record-element -> tag=A
+[[38;5;150mATS-DRIVER-OUTPUT[0m] record-value -> v1
+[[38;5;150mATS-DRIVER-OUTPUT[0m] record-position -> hpos=0, vpos=0
+[[38;5;150mATS-DRIVER-OUTPUT[0m] record-image -> bound=[10,10,1280,960]
+[[38;5;150mATS-DRIVER-OUTPUT[0m] record-image -> bound=[10,10,1280,960]
+[[38;5;140mATS-ACTION[0m] ActionMouseKey -> {"type":"click","searchDuration":15,"delay":0,"occurrences":1,"passed":true,"duration":1543,"script":{"name":"subscripts.TesterLeParametreDeCommandeSubscript","line":13}}
+[[38;5;150mATS-DRIVER-OUTPUT[0m] record-create -> name=new-channel, bound=[10,10,1280,960]
+[[38;5;150mATS-DRIVER-OUTPUT[0m] record-value -> v1
+[[94mATS-INFO[0m] Close web browser -> chrome
+[[38;5;150mATS-DRIVER-OUTPUT[0m] record-data -> v1 and v2
+[[38;5;150mATS-DRIVER-OUTPUT[0m] record-image -> bound=[10,10,1280,960]
+[[38;5;140mATS-ACTION[0m] ActionChannelClose -> {"name":"new-channel","warning":"channel does not exist","passed":true,"duration":121,"script":{"name":"subscripts.TesterLeParametreDeCommandeSubscript","line":14}}
+[[38;5;140mATS-ACTION[0m] ActionCallscript -> {"status":"terminated","passed":true,"duration":86000,"script":{"name":"construction_de_commande.TesterLeParametreDeCommand","line":0}}
+[[94mATS-INFO[0m] Stop visual recording -> construction_de_commande.TesterLeParametreDeCommand
+[[38;5;150mATS-DRIVER-OUTPUT[0m] record-error-summary -> test=construction_de_commande.TesterLeParametreDeCommand, suite=ConstructionDeCommandeSuite1
+[[38;5;150mATS-DRIVER-OUTPUT[0m] record-stop
+[[38;5;150mATS-DRIVER-OUTPUT[0m] record-download -> C:\Users\AishwaryaMANORE\AppData\Local\Temp\ats_recorder\atsv_8137ebea-6d10-4e17-8780-5879d6d3729f.tmp
+[[94mATS-INFO[0m] Save ATSV file -> C:\Users\AishwaryaMANORE\Documents\AgilitestProjects\QAFOOD\target\ats-output\ConstructionDeCommandeSuite1\construction_de_commande.TesterLeParametreDeCommand.atsv (8694 Ko)
+[[94mATS-INFO[0m] Create HTML player report -> C:\Users\AishwaryaMANORE\Documents\AgilitestProjects\QAFOOD\target\ats-output\ConstructionDeCommandeSuite1\construction_de_commande.TesterLeParametreDeCommand_xml
+[[94mATS-INFO[0m] HTML_player generated -> C:\Users\AishwaryaMANORE\Documents\AgilitestProjects\QAFOOD\target\ats-output\ConstructionDeCommandeSuite1\construction_de_commande.TesterLeParametreDeCommand_xml
+[[94mATS-INFO[0m] Create XML report -> C:\Users\AishwaryaMANORE\Documents\AgilitestProjects\QAFOOD\target\ats-output\ConstructionDeCommandeSuite1\construction_de_commande.TesterLeParametreDeCommand_xml
+[[94mATS-INFO[0m] XML report generated -> C:\Users\AishwaryaMANORE\Documents\AgilitestProjects\QAFOOD\target\ats-output\ConstructionDeCommandeSuite1\construction_de_commande.TesterLeParametreDeCommand_xml
+[ATS-TEST] Test terminated -> {"name":"construction_de_commande.TesterLeParametreDeCommand","suite":"ConstructionDeCommandeSuite1","duration":"122203","passed":true,"actions":30}
+PASSED: construction_de_commande.TesterLeParametreDeCommand.TcTesterLeParametreDeCommand
+
+===============================================
+    construction_de_commande.TesterLeParametreDeCommand
+    Tests run: 1, Failures: 0, Skips: 0
+===============================================
+
+[[94mATS-INFO[0m] Save ATS results -> C:\Users\AishwaryaMANORE\Documents\AgilitestProjects\QAFOOD\target\ats-output\ats-results.json
+[[38;5;81mATS-SUITE[0m] Suite terminated -> {"name":"ConstructionDeCommandeSuite1","passed":2,"failed":0,"filtered":0}
+
+===============================================
+ConstructionDeCommandeSuite1
+Total tests run: 2, Passes: 2, Failures: 0, Skips: 0
+===============================================
+
+[[97mATS-LOGGER[0m] [Terminal Color] Logger level -> Disabled
+[[38;5;81mATS-SUITE[0m] Start suite -> {"name":"ConstructionDeCommandeSuite2","tests":2}
+[[97mATS-LOGGER[0m] [Terminal Color] Logger level -> Disabled
+[ATS-TEST] Start test -> {"name":"construction_de_commande.TesterLeParametreDeCommand","suite":"ConstructionDeCommandeSuite2","xmlReport":true,"visualQuality":3,"parameters":{"password":"user2","ats.log.level":"silent","ats.suite.description":"","ats.suite.date.order":"","username":"AishwaryaMANORE","Browser":"chrome"}}
+[[92mATS-SCRIPT[0m] Subscript -> {"called":"subscripts.TesterLeParametreDeCommandeSubscript","iteration":"1/2","type":"dataFile","url":"C:\\Users\\AishwaryaMANORE\\Documents\\AgilitestProjects\\QAFOOD\\target\\classes\\assets\\data\\data_construction_de_commande\\TesterParametreDeCommand.csv","parameters":[{"Browser":"chrome"},{"EmailID":"aishwarya.manore@aldemia.fr"},{"Password":"Password"},{"FoodItem":"Feuilletés poulet bacon"},{"LiveraisonOuEmporter":"Livraison"},{"Temps":"19:30"},{"Toppings":"Sauce douce"}],"name":"construction_de_commande.TesterLeParametreDeCommand","line":0}
+[[38;5;150mATS-DRIVER-OUTPUT[0m] record-create -> name=new-channel, bound=[10,10,1280,960]
+[[38;5;150mATS-DRIVER-OUTPUT[0m] record-data -> v1 and v2
+[[38;5;150mATS-DRIVER-OUTPUT[0m] record-create -> name=new-channel, bound=[10,10,1280,960]
+[[38;5;150mATS-DRIVER-OUTPUT[0m] record-value -> v1
+[[38;5;150mATS-DRIVER-OUTPUT[0m] record-image -> bound=[10,10,1280,960]
+[[38;5;150mATS-DRIVER-OUTPUT[0m] record-create -> name=new-channel, bound=[10,10,1280,960]
+[[38;5;150mATS-DRIVER-OUTPUT[0m] record-element -> tag=A
+[[38;5;150mATS-DRIVER-OUTPUT[0m] record-image -> bound=[10,10,1280,960]
+[[38;5;150mATS-DRIVER-OUTPUT[0m] record-element -> tag=A
+[[38;5;150mATS-DRIVER-OUTPUT[0m] record-value -> v1
+[[38;5;150mATS-DRIVER-OUTPUT[0m] record-position -> hpos=96, vpos=37
+[[38;5;150mATS-DRIVER-OUTPUT[0m] record-image -> bound=[10,10,1280,960]
+[[38;5;150mATS-DRIVER-OUTPUT[0m] record-image -> bound=[10,10,1280,960]
+[[38;5;150mATS-DRIVER-OUTPUT[0m] record-create -> name=new-channel, bound=[10,10,1280,960]
+[[38;5;150mATS-DRIVER-OUTPUT[0m] record-element -> tag=INPUT
+[[38;5;150mATS-DRIVER-OUTPUT[0m] record-image -> bound=[10,10,1280,960]
+[[38;5;150mATS-DRIVER-OUTPUT[0m] record-element -> tag=INPUT
+[[38;5;150mATS-DRIVER-OUTPUT[0m] record-data -> v1 and v2
+[[38;5;150mATS-DRIVER-OUTPUT[0m] record-image -> bound=[10,10,1280,960]
+[[38;5;150mATS-DRIVER-OUTPUT[0m] record-create -> name=new-channel, bound=[10,10,1280,960]
+[[38;5;150mATS-DRIVER-OUTPUT[0m] record-element -> tag=INPUT
+[[38;5;150mATS-DRIVER-OUTPUT[0m] record-image -> bound=[10,10,1280,960]
+[[38;5;150mATS-DRIVER-OUTPUT[0m] record-element -> tag=INPUT
+[[38;5;150mATS-DRIVER-OUTPUT[0m] record-data -> v1 and v2
+[[38;5;150mATS-DRIVER-OUTPUT[0m] record-image -> bound=[10,10,1280,960]
+[[38;5;150mATS-DRIVER-OUTPUT[0m] record-create -> name=new-channel, bound=[10,10,1280,960]
+[[38;5;150mATS-DRIVER-OUTPUT[0m] record-element -> tag=INPUT
+[[38;5;150mATS-DRIVER-OUTPUT[0m] record-image -> bound=[10,10,1280,960]
+[[38;5;150mATS-DRIVER-OUTPUT[0m] record-element -> tag=INPUT
+[[38;5;150mATS-DRIVER-OUTPUT[0m] record-value -> v1
+[[38;5;150mATS-DRIVER-OUTPUT[0m] record-position -> hpos=0, vpos=0
+[[38;5;150mATS-DRIVER-OUTPUT[0m] record-image -> bound=[10,10,1280,960]
+[[38;5;150mATS-DRIVER-OUTPUT[0m] record-image -> bound=[10,10,1280,960]
+[[38;5;150mATS-DRIVER-OUTPUT[0m] record-create -> name=new-channel, bound=[10,10,1280,960]
+[[38;5;150mATS-DRIVER-OUTPUT[0m] record-element -> tag=A
+[[38;5;150mATS-DRIVER-OUTPUT[0m] record-image -> bound=[10,10,1280,960]
+[[38;5;150mATS-DRIVER-OUTPUT[0m] record-element -> tag=A
+[[38;5;150mATS-DRIVER-OUTPUT[0m] record-value -> v1
+[[38;5;150mATS-DRIVER-OUTPUT[0m] record-position -> hpos=0, vpos=0
+[[38;5;150mATS-DRIVER-OUTPUT[0m] record-image -> bound=[10,10,1280,960]
+[[38;5;150mATS-DRIVER-OUTPUT[0m] record-image -> bound=[10,10,1280,960]
+[[38;5;150mATS-DRIVER-OUTPUT[0m] record-create -> name=new-channel, bound=[10,10,1280,960]
+[[38;5;150mATS-DRIVER-OUTPUT[0m] record-element -> tag=A
+[[38;5;150mATS-DRIVER-OUTPUT[0m] record-image -> bound=[10,10,1280,960]
+[[38;5;150mATS-DRIVER-OUTPUT[0m] record-element -> tag=A
+[[38;5;150mATS-DRIVER-OUTPUT[0m] record-value -> v1
+[[38;5;150mATS-DRIVER-OUTPUT[0m] record-position -> hpos=0, vpos=0
+[[38;5;150mATS-DRIVER-OUTPUT[0m] record-image -> bound=[10,10,1280,960]
+[[38;5;150mATS-DRIVER-OUTPUT[0m] record-image -> bound=[10,10,1280,960]
+[[38;5;150mATS-DRIVER-OUTPUT[0m] record-create -> name=new-channel, bound=[10,10,1280,960]
+[[38;5;150mATS-DRIVER-OUTPUT[0m] record-element -> tag=A
+[[38;5;150mATS-DRIVER-OUTPUT[0m] record-image -> bound=[10,10,1280,960]
+[[38;5;150mATS-DRIVER-OUTPUT[0m] record-element -> tag=A
+[[38;5;150mATS-DRIVER-OUTPUT[0m] record-value -> v1
+[[38;5;150mATS-DRIVER-OUTPUT[0m] record-position -> hpos=0, vpos=0
+[[38;5;150mATS-DRIVER-OUTPUT[0m] record-image -> bound=[10,10,1280,960]
+[[38;5;150mATS-DRIVER-OUTPUT[0m] record-image -> bound=[10,10,1280,960]
+[[38;5;150mATS-DRIVER-OUTPUT[0m] record-create -> name=new-channel, bound=[10,10,1280,960]
+[[38;5;150mATS-DRIVER-OUTPUT[0m] record-element -> tag=SELECT
+[[38;5;150mATS-DRIVER-OUTPUT[0m] record-image -> bound=[10,10,1280,960]
+[[38;5;150mATS-DRIVER-OUTPUT[0m] record-element -> tag=SELECT
+[[38;5;150mATS-DRIVER-OUTPUT[0m] record-image -> bound=[10,10,1280,960]
+[[38;5;150mATS-DRIVER-OUTPUT[0m] record-data -> v1 and v2
+[[38;5;150mATS-DRIVER-OUTPUT[0m] record-image -> bound=[10,10,1280,960]
+[[38;5;150mATS-DRIVER-OUTPUT[0m] record-create -> name=new-channel, bound=[10,10,1280,960]
+[[38;5;150mATS-DRIVER-OUTPUT[0m] record-element -> tag=SELECT
+[[38;5;150mATS-DRIVER-OUTPUT[0m] record-image -> bound=[10,10,1280,960]
+[[38;5;150mATS-DRIVER-OUTPUT[0m] record-value -> v1
+[[38;5;150mATS-DRIVER-OUTPUT[0m] record-create -> name=new-channel, bound=[10,10,1280,960]
+[[38;5;150mATS-DRIVER-OUTPUT[0m] record-element -> tag=A
+[[38;5;150mATS-DRIVER-OUTPUT[0m] record-image -> bound=[10,10,1280,960]
+[[38;5;150mATS-DRIVER-OUTPUT[0m] record-element -> tag=A
+[[38;5;150mATS-DRIVER-OUTPUT[0m] record-value -> v1
+[[38;5;150mATS-DRIVER-OUTPUT[0m] record-position -> hpos=0, vpos=0
+[[38;5;150mATS-DRIVER-OUTPUT[0m] record-image -> bound=[10,10,1280,960]
+[[38;5;150mATS-DRIVER-OUTPUT[0m] record-image -> bound=[10,10,1280,960]
+[[38;5;150mATS-DRIVER-OUTPUT[0m] record-create -> name=new-channel, bound=[10,10,1280,960]
+[[38;5;150mATS-DRIVER-OUTPUT[0m] record-element -> tag=LABEL
+[[38;5;150mATS-DRIVER-OUTPUT[0m] record-image -> bound=[10,10,1280,960]
+[[38;5;150mATS-DRIVER-OUTPUT[0m] record-element -> tag=LABEL
+[[38;5;150mATS-DRIVER-OUTPUT[0m] record-value -> v1
+[[38;5;150mATS-DRIVER-OUTPUT[0m] record-position -> hpos=0, vpos=0
+[[38;5;150mATS-DRIVER-OUTPUT[0m] record-image -> bound=[10,10,1280,960]
+[[38;5;150mATS-DRIVER-OUTPUT[0m] record-image -> bound=[10,10,1280,960]
+[[38;5;150mATS-DRIVER-OUTPUT[0m] record-create -> name=new-channel, bound=[10,10,1280,960]
+[[38;5;150mATS-DRIVER-OUTPUT[0m] record-element -> tag=A
+[[38;5;150mATS-DRIVER-OUTPUT[0m] record-image -> bound=[10,10,1280,960]
+[[38;5;150mATS-DRIVER-OUTPUT[0m] record-element -> tag=A
+[[38;5;150mATS-DRIVER-OUTPUT[0m] record-value -> v1
+[[38;5;150mATS-DRIVER-OUTPUT[0m] record-position -> hpos=0, vpos=0
+[[38;5;150mATS-DRIVER-OUTPUT[0m] record-image -> bound=[10,10,1280,960]
+[[38;5;150mATS-DRIVER-OUTPUT[0m] record-image -> bound=[10,10,1280,960]
+[[38;5;150mATS-DRIVER-OUTPUT[0m] record-create -> name=new-channel, bound=[10,10,1280,960]
+[[38;5;150mATS-DRIVER-OUTPUT[0m] record-value -> v1
+[[38;5;150mATS-DRIVER-OUTPUT[0m] record-data -> v1 and v2
+[[38;5;150mATS-DRIVER-OUTPUT[0m] record-image -> bound=[10,10,1280,960]
+[[92mATS-SCRIPT[0m] Subscript -> {"called":"subscripts.TesterLeParametreDeCommandeSubscript","iteration":"2/2","type":"dataFile","url":"C:\\Users\\AishwaryaMANORE\\Documents\\AgilitestProjects\\QAFOOD\\target\\classes\\assets\\data\\data_construction_de_commande\\TesterParametreDeCommand.csv","parameters":[{"Browser":"chrome"},{"EmailID":"aishwarya.manore@aldemia.fr"},{"Password":"Password"},{"FoodItem":"12 wings"},{"LiveraisonOuEmporter":"À emporter"},{"Temps":"18:30"},{"Toppings":"Ketchup"}],"name":"construction_de_commande.TesterLeParametreDeCommand","line":0}
+[[38;5;150mATS-DRIVER-OUTPUT[0m] record-create -> name=new-channel, bound=[10,10,1280,960]
+[[38;5;150mATS-DRIVER-OUTPUT[0m] record-data -> v1 and v2
+[[38;5;150mATS-DRIVER-OUTPUT[0m] record-create -> name=new-channel, bound=[10,10,1280,960]
+[[38;5;150mATS-DRIVER-OUTPUT[0m] record-value -> v1
+[[38;5;150mATS-DRIVER-OUTPUT[0m] record-image -> bound=[10,10,1280,960]
+[[38;5;150mATS-DRIVER-OUTPUT[0m] record-create -> name=new-channel, bound=[10,10,1280,960]
+[[38;5;150mATS-DRIVER-OUTPUT[0m] record-element -> tag=A
+[[38;5;150mATS-DRIVER-OUTPUT[0m] record-image -> bound=[10,10,1280,960]
+[[38;5;150mATS-DRIVER-OUTPUT[0m] record-element -> tag=A
+[[38;5;150mATS-DRIVER-OUTPUT[0m] record-value -> v1
+[[38;5;150mATS-DRIVER-OUTPUT[0m] record-position -> hpos=96, vpos=37
+[[38;5;150mATS-DRIVER-OUTPUT[0m] record-image -> bound=[10,10,1280,960]
+[[38;5;150mATS-DRIVER-OUTPUT[0m] record-image -> bound=[10,10,1280,960]
+[[38;5;150mATS-DRIVER-OUTPUT[0m] record-create -> name=new-channel, bound=[10,10,1280,960]
+[[38;5;150mATS-DRIVER-OUTPUT[0m] record-element -> tag=INPUT
+[[38;5;150mATS-DRIVER-OUTPUT[0m] record-image -> bound=[10,10,1280,960]
+[[38;5;150mATS-DRIVER-OUTPUT[0m] record-element -> tag=INPUT
+[[38;5;150mATS-DRIVER-OUTPUT[0m] record-data -> v1 and v2
+[[38;5;150mATS-DRIVER-OUTPUT[0m] record-image -> bound=[10,10,1280,960]
+[[38;5;150mATS-DRIVER-OUTPUT[0m] record-create -> name=new-channel, bound=[10,10,1280,960]
+[[38;5;150mATS-DRIVER-OUTPUT[0m] record-element -> tag=INPUT
+[[38;5;150mATS-DRIVER-OUTPUT[0m] record-image -> bound=[10,10,1280,960]
+[[38;5;150mATS-DRIVER-OUTPUT[0m] record-element -> tag=INPUT
+[[38;5;150mATS-DRIVER-OUTPUT[0m] record-data -> v1 and v2
+[[38;5;150mATS-DRIVER-OUTPUT[0m] record-image -> bound=[10,10,1280,960]
+[[38;5;150mATS-DRIVER-OUTPUT[0m] record-create -> name=new-channel, bound=[10,10,1280,960]
+[[38;5;150mATS-DRIVER-OUTPUT[0m] record-element -> tag=INPUT
+[[38;5;150mATS-DRIVER-OUTPUT[0m] record-image -> bound=[10,10,1280,960]
+[[38;5;150mATS-DRIVER-OUTPUT[0m] record-element -> tag=INPUT
+[[38;5;150mATS-DRIVER-OUTPUT[0m] record-value -> v1
+[[38;5;150mATS-DRIVER-OUTPUT[0m] record-position -> hpos=0, vpos=0
+[[38;5;150mATS-DRIVER-OUTPUT[0m] record-image -> bound=[10,10,1280,960]
+[[38;5;150mATS-DRIVER-OUTPUT[0m] record-image -> bound=[10,10,1280,960]
+[[38;5;150mATS-DRIVER-OUTPUT[0m] record-create -> name=new-channel, bound=[10,10,1280,960]
+[[38;5;150mATS-DRIVER-OUTPUT[0m] record-element -> tag=A
+[[38;5;150mATS-DRIVER-OUTPUT[0m] record-image -> bound=[10,10,1280,960]
+[[38;5;150mATS-DRIVER-OUTPUT[0m] record-element -> tag=A
+[[38;5;150mATS-DRIVER-OUTPUT[0m] record-value -> v1
+[[38;5;150mATS-DRIVER-OUTPUT[0m] record-position -> hpos=0, vpos=0
+[[38;5;150mATS-DRIVER-OUTPUT[0m] record-image -> bound=[10,10,1280,960]
+[[38;5;150mATS-DRIVER-OUTPUT[0m] record-image -> bound=[10,10,1280,960]
+[[38;5;150mATS-DRIVER-OUTPUT[0m] record-create -> name=new-channel, bound=[10,10,1280,960]
+[[38;5;150mATS-DRIVER-OUTPUT[0m] record-element -> tag=A
+[[38;5;150mATS-DRIVER-OUTPUT[0m] record-image -> bound=[10,10,1280,960]
+[[38;5;150mATS-DRIVER-OUTPUT[0m] record-element -> tag=A
+[[38;5;150mATS-DRIVER-OUTPUT[0m] record-value -> v1
+[[38;5;150mATS-DRIVER-OUTPUT[0m] record-position -> hpos=0, vpos=0
+[[38;5;150mATS-DRIVER-OUTPUT[0m] record-image -> bound=[10,10,1280,960]
+[[38;5;150mATS-DRIVER-OUTPUT[0m] record-image -> bound=[10,10,1280,960]
+[[38;5;150mATS-DRIVER-OUTPUT[0m] record-create -> name=new-channel, bound=[10,10,1280,960]
+[[38;5;150mATS-DRIVER-OUTPUT[0m] record-element -> tag=A
+[[38;5;150mATS-DRIVER-OUTPUT[0m] record-image -> bound=[10,10,1280,960]
+[[38;5;150mATS-DRIVER-OUTPUT[0m] record-element -> tag=A
+[[38;5;150mATS-DRIVER-OUTPUT[0m] record-value -> v1
+[[38;5;150mATS-DRIVER-OUTPUT[0m] record-position -> hpos=0, vpos=0
+[[38;5;150mATS-DRIVER-OUTPUT[0m] record-image -> bound=[10,10,1280,960]
+[[38;5;150mATS-DRIVER-OUTPUT[0m] record-image -> bound=[10,10,1280,960]
+[[38;5;150mATS-DRIVER-OUTPUT[0m] record-create -> name=new-channel, bound=[10,10,1280,960]
+[[38;5;150mATS-DRIVER-OUTPUT[0m] record-element -> tag=SELECT
+[[38;5;150mATS-DRIVER-OUTPUT[0m] record-image -> bound=[10,10,1280,960]
+[[38;5;150mATS-DRIVER-OUTPUT[0m] record-value -> v1
+[[38;5;150mATS-DRIVER-OUTPUT[0m] record-create -> name=new-channel, bound=[10,10,1280,960]
+[[38;5;150mATS-DRIVER-OUTPUT[0m] record-element -> tag=SELECT
+[[38;5;150mATS-DRIVER-OUTPUT[0m] record-image -> bound=[10,10,1280,960]
+[[38;5;150mATS-DRIVER-OUTPUT[0m] record-element -> tag=SELECT
+[[38;5;150mATS-DRIVER-OUTPUT[0m] record-image -> bound=[10,10,1280,960]
+[[38;5;150mATS-DRIVER-OUTPUT[0m] record-data -> v1 and v2
+[[38;5;150mATS-DRIVER-OUTPUT[0m] record-image -> bound=[10,10,1280,960]
+[[38;5;150mATS-DRIVER-OUTPUT[0m] record-create -> name=new-channel, bound=[10,10,1280,960]
+[[38;5;150mATS-DRIVER-OUTPUT[0m] record-element -> tag=A
+[[38;5;150mATS-DRIVER-OUTPUT[0m] record-image -> bound=[10,10,1280,960]
+[[38;5;150mATS-DRIVER-OUTPUT[0m] record-element -> tag=A
+[[38;5;150mATS-DRIVER-OUTPUT[0m] record-value -> v1
+[[38;5;150mATS-DRIVER-OUTPUT[0m] record-position -> hpos=0, vpos=0
+[[38;5;150mATS-DRIVER-OUTPUT[0m] record-image -> bound=[10,10,1280,960]
+[[38;5;150mATS-DRIVER-OUTPUT[0m] record-image -> bound=[10,10,1280,960]
+[[38;5;150mATS-DRIVER-OUTPUT[0m] record-create -> name=new-channel, bound=[10,10,1280,960]
+[[38;5;150mATS-DRIVER-OUTPUT[0m] record-element -> tag=LABEL
+[[38;5;150mATS-DRIVER-OUTPUT[0m] record-image -> bound=[10,10,1280,960]
+[[38;5;150mATS-DRIVER-OUTPUT[0m] record-element -> tag=LABEL
+[[38;5;150mATS-DRIVER-OUTPUT[0m] record-value -> v1
+[[38;5;150mATS-DRIVER-OUTPUT[0m] record-position -> hpos=0, vpos=0
+[[38;5;150mATS-DRIVER-OUTPUT[0m] record-image -> bound=[10,10,1280,960]
+[[38;5;150mATS-DRIVER-OUTPUT[0m] record-image -> bound=[10,10,1280,960]
+[[38;5;150mATS-DRIVER-OUTPUT[0m] record-create -> name=new-channel, bound=[10,10,1280,960]
+[[38;5;150mATS-DRIVER-OUTPUT[0m] record-element -> tag=A
+[[38;5;150mATS-DRIVER-OUTPUT[0m] record-image -> bound=[10,10,1280,960]
+[[38;5;150mATS-DRIVER-OUTPUT[0m] record-element -> tag=A
+[[38;5;150mATS-DRIVER-OUTPUT[0m] record-value -> v1
+[[38;5;150mATS-DRIVER-OUTPUT[0m] record-position -> hpos=0, vpos=0
+[[38;5;150mATS-DRIVER-OUTPUT[0m] record-image -> bound=[10,10,1280,960]
+[[38;5;150mATS-DRIVER-OUTPUT[0m] record-image -> bound=[10,10,1280,960]
+[[38;5;150mATS-DRIVER-OUTPUT[0m] record-create -> name=new-channel, bound=[10,10,1280,960]
+[[38;5;150mATS-DRIVER-OUTPUT[0m] record-value -> v1
+[[38;5;150mATS-DRIVER-OUTPUT[0m] record-data -> v1 and v2
+[[38;5;150mATS-DRIVER-OUTPUT[0m] record-image -> bound=[10,10,1280,960]
+[[38;5;150mATS-DRIVER-OUTPUT[0m] record-error-summary -> test=construction_de_commande.TesterLeParametreDeCommand, suite=ConstructionDeCommandeSuite2
+[[38;5;150mATS-DRIVER-OUTPUT[0m] record-stop
+[[38;5;150mATS-DRIVER-OUTPUT[0m] record-download -> C:\Users\AishwaryaMANORE\AppData\Local\Temp\ats_recorder\atsv_367827e8-fe20-4d34-92d5-70196aad1be9.tmp
+[ATS-TEST] Test terminated -> {"name":"construction_de_commande.TesterLeParametreDeCommand","suite":"ConstructionDeCommandeSuite2","duration":"140083","passed":true,"actions":30}
+[[97mATS-LOGGER[0m] [Terminal Color] Logger level -> Disabled
+[ATS-TEST] Start test -> {"name":"construction_de_commande.TesterAjouterMultipleArticleAvecMultipleToppings","suite":"ConstructionDeCommandeSuite2","xmlReport":true,"visualQuality":3,"parameters":{"password":"user2","ats.log.level":"silent","ats.suite.description":"","ats.suite.date.order":"","username":"AishwaryaMANORE","Browser":"chrome"}}
+[[92mATS-SCRIPT[0m] Subscript -> {"called":"subscripts.AtsScript","iteration":"1/2","type":"dataFile","url":"C:\\Users\\AishwaryaMANORE\\Documents\\AgilitestProjects\\QAFOOD\\target\\classes\\assets\\data\\data_construction_de_commande\\TesterAjouterMultipleArticleAvecMultipleToppings.csv","parameters":[{"FoodItem":"12 wings"},{"Topping1":"Ketchup"},{"Topping2":"Sauce douce"},{"Topping3":"Sauce piquante"},{"ToppingFilePath":"Topping1.csv"}],"name":"construction_de_commande.TesterAjouterMultipleArticleAvecMultipleToppings","line":1}
+[[38;5;150mATS-DRIVER-OUTPUT[0m] record-create -> name=new-channel, bound=[10,10,1280,960]
+[[38;5;150mATS-DRIVER-OUTPUT[0m] record-data -> v1 and v2
+[[38;5;150mATS-DRIVER-OUTPUT[0m] record-create -> name=new-channel, bound=[10,10,1280,960]
+[[38;5;150mATS-DRIVER-OUTPUT[0m] record-value -> v1
+[[38;5;150mATS-DRIVER-OUTPUT[0m] record-image -> bound=[10,10,1280,960]
+[[38;5;150mATS-DRIVER-OUTPUT[0m] record-create -> name=new-channel, bound=[10,10,1280,960]
+[[38;5;150mATS-DRIVER-OUTPUT[0m] record-element -> tag=A
+[[38;5;150mATS-DRIVER-OUTPUT[0m] record-image -> bound=[10,10,1280,960]
+[[38;5;150mATS-DRIVER-OUTPUT[0m] record-element -> tag=A
+[[38;5;150mATS-DRIVER-OUTPUT[0m] record-value -> v1
+[[38;5;150mATS-DRIVER-OUTPUT[0m] record-position -> hpos=0, vpos=0
+[[38;5;150mATS-DRIVER-OUTPUT[0m] record-image -> bound=[10,10,1280,960]
+[[38;5;150mATS-DRIVER-OUTPUT[0m] record-image -> bound=[10,10,1280,960]
+[[38;5;150mATS-DRIVER-OUTPUT[0m] record-create -> name=new-channel, bound=[10,10,1280,960]
+[[38;5;150mATS-DRIVER-OUTPUT[0m] record-value -> v1
+[[38;5;150mATS-DRIVER-OUTPUT[0m] record-data -> v1 and v2
+[[38;5;150mATS-DRIVER-OUTPUT[0m] record-data -> v1 and v2
+[[92mATS-SCRIPT[0m] Subscript -> {"condition":{"variable":{"article_iter":"1"},"compare":{"operator":"==","value":"1"},"continue":true},"called":"subscripts.ParametreDeCommande","iteration":"1/1","type":"dataFile","url":"C:\\Users\\AishwaryaMANORE\\Documents\\AgilitestProjects\\QAFOOD\\target\\classes\\assets\\data\\data_construction_de_commande\\ParametreDeCommande.csv","parameters":[{"LiveraisonOuEmporter":"Livraison"},{"Temps":"19:00"}],"name":"subscripts.AtsScript","line":4}
+[[38;5;150mATS-DRIVER-OUTPUT[0m] record-create -> name=new-channel, bound=[10,10,1280,960]
+[[38;5;150mATS-DRIVER-OUTPUT[0m] record-element -> tag=A
+[[38;5;150mATS-DRIVER-OUTPUT[0m] record-value -> v1
+[[38;5;150mATS-DRIVER-OUTPUT[0m] record-position -> hpos=0, vpos=0
+[[38;5;150mATS-DRIVER-OUTPUT[0m] record-image -> bound=[10,10,1280,960]
+[[38;5;150mATS-DRIVER-OUTPUT[0m] record-image -> bound=[10,10,1280,960]
+[[38;5;220mATS-FAILED[0m] ActionMouseKey (subscripts.ParametreDeCommande:0) -> chrome -> ELEMENT_NOT_FOUND A[text="Livraison"] after 9739 ms
+[[38;5;220mATS-FAILED[0m] ActionCallscript (subscripts.AtsScript:4) ->  -> ActionMouseKey (subscripts.ParametreDeCommande:0) (Executed action :ActionMouseKey)
+[[91mATS-ERROR[0m] ActionMouseKey (subscripts.ParametreDeCommande:0) (Executed action :ActionMouseKey) -> subscripts.AtsScript:4
+[[38;5;220mATS-FAILED[0m] ActionCallscript (construction_de_commande.TesterAjouterMultipleArticleAvecMultipleToppings:1) ->  -> Java exception caused by -> java.lang.AssertionError: ActionMouseKey (subscripts.ParametreDeCommande:0) (Executed action :ActionMouseKey) after 0 ms
+	at org.testng.Assert.fail(Assert.java:111)
+	at com.ats.executor.ActionTestScript.scriptFail(ActionTestScript.java:215)
+	at com.ats.executor.ActionTestScript.exec(ActionTestScript.java:1133)
+	at subscripts.AtsScript.TcAtsScript(AtsScript.java:84)
+	at subscripts.AtsScript.testMain(AtsScript.java:67)
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+	at com.ats.script.actions.ActionCallscript.callScriptWithParametersFile(ActionCallscript.java:842)
+	at com.ats.script.actions.ActionCallscript.execute(ActionCallscript.java:714)
+	at com.ats.executor.ActionTestScript.exec(ActionTestScript.java:1118)
+	at construction_de_commande.TesterAjouterMultipleArticleAvecMultipleToppings.TcTesterAjouterMultipleArticleAvecMultipleToppings(TesterAjouterMultipleArticleAvecMultipleToppings.java:79)
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+	at org.testng.internal.invokers.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:141)
+	at org.testng.internal.invokers.TestInvoker.invokeMethod(TestInvoker.java:686)
+	at org.testng.internal.invokers.TestInvoker.invokeTestMethod(TestInvoker.java:230)
+	at org.testng.internal.invokers.MethodRunner.runInSequence(MethodRunner.java:63)
+	at org.testng.internal.invokers.TestInvoker$MethodInvocationAgent.invoke(TestInvoker.java:992)
+	at org.testng.internal.invokers.TestInvoker.invokeTestMethods(TestInvoker.java:203)
+	at org.testng.internal.invokers.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:154)
+	at org.testng.internal.invokers.TestMethodWorker.run(TestMethodWorker.java:134)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+	at org.testng.TestRunner.privateRun(TestRunner.java:739)
+	at org.testng.TestRunner.run(TestRunner.java:614)
+	at org.testng.SuiteRunner.runTest(SuiteRunner.java:421)
+	at org.testng.SuiteRunner.runSequentially(SuiteRunner.java:413)
+	at org.testng.SuiteRunner.privateRun(SuiteRunner.java:373)
+	at org.testng.SuiteRunner.run(SuiteRunner.java:312)
+	at org.testng.SuiteRunnerWorker.runSuite(SuiteRunnerWorker.java:52)
+	at org.testng.SuiteRunnerWorker.run(SuiteRunnerWorker.java:95)
+	at org.testng.TestNG.runSuitesSequentially(TestNG.java:1274)
+	at org.testng.TestNG.runSuitesLocally(TestNG.java:1208)
+	at org.testng.TestNG.runSuites(TestNG.java:1112)
+	at org.testng.TestNG.run(TestNG.java:1079)
+	at org.testng.TestNG.privateMain(TestNG.java:1430)
+	at org.testng.TestNG.main(TestNG.java:1394)
+
+[[91mATS-ERROR[0m] Java exception caused by -> java.lang.AssertionError: ActionMouseKey (subscripts.ParametreDeCommande:0) (Executed action :ActionMouseKey) after 0 ms
+	at org.testng.Assert.fail(Assert.java:111)
+	at com.ats.executor.ActionTestScript.scriptFail(ActionTestScript.java:215)
+	at com.ats.executor.ActionTestScript.exec(ActionTestScript.java:1133)
+	at subscripts.AtsScript.TcAtsScript(AtsScript.java:84)
+	at subscripts.AtsScript.testMain(AtsScript.java:67)
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+	at com.ats.script.actions.ActionCallscript.callScriptWithParametersFile(ActionCallscript.java:842)
+	at com.ats.script.actions.ActionCallscript.execute(ActionCallscript.java:714)
+	at com.ats.executor.ActionTestScript.exec(ActionTestScript.java:1118)
+	at construction_de_commande.TesterAjouterMultipleArticleAvecMultipleToppings.TcTesterAjouterMultipleArticleAvecMultipleToppings(TesterAjouterMultipleArticleAvecMultipleToppings.java:79)
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+	at org.testng.internal.invokers.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:141)
+	at org.testng.internal.invokers.TestInvoker.invokeMethod(TestInvoker.java:686)
+	at org.testng.internal.invokers.TestInvoker.invokeTestMethod(TestInvoker.java:230)
+	at org.testng.internal.invokers.MethodRunner.runInSequence(MethodRunner.java:63)
+	at org.testng.internal.invokers.TestInvoker$MethodInvocationAgent.invoke(TestInvoker.java:992)
+	at org.testng.internal.invokers.TestInvoker.invokeTestMethods(TestInvoker.java:203)
+	at org.testng.internal.invokers.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:154)
+	at org.testng.internal.invokers.TestMethodWorker.run(TestMethodWorker.java:134)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+	at org.testng.TestRunner.privateRun(TestRunner.java:739)
+	at org.testng.TestRunner.run(TestRunner.java:614)
+	at org.testng.SuiteRunner.runTest(SuiteRunner.java:421)
+	at org.testng.SuiteRunner.runSequentially(SuiteRunner.java:413)
+	at org.testng.SuiteRunner.privateRun(SuiteRunner.java:373)
+	at org.testng.SuiteRunner.run(SuiteRunner.java:312)
+	at org.testng.SuiteRunnerWorker.runSuite(SuiteRunnerWorker.java:52)
+	at org.testng.SuiteRunnerWorker.run(SuiteRunnerWorker.java:95)
+	at org.testng.TestNG.runSuitesSequentially(TestNG.java:1274)
+	at org.testng.TestNG.runSuitesLocally(TestNG.java:1208)
+	at org.testng.TestNG.runSuites(TestNG.java:1112)
+	at org.testng.TestNG.run(TestNG.java:1079)
+	at org.testng.TestNG.privateMain(TestNG.java:1430)
+	at org.testng.TestNG.main(TestNG.java:1394)
+ -> construction_de_commande.TesterAjouterMultipleArticleAvecMultipleToppings:1
+[[38;5;220mATS-FAILED[0m] ActionCallscript (construction_de_commande.TesterAjouterMultipleArticleAvecMultipleToppings:1) ->  -> Java exception caused by -> java.lang.AssertionError: ActionMouseKey (subscripts.ParametreDeCommande:0) (Executed action :ActionMouseKey) after 0 ms
+	at org.testng.Assert.fail(Assert.java:111)
+	at com.ats.executor.ActionTestScript.scriptFail(ActionTestScript.java:215)
+	at com.ats.executor.ActionTestScript.exec(ActionTestScript.java:1133)
+	at subscripts.AtsScript.TcAtsScript(AtsScript.java:84)
+	at subscripts.AtsScript.testMain(AtsScript.java:67)
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+	at com.ats.script.actions.ActionCallscript.callScriptWithParametersFile(ActionCallscript.java:842)
+	at com.ats.script.actions.ActionCallscript.execute(ActionCallscript.java:714)
+	at com.ats.executor.ActionTestScript.exec(ActionTestScript.java:1118)
+	at construction_de_commande.TesterAjouterMultipleArticleAvecMultipleToppings.TcTesterAjouterMultipleArticleAvecMultipleToppings(TesterAjouterMultipleArticleAvecMultipleToppings.java:79)
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+	at org.testng.internal.invokers.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:141)
+	at org.testng.internal.invokers.TestInvoker.invokeMethod(TestInvoker.java:686)
+	at org.testng.internal.invokers.TestInvoker.invokeTestMethod(TestInvoker.java:230)
+	at org.testng.internal.invokers.MethodRunner.runInSequence(MethodRunner.java:63)
+	at org.testng.internal.invokers.TestInvoker$MethodInvocationAgent.invoke(TestInvoker.java:992)
+	at org.testng.internal.invokers.TestInvoker.invokeTestMethods(TestInvoker.java:203)
+	at org.testng.internal.invokers.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:154)
+	at org.testng.internal.invokers.TestMethodWorker.run(TestMethodWorker.java:134)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+	at org.testng.TestRunner.privateRun(TestRunner.java:739)
+	at org.testng.TestRunner.run(TestRunner.java:614)
+	at org.testng.SuiteRunner.runTest(SuiteRunner.java:421)
+	at org.testng.SuiteRunner.runSequentially(SuiteRunner.java:413)
+	at org.testng.SuiteRunner.privateRun(SuiteRunner.java:373)
+	at org.testng.SuiteRunner.run(SuiteRunner.java:312)
+	at org.testng.SuiteRunnerWorker.runSuite(SuiteRunnerWorker.java:52)
+	at org.testng.SuiteRunnerWorker.run(SuiteRunnerWorker.java:95)
+	at org.testng.TestNG.runSuitesSequentially(TestNG.java:1274)
+	at org.testng.TestNG.runSuitesLocally(TestNG.java:1208)
+	at org.testng.TestNG.runSuites(TestNG.java:1112)
+	at org.testng.TestNG.run(TestNG.java:1079)
+	at org.testng.TestNG.privateMain(TestNG.java:1430)
+	at org.testng.TestNG.main(TestNG.java:1394)
+ after 0 ms
+[[91mATS-ERROR[0m] Callscripts error -> Java exception caused by -> java.lang.AssertionError: ActionMouseKey (subscripts.ParametreDeCommande:0) (Executed action :ActionMouseKey) after 0 ms
+	at org.testng.Assert.fail(Assert.java:111)
+	at com.ats.executor.ActionTestScript.scriptFail(ActionTestScript.java:215)
+	at com.ats.executor.ActionTestScript.exec(ActionTestScript.java:1133)
+	at subscripts.AtsScript.TcAtsScript(AtsScript.java:84)
+	at subscripts.AtsScript.testMain(AtsScript.java:67)
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+	at com.ats.script.actions.ActionCallscript.callScriptWithParametersFile(ActionCallscript.java:842)
+	at com.ats.script.actions.ActionCallscript.execute(ActionCallscript.java:714)
+	at com.ats.executor.ActionTestScript.exec(ActionTestScript.java:1118)
+	at construction_de_commande.TesterAjouterMultipleArticleAvecMultipleToppings.TcTesterAjouterMultipleArticleAvecMultipleToppings(TesterAjouterMultipleArticleAvecMultipleToppings.java:79)
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+	at org.testng.internal.invokers.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:141)
+	at org.testng.internal.invokers.TestInvoker.invokeMethod(TestInvoker.java:686)
+	at org.testng.internal.invokers.TestInvoker.invokeTestMethod(TestInvoker.java:230)
+	at org.testng.internal.invokers.MethodRunner.runInSequence(MethodRunner.java:63)
+	at org.testng.internal.invokers.TestInvoker$MethodInvocationAgent.invoke(TestInvoker.java:992)
+	at org.testng.internal.invokers.TestInvoker.invokeTestMethods(TestInvoker.java:203)
+	at org.testng.internal.invokers.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:154)
+	at org.testng.internal.invokers.TestMethodWorker.run(TestMethodWorker.java:134)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+	at org.testng.TestRunner.privateRun(TestRunner.java:739)
+	at org.testng.TestRunner.run(TestRunner.java:614)
+	at org.testng.SuiteRunner.runTest(SuiteRunner.java:421)
+	at org.testng.SuiteRunner.runSequentially(SuiteRunner.java:413)
+	at org.testng.SuiteRunner.privateRun(SuiteRunner.java:373)
+	at org.testng.SuiteRunner.run(SuiteRunner.java:312)
+	at org.testng.SuiteRunnerWorker.runSuite(SuiteRunnerWorker.java:52)
+	at org.testng.SuiteRunnerWorker.run(SuiteRunnerWorker.java:95)
+	at org.testng.TestNG.runSuitesSequentially(TestNG.java:1274)
+	at org.testng.TestNG.runSuitesLocally(TestNG.java:1208)
+	at org.testng.TestNG.runSuites(TestNG.java:1112)
+	at org.testng.TestNG.run(TestNG.java:1079)
+	at org.testng.TestNG.privateMain(TestNG.java:1430)
+	at org.testng.TestNG.main(TestNG.java:1394)
+ <- construction_de_commande.TesterAjouterMultipleArticleAvecMultipleToppings:1
+[[38;5;150mATS-DRIVER-OUTPUT[0m] record-error-summary -> test=construction_de_commande.TesterAjouterMultipleArticleAvecMultipleToppings, suite=ConstructionDeCommandeSuite2
+[[38;5;150mATS-DRIVER-OUTPUT[0m] record-stop
+[[38;5;150mATS-DRIVER-OUTPUT[0m] record-download -> C:\Users\AishwaryaMANORE\AppData\Local\Temp\ats_recorder\atsv_306d0aa1-831c-4d53-88da-7fd662b43f72.tmp
+[ATS-TEST] Test terminated -> {"name":"construction_de_commande.TesterAjouterMultipleArticleAvecMultipleToppings","suite":"ConstructionDeCommandeSuite2","duration":"35266","passed":false,"actions":4}
+[[38;5;81mATS-SUITE[0m] Suite terminated -> {"name":"ConstructionDeCommandeSuite2","passed":1,"failed":1,"filtered":0}
+[[97mATS-LOGGER[0m] [Terminal Color] Logger level -> Disabled
+[[38;5;81mATS-SUITE[0m] Start suite -> {"name":"ConstructionDeCommandeSuite3","tests":2}
+[[97mATS-LOGGER[0m] [Terminal Color] Logger level -> Disabled
+[ATS-TEST] Start test -> {"name":"construction_de_commande.TesterLeParametreDeCommand","suite":"ConstructionDeCommandeSuite3","xmlReport":true,"visualQuality":3,"parameters":{"password":"user1","ats.log.level":"silent","ats.suite.description":"","ats.suite.date.order":"","username":"AishwaryaMANORE","Browser":"firefox"}}
+[[92mATS-SCRIPT[0m] Subscript -> {"called":"subscripts.TesterLeParametreDeCommandeSubscript","iteration":"1/2","type":"dataFile","url":"C:\\Users\\AishwaryaMANORE\\Documents\\AgilitestProjects\\QAFOOD\\target\\classes\\assets\\data\\data_construction_de_commande\\TesterParametreDeCommand.csv","parameters":[{"Browser":"chrome"},{"EmailID":"aishwarya.manore@aldemia.fr"},{"Password":"Password"},{"FoodItem":"Feuilletés poulet bacon"},{"LiveraisonOuEmporter":"Livraison"},{"Temps":"19:30"},{"Toppings":"Sauce douce"}],"name":"construction_de_commande.TesterLeParametreDeCommand","line":0}
+[[91mATS-DRIVER-ERROR[0m] ats-agent-error|Remote driver file not found -> 
+[[38;5;220mATS-FAILED[0m] ActionChannelStart (subscripts.TesterLeParametreDeCommandeSubscript:0) -> firefox -> remote Driver / RemoteDriver name is incorrect
+RemoteDriver 'firefox' start failed with error -> application binary not found ->  after 0 ms
+[[38;5;220mATS-FAILED[0m] ActionChannelStart (subscripts.TesterLeParametreDeCommandeSubscript:0) -> firefox -> remote Driver / RemoteDriver name is incorrect
+RemoteDriver 'firefox' start failed with error -> application binary not found ->  after 58 ms
+[[38;5;220mATS-FAILED[0m] ActionCallscript (construction_de_commande.TesterLeParametreDeCommand:0) ->  -> ActionChannelStart (subscripts.TesterLeParametreDeCommandeSubscript:0) (Executed action :ActionChannelStart)
+[[91mATS-ERROR[0m] ActionChannelStart (subscripts.TesterLeParametreDeCommandeSubscript:0) (Executed action :ActionChannelStart) -> construction_de_commande.TesterLeParametreDeCommand:0
+[[38;5;220mATS-FAILED[0m] ActionCallscript (construction_de_commande.TesterLeParametreDeCommand:0) ->  -> ActionChannelStart (subscripts.TesterLeParametreDeCommandeSubscript:0) (Executed action :ActionChannelStart) after 0 ms
+[[91mATS-ERROR[0m] Callscripts error -> ActionChannelStart (subscripts.TesterLeParametreDeCommandeSubscript:0) (Executed action :ActionChannelStart) <- construction_de_commande.TesterLeParametreDeCommand:0
+[ATS-TEST] Test terminated -> {"name":"construction_de_commande.TesterLeParametreDeCommand","suite":"ConstructionDeCommandeSuite3","duration":"81","passed":false,"actions":1}
+[[97mATS-LOGGER[0m] [Terminal Color] Logger level -> Disabled
+[ATS-TEST] Start test -> {"name":"construction_de_commande.TesterAjouterMultipleArticleAvecMultipleToppings","suite":"ConstructionDeCommandeSuite3","xmlReport":true,"visualQuality":3,"parameters":{"password":"user1","ats.log.level":"silent","ats.suite.description":"","ats.suite.date.order":"","username":"AishwaryaMANORE","Browser":"firefox"}}
+[[92mATS-SCRIPT[0m] Subscript -> {"called":"subscripts.AtsScript","iteration":"1/2","type":"dataFile","url":"C:\\Users\\AishwaryaMANORE\\Documents\\AgilitestProjects\\QAFOOD\\target\\classes\\assets\\data\\data_construction_de_commande\\TesterAjouterMultipleArticleAvecMultipleToppings.csv","parameters":[{"FoodItem":"12 wings"},{"Topping1":"Ketchup"},{"Topping2":"Sauce douce"},{"Topping3":"Sauce piquante"},{"ToppingFilePath":"Topping1.csv"}],"name":"construction_de_commande.TesterAjouterMultipleArticleAvecMultipleToppings","line":1}
+[[91mATS-DRIVER-ERROR[0m] ats-agent-error|Remote driver file not found -> 
+[[38;5;220mATS-FAILED[0m] ActionChannelStart (subscripts.AtsScript:0) -> firefox -> remote Driver / RemoteDriver name is incorrect
+RemoteDriver 'firefox' start failed with error -> application binary not found ->  after 0 ms
+[[38;5;220mATS-FAILED[0m] ActionChannelStart (subscripts.AtsScript:0) -> firefox -> remote Driver / RemoteDriver name is incorrect
+RemoteDriver 'firefox' start failed with error -> application binary not found ->  after 59 ms
+[[38;5;220mATS-FAILED[0m] ActionCallscript (construction_de_commande.TesterAjouterMultipleArticleAvecMultipleToppings:1) ->  -> ActionChannelStart (subscripts.AtsScript:0) (Executed action :ActionChannelStart)
+[[91mATS-ERROR[0m] ActionChannelStart (subscripts.AtsScript:0) (Executed action :ActionChannelStart) -> construction_de_commande.TesterAjouterMultipleArticleAvecMultipleToppings:1
+[[38;5;220mATS-FAILED[0m] ActionCallscript (construction_de_commande.TesterAjouterMultipleArticleAvecMultipleToppings:1) ->  -> ActionChannelStart (subscripts.AtsScript:0) (Executed action :ActionChannelStart) after 0 ms
+[[91mATS-ERROR[0m] Callscripts error -> ActionChannelStart (subscripts.AtsScript:0) (Executed action :ActionChannelStart) <- construction_de_commande.TesterAjouterMultipleArticleAvecMultipleToppings:1
+[ATS-TEST] Test terminated -> {"name":"construction_de_commande.TesterAjouterMultipleArticleAvecMultipleToppings","suite":"ConstructionDeCommandeSuite3","duration":"80","passed":false,"actions":1}
+[[38;5;81mATS-SUITE[0m] Suite terminated -> {"name":"ConstructionDeCommandeSuite3","passed":0,"failed":2,"filtered":0}
+[[97mATS-LOGGER[0m] [Terminal Color] Logger level -> Disabled
+[[38;5;81mATS-SUITE[0m] Start suite -> {"name":"ConstructionDeCommandeSuite4","tests":2}
+[[97mATS-LOGGER[0m] [Terminal Color] Logger level -> Disabled
+[ATS-TEST] Start test -> {"name":"construction_de_commande.TesterLeParametreDeCommand","suite":"ConstructionDeCommandeSuite4","xmlReport":true,"visualQuality":3,"parameters":{"password":"user2","ats.log.level":"silent","ats.suite.description":"","ats.suite.date.order":"","username":"AishwaryaMANORE","Browser":"firefox"}}
+[[92mATS-SCRIPT[0m] Subscript -> {"called":"subscripts.TesterLeParametreDeCommandeSubscript","iteration":"1/2","type":"dataFile","url":"C:\\Users\\AishwaryaMANORE\\Documents\\AgilitestProjects\\QAFOOD\\target\\classes\\assets\\data\\data_construction_de_commande\\TesterParametreDeCommand.csv","parameters":[{"Browser":"chrome"},{"EmailID":"aishwarya.manore@aldemia.fr"},{"Password":"Password"},{"FoodItem":"Feuilletés poulet bacon"},{"LiveraisonOuEmporter":"Livraison"},{"Temps":"19:30"},{"Toppings":"Sauce douce"}],"name":"construction_de_commande.TesterLeParametreDeCommand","line":0}
+[[91mATS-DRIVER-ERROR[0m] ats-agent-error|Remote driver file not found -> 
+[[38;5;220mATS-FAILED[0m] ActionChannelStart (subscripts.TesterLeParametreDeCommandeSubscript:0) -> firefox -> remote Driver / RemoteDriver name is incorrect
+RemoteDriver 'firefox' start failed with error -> application binary not found ->  after 0 ms
+[[38;5;220mATS-FAILED[0m] ActionChannelStart (subscripts.TesterLeParametreDeCommandeSubscript:0) -> firefox -> remote Driver / RemoteDriver name is incorrect
+RemoteDriver 'firefox' start failed with error -> application binary not found ->  after 79 ms
+[[38;5;220mATS-FAILED[0m] ActionCallscript (construction_de_commande.TesterLeParametreDeCommand:0) ->  -> ActionChannelStart (subscripts.TesterLeParametreDeCommandeSubscript:0) (Executed action :ActionChannelStart)
+[[91mATS-ERROR[0m] ActionChannelStart (subscripts.TesterLeParametreDeCommandeSubscript:0) (Executed action :ActionChannelStart) -> construction_de_commande.TesterLeParametreDeCommand:0
+[[38;5;220mATS-FAILED[0m] ActionCallscript (construction_de_commande.TesterLeParametreDeCommand:0) ->  -> ActionChannelStart (subscripts.TesterLeParametreDeCommandeSubscript:0) (Executed action :ActionChannelStart) after 0 ms
+[[91mATS-ERROR[0m] Callscripts error -> ActionChannelStart (subscripts.TesterLeParametreDeCommandeSubscript:0) (Executed action :ActionChannelStart) <- construction_de_commande.TesterLeParametreDeCommand:0
+[ATS-TEST] Test terminated -> {"name":"construction_de_commande.TesterLeParametreDeCommand","suite":"ConstructionDeCommandeSuite4","duration":"99","passed":false,"actions":1}
+[[97mATS-LOGGER[0m] [Terminal Color] Logger level -> Disabled
+[ATS-TEST] Start test -> {"name":"construction_de_commande.TesterAjouterMultipleArticleAvecMultipleToppings","suite":"ConstructionDeCommandeSuite4","xmlReport":true,"visualQuality":3,"parameters":{"password":"user2","ats.log.level":"silent","ats.suite.description":"","ats.suite.date.order":"","username":"AishwaryaMANORE","Browser":"firefox"}}
+[[92mATS-SCRIPT[0m] Subscript -> {"called":"subscripts.AtsScript","iteration":"1/2","type":"dataFile","url":"C:\\Users\\AishwaryaMANORE\\Documents\\AgilitestProjects\\QAFOOD\\target\\classes\\assets\\data\\data_construction_de_commande\\TesterAjouterMultipleArticleAvecMultipleToppings.csv","parameters":[{"FoodItem":"12 wings"},{"Topping1":"Ketchup"},{"Topping2":"Sauce douce"},{"Topping3":"Sauce piquante"},{"ToppingFilePath":"Topping1.csv"}],"name":"construction_de_commande.TesterAjouterMultipleArticleAvecMultipleToppings","line":1}
+[[91mATS-DRIVER-ERROR[0m] ats-agent-error|Remote driver file not found -> 
+[[38;5;220mATS-FAILED[0m] ActionChannelStart (subscripts.AtsScript:0) -> firefox -> remote Driver / RemoteDriver name is incorrect
+RemoteDriver 'firefox' start failed with error -> application binary not found ->  after 0 ms
+[[38;5;220mATS-FAILED[0m] ActionChannelStart (subscripts.AtsScript:0) -> firefox -> remote Driver / RemoteDriver name is incorrect
+RemoteDriver 'firefox' start failed with error -> application binary not found ->  after 55 ms
+[[38;5;220mATS-FAILED[0m] ActionCallscript (construction_de_commande.TesterAjouterMultipleArticleAvecMultipleToppings:1) ->  -> ActionChannelStart (subscripts.AtsScript:0) (Executed action :ActionChannelStart)
+[[91mATS-ERROR[0m] ActionChannelStart (subscripts.AtsScript:0) (Executed action :ActionChannelStart) -> construction_de_commande.TesterAjouterMultipleArticleAvecMultipleToppings:1
+[[38;5;220mATS-FAILED[0m] ActionCallscript (construction_de_commande.TesterAjouterMultipleArticleAvecMultipleToppings:1) ->  -> ActionChannelStart (subscripts.AtsScript:0) (Executed action :ActionChannelStart) after 0 ms
+[[91mATS-ERROR[0m] Callscripts error -> ActionChannelStart (subscripts.AtsScript:0) (Executed action :ActionChannelStart) <- construction_de_commande.TesterAjouterMultipleArticleAvecMultipleToppings:1
+[ATS-TEST] Test terminated -> {"name":"construction_de_commande.TesterAjouterMultipleArticleAvecMultipleToppings","suite":"ConstructionDeCommandeSuite4","duration":"75","passed":false,"actions":1}
+[[38;5;81mATS-SUITE[0m] Suite terminated -> {"name":"ConstructionDeCommandeSuite4","passed":0,"failed":2,"filtered":0}
+[100m===============================================[0m
+[100m           ATS execution complete              [0m
+[100m===============================================[0m
+Generate ATS report -> C:\Users\AishwaryaMANORE\Documents\AgilitestProjects\QAFOOD\target\ats-output
+Report generation in progress for: 0 seconds, 278MB of memory used.
+Generate JASPER reports templates ...
+JASPER reports templates generated !
+Create ats-test report -> C:\Users\AishwaryaMANORE\Documents\AgilitestProjects\QAFOOD\target\ats-output\ConstructionDeCommandeSuite1\construction_de_commande.TesterAjouterMultipleArticleAvecMultipleToppings_xml\ats-test-report.html
+Create ats-test report -> C:\Users\AishwaryaMANORE\Documents\AgilitestProjects\QAFOOD\target\ats-output\ConstructionDeCommandeSuite1\construction_de_commande.TesterLeParametreDeCommand_xml\ats-test-report.html
+Create ats-test report -> C:\Users\AishwaryaMANORE\Documents\AgilitestProjects\QAFOOD\target\ats-output\ConstructionDeCommandeSuite2\construction_de_commande.TesterLeParametreDeCommand_xml\ats-test-report.html
+Create ats-test report -> C:\Users\AishwaryaMANORE\Documents\AgilitestProjects\QAFOOD\target\ats-output\ConstructionDeCommandeSuite2\construction_de_commande.TesterAjouterMultipleArticleAvecMultipleToppings_xml\ats-test-report.html
+Create ats-test report -> C:\Users\AishwaryaMANORE\Documents\AgilitestProjects\QAFOOD\target\ats-output\ConstructionDeCommandeSuite3\construction_de_commande.TesterLeParametreDeCommand_xml\ats-test-report.html
+Create ats-test report -> C:\Users\AishwaryaMANORE\Documents\AgilitestProjects\QAFOOD\target\ats-output\ConstructionDeCommandeSuite3\construction_de_commande.TesterAjouterMultipleArticleAvecMultipleToppings_xml\ats-test-report.html
+Create ats-test report -> C:\Users\AishwaryaMANORE\Documents\AgilitestProjects\QAFOOD\target\ats-output\ConstructionDeCommandeSuite4\construction_de_commande.TesterLeParametreDeCommand_xml\ats-test-report.html
+Create ats-test report -> C:\Users\AishwaryaMANORE\Documents\AgilitestProjects\QAFOOD\target\ats-output\ConstructionDeCommandeSuite4\construction_de_commande.TesterAjouterMultipleArticleAvecMultipleToppings_xml\ats-test-report.html
+File -> C:\Users\AishwaryaMANORE\Documents\AgilitestProjects\QAFOOD\target\ats-output\summary.pdf ... OK
+Report generation took: 27 seconds.
+Maximum 360 MB of memory was used during report generation.
+[ATS-LAUNCHER] Launch suites execution terminated

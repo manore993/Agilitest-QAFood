@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.20.6.final using JasperReports Library version 6.20.6-5c96b6aa8a39ac1dc6b6bea4b81168e16dd39231  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="reportNewForm_subreportElectronicDistributionList" pageWidth="555" pageHeight="802" columnWidth="555" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0" uuid="b9a625d5-6c7d-4713-b6c4-4bd250a184cd">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<style name="Label" forecolor="#4D545D" fontName="DejaVu Sans" fontSize="10"/>
+	<style name="Alternate" mode="Transparent" forecolor="#4D545D" fontName="DejaVu Sans" fontSize="10">
+		<conditionalStyle>
+			<conditionExpression><![CDATA[$V{REPORT_COUNT}%2 == 1]]></conditionExpression>
+			<style backcolor="#DEDEDE"/>
+		</conditionalStyle>
+		<conditionalStyle>
+			<conditionExpression><![CDATA[$V{REPORT_COUNT}%2 == 0]]></conditionExpression>
+			<style backcolor="#F6F6F6"/>
+		</conditionalStyle>
+	</style>
+	<style name="table" fontName="DejaVu Sans">
+		<box>
+			<pen lineWidth="1.0" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table_TH" mode="Opaque" backcolor="#F0F8FF" fontName="DejaVu Sans">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table_CH" mode="Opaque" backcolor="#BFE1FF" fontName="DejaVu Sans">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table_TD" mode="Opaque" backcolor="#FFFFFF" fontName="DejaVu Sans">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<parameter name="iconTrue" class="java.lang.String"/>
+	<parameter name="iconFalse" class="java.lang.String"/>
+	<queryString language="XPath">
+		<![CDATA[/]]>
+	</queryString>
+	<field name="testName" class="java.lang.String">
+		<fieldDescription><![CDATA[script/@testName]]></fieldDescription>
+	</field>
+	<field name="status" class="java.lang.Integer">
+		<fieldDescription><![CDATA[script/summary/@status]]></fieldDescription>
+	</field>
+	<field name="actionsCount" class="java.lang.Integer">
+		<fieldDescription><![CDATA[script/summary/@actions]]></fieldDescription>
+	</field>
+	<field name="duration" class="java.lang.Long">
+		<fieldDescription><![CDATA[@duration]]></fieldDescription>
+	</field>
+	<field name="summary" class="java.lang.String">
+		<fieldDescription><![CDATA[script/summary/data]]></fieldDescription>
+	</field>
+	<variable name="durationSec" class="java.lang.Long">
+		<variableExpression><![CDATA[$F{duration}/1000]]></variableExpression>
+	</variable>
+	<detail>
+		<band height="23" splitType="Stretch">
+			<property name="com.jaspersoft.studio.unit.height" value="px"/>
+			<textField textAdjust="StretchHeight">
+				<reportElement key="" style="Alternate" mode="Opaque" x="10" y="0" width="520" height="23" uuid="7557e80c-b639-4dd7-aa66-777934a7c319">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+					<property name="com.jaspersoft.studio.unit.y" value="px"/>
+					<property name="com.jaspersoft.studio.unit.x" value="px"/>
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+				</reportElement>
+				<box topPadding="1" leftPadding="4"/>
+				<textElement verticalAlignment="Top" markup="styled">
+					<font size="10"/>
+				</textElement>
+				<textFieldExpression><![CDATA["<style forecolor='#7B7A87' size='8' isItalic='true' isBold='false'>test - </style>" + $F{testName}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement style="Label" x="10" y="12" width="182" height="10" forecolor="#666600" uuid="da7f87a1-2f10-486b-a939-5cf7efc87142">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+					<property name="com.jaspersoft.studio.unit.y" value="px"/>
+					<printWhenExpression><![CDATA[$F{actionsCount}!=null]]></printWhenExpression>
+				</reportElement>
+				<box leftPadding="8"/>
+				<textElement verticalAlignment="Middle">
+					<font size="6" isItalic="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA["- " + $F{actionsCount} + " action(s) executed in " + String.format("%02d:%02d:%02d", (int)($V{durationSec}/ (60 * 60)),((int)($V{durationSec} / 60)) % 60,$V{durationSec} % 60)]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement style="Label" x="10" y="12" width="182" height="10" forecolor="#737272" uuid="f36a07c0-5cf0-4a2d-9233-b11a4063c539">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+					<property name="com.jaspersoft.studio.unit.y" value="px"/>
+					<property name="com.jaspersoft.studio.unit.x" value="px"/>
+					<printWhenExpression><![CDATA[$F{actionsCount}==null]]></printWhenExpression>
+				</reportElement>
+				<box leftPadding="8"/>
+				<textElement verticalAlignment="Middle">
+					<font size="6" isBold="true" isItalic="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA["No actions recorded !"]]></textFieldExpression>
+			</textField>
+			<image>
+				<reportElement x="511" y="4" width="12" height="12" uuid="1b47d33f-5b3e-4266-98f8-683c441e3553">
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+					<property name="com.jaspersoft.studio.unit.y" value="px"/>
+					<property name="com.jaspersoft.studio.unit.x" value="px"/>
+				</reportElement>
+				<imageExpression><![CDATA[$F{status} == 1 ?	javax.imageio.ImageIO.read(new java.io.ByteArrayInputStream(Base64.getDecoder().decode($P{iconTrue}))) : javax.imageio.ImageIO.read(new java.io.ByteArrayInputStream(Base64.getDecoder().decode($P{iconFalse})))]]></imageExpression>
+			</image>
+		</band>
+	</detail>
+</jasperReport>

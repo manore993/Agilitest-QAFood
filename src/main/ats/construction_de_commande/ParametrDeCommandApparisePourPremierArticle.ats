@@ -6,12 +6,16 @@ created -> 2024-07-22 at 17:00:50
 [ats-variables]
 
 var -> FoodItem -> Feuilletés poulet bacon
+var -> newVar -> $param(0)
 
 [ats-actions]
 
+callscript -> JavaCode
 callscript -> subscripts.AccessWebsiteAndLogin -> assets:///data/data_construction_de_commande/AccessWebsiteLogin.csv
 click -> A [href = https://pprod.aldemia.fr/]
 click -> A [@index = 2, data-title = $var(FoodItem)]
+scripting -> 
+comment -> <i>comment ...</i>
 callscript -> subscripts.ParametreDeCommande -> assets:///data/data_construction_de_commande/ParametreDeCommande.csv
 click -> LABEL [class = checkbox-container, text = Sauce douce]
 click -> A [href = javascript:void(0);]

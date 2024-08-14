@@ -1,0 +1,2791 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<xsl:stylesheet version="2.0"
+                xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
+                xmlns:file="http://expath.org/ns/file"
+                xmlns:java="http://xml.apache.org/xslt/java"
+                xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+    <xsl:output method="html" version="5.0" encoding="UTF-8" indent="no"/>
+    <xsl:strip-space elements="*"/>
+
+    <!-- ========================= -->
+    <!-- Calculations -->
+    <!-- ========================= -->
+    <xsl:variable name="picLogo" select="//ats-report/pics/pic[@name='logo']"/>
+    <xsl:variable name="picPdf" select="//ats-report/pics/pic[@name='pdf']"/>
+
+    <!--	unused for the moment-->
+    <xsl:variable name="xml_reports" select="//ats-report/suite/parameter[@name='xml.report']/@value"/>
+    <xsl:variable name="atsv_reports" select="//ats-report/suite/parameter[@name='visual.report']/@value"/>
+    <xsl:variable name="ats_loglevel" select="//ats-report/suite/parameter[@name='ats.log.level']/@value"/>
+    <xsl:variable name="details" select="//ats-report/@details"/>
+
+
+    <xsl:variable name="actions" select="//ats-report/@actions"/>
+    <xsl:variable name="atsVersion" select="//ats-report/@atsVersion"/>
+
+    <xsl:variable name="projectId" select="//ats-report/@projectId"/>
+    <xsl:variable name="projectUuid" select="//ats-report/@projectUuid"/>
+    <xsl:variable name="projectName" select="//ats-report/@projectName"/>
+    <xsl:variable name="projectVersion" select="//ats-report/@projectVersion"/>
+    <xsl:variable name="execStarted" select="//ats-report/@started"/>
+    <xsl:variable name="execStartedFormated" select="//ats-report/@startedFormated"/>
+    <xsl:variable name="execStartedFormatedZulu" select="//ats-report/@startedFormatedZulu"/>
+
+<!--    <xsl:variable name="blackActions">
+        <Item>com.ats.script.actions.ActionApi</Item>
+    </xsl:variable>-->
+
+    <!--
+    <Item>ActionAssertValue</Item>
+    <Item>ActionAssertCount</Item>
+    <Item>ActionComment</Item>
+    <Item>ActionAssertProperty</Item>
+    <Item>ActionProperty</Item>
+    <Item>ActionCallscript</Item>
+    -->
+
+    <xsl:template name="substring-after-last">
+        <xsl:param name="string"/>
+        <xsl:param name="delimiter"/>
+        <xsl:choose>
+            <xsl:when test="contains($string, $delimiter)">
+                <xsl:call-template name="substring-after-last">
+                    <xsl:with-param name="string" select="substring-after($string, $delimiter)"/>
+                    <xsl:with-param name="delimiter" select="$delimiter"/>
+                </xsl:call-template>
+            </xsl:when>
+            <xsl:otherwise>
+                <xsl:value-of select="$string"/>
+            </xsl:otherwise>
+        </xsl:choose>
+    </xsl:template>
+
+    <xsl:template name="seconds-to-time">
+        <xsl:param name="seconds"/>
+        <xsl:variable name="h" select="floor($seconds div 3600)"/>
+        <xsl:variable name="m" select="floor($seconds div 60) mod 60"/>
+        <xsl:variable name="s" select="$seconds mod 60"/>
+
+        <xsl:value-of select="format-number($h, '00')"/>
+        <xsl:value-of select="format-number($m, ':00')"/>
+        <xsl:value-of select="format-number($s, ':00')"/>
+    </xsl:template>
+
+    <xsl:template name="millisecs-to-ISO">
+        <xsl:param name="millisecs"/>
+
+        <xsl:param name="JDN" select="floor($millisecs div 86400000) + 2440588"/>
+        <xsl:param name="mSec" select="$millisecs mod 86400000"/>
+
+        <xsl:param name="f" select="$JDN + 1401 + floor((floor((4 * $JDN + 274277) div 146097) * 3) div 4) - 38"/>
+        <xsl:param name="e" select="4*$f + 3"/>
+        <xsl:param name="g" select="floor(($e mod 1461) div 4)"/>
+        <xsl:param name="h" select="5*$g + 2"/>
+
+        <xsl:param name="d" select="floor(($h mod 153) div 5 ) + 1"/>
+        <xsl:param name="m" select="(floor($h div 153) + 2) mod 12 + 1"/>
+        <xsl:param name="y" select="floor($e div 1461) - 4716 + floor((14 - $m) div 12)"/>
+
+        <xsl:param name="H" select="floor($mSec div 3600000)"/>
+        <xsl:param name="M" select="floor($mSec mod 3600000 div 60000)"/>
+        <xsl:param name="S" select="$mSec mod 60000 div 1000"/>
+
+        <xsl:value-of select="concat($y, format-number($m, '-00'), format-number($d, '-00'))"/>
+        <xsl:value-of select="concat(format-number($H, 'T00'), format-number($M, ':00'), format-number($S, ':00'), 'Z')"/>
+    </xsl:template>
+
+    <xsl:template name="data-temp">
+        <xsl:param name="data"/>
+    </xsl:template>
+
+    <!-- ========================= -->
+    <!-- Appel du template: ats -->
+    <!-- ========================= -->
+    <xsl:template match="ats-report">
+        <HTML LANG="en">
+            <HEAD>
+                <META charset="utf-8"/>
+                <META name="description" content=""/>
+                <TITLE>ATS Suites Reporting</TITLE>
+
+                <script type="text/javascript">
+
+                    function scrollToNextAts(elem){
+                    var sibling = elem.nextElementSibling;
+                    while (sibling) {
+                    if (sibling.className == "ats-script"){
+                    sibling.scrollIntoView();
+                    return;
+                    };
+                    sibling = sibling.nextElementSibling;
+                    }
+                    };
+
+                    function scrollToPrevAts(elem){
+                    var sibling = elem.previousElementSibling;
+                    while (sibling) {
+                    if (sibling.className == "ats-script"){
+                    sibling.scrollIntoView();
+                    return;
+                    };
+                    sibling = sibling.previousElementSibling;
+                    }
+                    };
+
+                    function openModal(vVar) {
+                    console.log(vVar);
+                    document.getElementById("myModal").style.display = "block";
+                    var image = document.getElementById(vVar);
+                    var divImage = document.getElementById("imgCont");
+                    var modalImage = document.getElementById("modal_image");
+
+                    modalImage.src = image.src;
+                    divImage.style.display = "block";
+                    };
+
+                    function openModalVid(vVar) {
+                    console.log(vVar);
+                    document.getElementById("myModalVid").style.display = "block";
+                    var vid = document.getElementById(vVar);
+                    var divVideo = document.getElementById("vidCont");
+                    var modalVideo = document.getElementById("modal_video");
+                    modalVideo.setAttribute("controls","controls");
+                    modalVideo.src = vid.src;
+                    divVideo.style.display = "block";
+                    };
+
+                    function closeModal() {
+                    document.getElementById("myModal").style.display = "none";
+                    document.getElementById("myModalVid").style.display = "none";
+                    };
+
+                    window.addEventListener('load', function () {
+                    let videoDiv = document.querySelectorAll('.video');
+                    Array.prototype.forEach.call(videoDiv, function(element) {
+                        element.setAttribute("controls","controls");
+                    });
+                    });
+
+                </script>
+                <style>
+                    html {
+                    background: #f0f0f0;
+                    padding: 16px;
+                    font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Noto Sans, Oxygen, Ubuntu,
+                    Cantarell, Fira Sans, Droid Sans, Helvetica Neue, Arial, sans-serif, Apple Color Emoji, Segoe UI
+                    Emoji, Segoe UI Symbol;
+                    }
+                    TABLE,
+                    TD {
+                    border: 0px; /*margin-bottom: 0.1rem;*/
+                    border-top: 1px;
+                    }
+                    TABLE TD {
+                    border-top: thin solid;
+                    border-bottom: thin solid;
+                    border-right: thin solid;
+                    border-color: #ffffff;
+                    padding: 0px;
+                    }
+                    table .info {
+                    table-layout: auto;
+                    width: 100%;
+                    padding-left: 16px;
+                    word-break: break-all;
+                    }
+                    table .absorbing-column {
+                    width: 100%;
+                    }
+                    TD.titleClass {
+                    border-top: none;
+                    border-bottom: none;
+                    border-right: none;
+                    border-color: #000000;
+                    }
+                    TD.resultClass {
+                    border-top: none;
+                    border-bottom: none;
+                    border-right: none;
+                    border-left: thin solid;
+                    border-color: #ffffff;
+                    }
+                    td p {
+                    margin-block-start: 0px;
+                    margin-block-end: 0px;
+                    }
+                    HR {
+                    height: 2px;
+                    color: #696969;
+                    background-color: #696969;
+                    width: 100%;
+                    border: none;
+                    }
+                    td hr {
+                    height: 2px;
+                    color: #C4C4C4;
+                    background-color: #C4C4C4;
+                    width: 100%;
+                    border: none;
+                    margin-top: 0px;
+                    margin-bottom: 0px;
+                    }
+                    body {
+                    margin: 20px;
+                    padding: 10px;
+                    font-size: 100%;
+                    line-height: 1.5;
+                    }
+                    .themed-grid-col {
+                    padding-top: 16px;
+                    padding-bottom: 16px;
+                    background-color: rgba(86, 61, 124, .15);
+                    border: 1px solid rgba(86, 61, 124, .2);
+                    }
+                    .themed-container {
+                    padding: 16px;
+                    margin-bottom: 30px;
+                    background-color: rgba(0, 123, 255, .15);
+                    border: 1px solid rgba(0, 123, 255, .2);
+                    }
+                    .suite-resume,
+                    .execution-resume {
+                    border: 1px;
+                    border-color: #ffffff;
+                    width: 100%;
+                    border-collapse: collapse;
+                    background-color:#C4C4C4;
+                    }
+                    .suite-resume td,
+                    .suite-resume th,
+                    .execution-resume td,
+                    .execution-resume th {
+                    padding-left: 10px;
+                    border-top: thin solid;
+                    border-bottom: thin solid;
+                    border-right: thin solid;
+                    border-color: white;
+                    height: 30;
+                    font-size: 80%;
+                    }
+                    .suite-resume-header {
+                    background-color: #575757;
+                    color: white
+                    }
+                    .action-table {
+                    border-collapse: separate;
+                    border-spacing: 0;
+                    padding-bottom: 16px;
+                    background-color: #F0F0F0;
+                    }
+                    .divSuite {
+                    margin-top: 16px;
+                    padding-left:4%;
+                    }
+                    .divActions {
+                    margin-top: 16px;
+                    padding-left: 4%;
+                    }
+                    .divAction {
+                    box-shadow: 6px 6px 6px 2px rgb(0 0 0 / 5%);
+                    width: 98%;
+                    padding-left: 8px;
+                    border-radius: 5px 0px 0px 5px ;
+                    background-color: #575757;
+                    border: 1px solid #ABABAB;
+                    margin-bottom: 20px;
+                    }
+                    .action-Header {
+                    font-family: Arial;
+                    font-size: 18px;
+                    font-weight: 700;
+                    line-height: 21px;
+                    letter-spacing: 0em;
+                    text-align: left;
+                    background-color: #D7D7D7;
+                    }
+                    .action-info {
+                    background-color: #F0F0F0;
+                    }
+                    tr.action-Header td {
+                    padding-left: 12px;
+                    border: 0px;
+                    }
+                    .action-details {
+                    border: 0px;
+                    color: #636363;
+                    font-family: Arial;
+                    font-size: 14px;
+                    font-weight: 400;
+                    line-height: 15px;
+                    letter-spacing: 0em;
+                    text-align: left;
+                    }
+                    tr.action-details th {
+                    padding: 14px 16px 12px 16px;
+                    }
+                    tr.action-details th.hr {
+                    padding: 0px 16px 12px 16px;
+                    }
+                    .linkButtons a {
+                    margin: 0px 10px;
+                    }
+                    .ats-script {
+                    color: #565656;
+                    text-shadow: 2px 2px 8px #b9b9b9
+                    }
+                    .ats-script-line {
+                    color: #333;
+                    background-color: #f0f0f0;
+                    border-bottom: 1px solid #9ba7af;
+                    font-size: 0.875rem;
+                    line-height: 1.5;
+                    width: 100%;
+                    }
+                    .ats-script-drag a {
+                    text-decoration: none;
+                    color: #565656;
+                    cursor: pointer;
+                    }
+                    .ats-script-drag a:hover {
+                    text-decoration: underline;
+                    }
+                    .ats-suite-drag a {
+                    text-decoration: none;
+                    color: #ffffff;
+                    cursor: pointer;
+                    }
+                    .ats-suite-drag a:hover {
+                    text-decoration: underline;
+                    }
+                    .ats-script-action {
+                    border-radius: 5px;
+                    border: 2px solid rgba(0, 0, 0, 0.18);
+                    background: #E3E3E3;
+                    padding: 2px 8px 2px 8px;
+                    cursor: pointer
+                    }
+                    .ats-script-action a {
+                    text-decoration: none;
+                    color: #303030;
+                    font-weight: 500;
+                    font-style :italic;
+                    }
+                    .ats-script-action a:hover {
+                    text-decoration: underline;
+                    }
+                    .group {
+                    border-radius: 5px;
+                    font-size: 14px;
+                    border: 1px solid rgba(0, 0, 0, 0.5);
+                    margin-left: 5px;
+                    padding: 0 4 2 4;
+                    cursor: pointer;
+                    }
+                    .execution-resume .group.include {
+                    background: rgb(57,133,200);
+                    background: linear-gradient(180deg, rgba(57,133,200,1) 0%, rgba(44,91,133,1) 47%, rgba(25,66,102,1)
+                    100%);
+                    }
+                    .execution-resume .group.exclude {
+                    background: rgb(200,46,18);
+                    background: linear-gradient(180deg, rgba(200,46,18,1) 0%, rgba(162,39,17,1) 47%, rgba(128,28,10,1)
+                    100%);
+                    }
+                    .script.group {
+                    background: rgb(230,230,230);
+                    background: linear-gradient(180deg, rgba(150,150,150,1) 0%, rgba(120,120,120,1) 47%,
+                    rgba(90,90,90,1) 100%);
+                    }
+                    .group a {
+                    color: #FFFFFF;
+                    text-decoration: none;
+                    }
+                    .group a:hover {
+                    text-decoration: underline;
+                    }
+                    .ats-link {
+                    color: #575757;
+                    text-shadow: 2px 2px 8px #a5a5a5;
+                    }
+                    .ats-link a {
+                    color: #575757;
+                    text-decoration: none;
+                    }
+                    .ats-link a:hover {
+                    text-decoration: underline;
+                    }
+                    .filePath {
+                    text-decoration: none;
+                    color: #303030;
+                    font-weight: 500;
+                    font-style :italic;
+                    }
+                    .filePath:hover {
+                    text-decoration: underline;
+                    }
+                    .ats-ext-report {
+                    text-decoration: none;
+                    color: #0000EE;
+                    }
+                    .ats-ext-report:hover {
+                    text-decoration: underline;
+                    }
+                    .ats-empty-field {
+                    padding: 2px 6px;
+                    gap: 10px;
+                    background: rgba(255, 255, 255, 0.5);
+                    background-blend-mode: lighten;
+                    border-radius: 2.5px;
+                    }
+                    .ats-field {
+                    padding: 2px 6px;
+                    gap: 10px;
+                    background: #FFFFFF;
+                    background-blend-mode: lighten;
+                    border: 1.5px solid #ACACAC;
+                    border-radius: 2.5px;
+                    }
+                    .ats-icon {
+                    padding: 0px;
+                    }
+                    input[type='checkbox'] {
+                    display: none;
+                    } /* toggle element */
+                    .lbl-toggle {
+                    color: #565656;
+                    font-weight: bold;
+                    font-family: monospace;
+                    font-size: 1.2rem;
+                    text-transform: uppercase;
+                    text-align: center;
+                    padding: 1rem;
+                    cursor: pointer;
+                    transition: all 0.25s ease-out;
+                    }
+                    .lbl-toggle::before {
+                    content: ' ';
+                    display: inline-block;
+                    border-top: 5px solid transparent;
+                    border-bottom: 5px solid transparent;
+                    border-left: 5px solid currentColor;
+                    vertical-align: middle;
+                    margin-right: .7rem;
+                    transform: translateY(-2px);
+                    transition: transform .2s ease-out;
+                    }
+                    .toggle:checked+.lbl-toggle::before {
+                    transform: rotate(90deg) translateX(-3px);
+                    }
+                    .collapsible-content {
+                    max-height: 0px;
+                    overflow: hidden;
+                    transition: max-height .25s ease-in-out;
+                    }
+                    .toggle:checked+.lbl-toggle+.collapsible-content {
+                    max-height: none;
+                    }
+                    .toggle:checked+.lbl-toggle {
+                    border-bottom-right-radius: 0;
+                    border-bottom-left-radius: 0;
+                    }
+                    .data-css {
+                    border: 0px;
+                    font-weight: 600;
+                    color: #303030;
+                    }
+                    .info-label {
+                    font-family: Arial;
+                    font-size: 14px;
+                    font-weight: 400;
+                    line-height: 16px;
+                    letter-spacing: 0em;
+                    text-align: right;
+                    vertical-align: top;
+                    padding: 8px 12px;
+                    white-space: nowrap;
+                    background-color: #ffffff;
+                    color : #303030;
+                    }
+                    .info-data {
+                    font-family: Arial;
+                    font-size: 14px;
+                    font-weight: 500;
+                    line-height: 16px;
+                    letter-spacing: 0em;
+                    text-align: left;
+                    padding: 8px 12px;
+                    background: linear-gradient(90deg, #E1E1E1 0%, rgba(225, 225, 225, 0) 72.92%);
+                    color : #303030;
+                    }
+                    .info-data-small {
+                    font-family: Arial;
+                    font-size: 12px;
+                    font-weight: 350;
+                    line-height: 16px;
+                    letter-spacing: 0em;
+                    text-align: left;
+                    padding: 8px 12px;
+                    background: linear-gradient(90deg, #E1E1E1 0%, rgba(225, 225, 225, 0) 72.92%);
+                    color : #676767;
+                    }
+                    .info-data-element {
+                    font-family: Arial;
+                    font-size: 12px;
+                    font-weight: 500;
+                    line-height: 16px;
+                    letter-spacing: 0em;
+                    text-align: left;
+                    color : #676767;
+                    }
+                    .data-label {
+                    font-family: Arial;
+                    font-size: 14px;
+                    font-weight: 400;
+                    line-height: 16px;
+                    letter-spacing: 0em;
+                    text-align: left;
+                    color: #707070;
+                    }
+                    .table-infos {
+                    width: 100%;
+                    vertical-align: top;
+                    }
+                    .action-img {
+                    vertical-align: middle;
+                    text-align: center;
+                    min-width: 207px;
+                    border: 0px;
+                    padding-left: 16px;
+                    padding-right: 16px;
+                    width: 19%;
+                    }
+                    .api-img {
+                    vertical-align: middle;
+                    text-align: center;
+                    border: 0px;
+                    padding-left: 16px;
+                    padding-right: 16px;
+                    width: 160;
+                    }
+                    .image-style {
+                    max-width: 207px;
+                    height: auto;
+                    }
+                    .overlay-image, .overlay-video {
+                    position: relative;
+                    width: 100%;
+                    min-width: 207px;
+                    max-width:207px;
+                    margin-left: auto;
+                    margin-right: auto;
+                    left: 0;
+                    right: 0;
+                    text-align: center;
+                    }
+                    .overlay-image .image, .overlay-video .vid {
+                    display: block;
+                    width: 100%;
+                    height: auto;
+                    }
+                    .overlay-image .hover, .overlay-video .hover {
+                    position: absolute;
+                    top: 0;
+                    height: 100%;
+                    width: 100%;
+                    opacity: 0; /*transition: .1s ease;*/
+                    }
+                    .overlay-image:hover .hover {
+                    opacity: 1;
+                    background-image:
+                    url("data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjYiIGhlaWdodD0iMTgiIHZpZXdCb3g9IjAgMCA2NiAxOCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHRleHQgZmlsbD0id2hpdGUiIHhtbDpzcGFjZT0icHJlc2VydmUiIHN0eWxlPSJ3aGl0ZS1zcGFjZTogcHJlIiBmb250LWZhbWlseT0iQXJpYWwiIGZvbnQtc2l6ZT0iMTYiIGZvbnQtd2VpZ2h0PSJib2xkIiBsZXR0ZXItc3BhY2luZz0iMGVtIj48dHNwYW4geD0iMjIiIHk9IjE0LjU0NjkiPlpvb208L3RzcGFuPjwvdGV4dD4KPHBhdGggZD0iTTcuMjk4NDMgMTEuMzE1OEM3LjY5Mzc0IDEwLjkzMDEgNy43MDE1NSAxMC4yOTcgNy4zMTU4NyA5LjkwMTY1QzYuOTMwMiA5LjUwNjM0IDYuMjk3MDggOS40OTg1MyA1LjkwMTc3IDkuODg0Mkw3LjI5ODQzIDExLjMxNThaTTEuMDAwMTEgMTYuMDYzNUwwLjAwMDEwNjIyNyAxNi4wNjM1QzAuMDAwMTA2MTc5IDE2LjYxNTggMC40NDc4MjEgMTcuMDYzNSAxLjAwMDExIDE3LjA2MzVMMS4wMDAxMSAxNi4wNjM1Wk0yLjAwMDExIDExLjM4MDVDMi4wMDAxMSAxMC44MjgyIDEuNTUyMzkgMTAuMzgwNSAxLjAwMDExIDEwLjM4MDVDMC40NDc4MjIgMTAuMzgwNSAwLjAwMDEwNjY4NSAxMC44MjgyIDAuMDAwMTA2NjM3IDExLjM4MDVMMi4wMDAxMSAxMS4zODA1Wk01LjIxNDc1IDE3LjA2MzVDNS43NjcwNCAxNy4wNjM1IDYuMjE0NzUgMTYuNjE1OCA2LjIxNDc1IDE2LjA2MzVDNi4yMTQ3NSAxNS41MTEyIDUuNzY3MDQgMTUuMDYzNSA1LjIxNDc1IDE1LjA2MzVMNS4yMTQ3NSAxNy4wNjM1Wk01LjkwMTc3IDkuODg0MkwwLjMwMTc3NyAxNS4zNDc3TDEuNjk4NDQgMTYuNzc5M0w3LjI5ODQzIDExLjMxNThMNS45MDE3NyA5Ljg4NDJaTTAuMDAwMTA2NjM3IDExLjM4MDVMMC4wMDAxMDYyMjcgMTYuMDYzNUwyLjAwMDExIDE2LjA2MzVMMi4wMDAxMSAxMS4zODA1TDAuMDAwMTA2NjM3IDExLjM4MDVaTTEuMDAwMTEgMTcuMDYzNUw1LjIxNDc1IDE3LjA2MzVMNS4yMTQ3NSAxNS4wNjM1TDEuMDAwMTEgMTUuMDYzNUwxLjAwMDExIDE3LjA2MzVaIiBmaWxsPSJ3aGl0ZSIvPgo8cGF0aCBkPSJNMTAuNzAxOCA1Ljc0NzcyQzEwLjMwNjUgNi4xMzM0IDEwLjI5ODcgNi43NjY1MSAxMC42ODQ0IDcuMTYxODNDMTEuMDcgNy41NTcxNCAxMS43MDMyIDcuNTY0OTUgMTIuMDk4NSA3LjE3OTI3TDEwLjcwMTggNS43NDc3MlpNMTcuMDAwMSAxTDE4LjAwMDEgMUMxOC4wMDAxIDAuNDQ3NzE1IDE3LjU1MjQgMCAxNy4wMDAxIDBWMVpNMTYuMDAwMSA1LjY4Mjk0QzE2LjAwMDEgNi4yMzUyMyAxNi40NDc5IDYuNjgyOTQgMTcuMDAwMSA2LjY4Mjk0QzE3LjU1MjQgNi42ODI5NCAxOC4wMDAxIDYuMjM1MjMgMTguMDAwMSA1LjY4Mjk0SDE2LjAwMDFaTTEyLjc4NTUgMEMxMi4yMzMyIDAgMTEuNzg1NSAwLjQ0NzcxNSAxMS43ODU1IDFDMTEuNzg1NSAxLjU1MjI4IDEyLjIzMzIgMiAxMi43ODU1IDJWMFpNMTIuMDk4NSA3LjE3OTI3TDE3LjY5ODUgMS43MTU3OEwxNi4zMDE4IDAuMjg0MjI0TDEwLjcwMTggNS43NDc3MkwxMi4wOTg1IDcuMTc5MjdaTTE4LjAwMDEgNS42ODI5NFYxTDE2LjAwMDEgMVY1LjY4Mjk0SDE4LjAwMDFaTTE3LjAwMDEgMEwxMi43ODU1IDBWMkwxNy4wMDAxIDJWMFoiIGZpbGw9IndoaXRlIi8+Cjwvc3ZnPg==");
+                    background-repeat: no-repeat;
+                    background-position: center;
+                    background-size: 35%;
+                    }
+
+                    .overlay-video:hover .hover {
+                    opacity: 1;
+                    background-image:
+                    url("data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjYiIGhlaWdodD0iMTgiIHZpZXdCb3g9IjAgMCA2NiAxOCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHRleHQgZmlsbD0id2hpdGUiIHhtbDpzcGFjZT0icHJlc2VydmUiIHN0eWxlPSJ3aGl0ZS1zcGFjZTogcHJlIiBmb250LWZhbWlseT0iQXJpYWwiIGZvbnQtc2l6ZT0iMTYiIGZvbnQtd2VpZ2h0PSJib2xkIiBsZXR0ZXItc3BhY2luZz0iMGVtIj48dHNwYW4geD0iMjIiIHk9IjE0LjU0NjkiPlpvb208L3RzcGFuPjwvdGV4dD4KPHBhdGggZD0iTTcuMjk4NDMgMTEuMzE1OEM3LjY5Mzc0IDEwLjkzMDEgNy43MDE1NSAxMC4yOTcgNy4zMTU4NyA5LjkwMTY1QzYuOTMwMiA5LjUwNjM0IDYuMjk3MDggOS40OTg1MyA1LjkwMTc3IDkuODg0Mkw3LjI5ODQzIDExLjMxNThaTTEuMDAwMTEgMTYuMDYzNUwwLjAwMDEwNjIyNyAxNi4wNjM1QzAuMDAwMTA2MTc5IDE2LjYxNTggMC40NDc4MjEgMTcuMDYzNSAxLjAwMDExIDE3LjA2MzVMMS4wMDAxMSAxNi4wNjM1Wk0yLjAwMDExIDExLjM4MDVDMi4wMDAxMSAxMC44MjgyIDEuNTUyMzkgMTAuMzgwNSAxLjAwMDExIDEwLjM4MDVDMC40NDc4MjIgMTAuMzgwNSAwLjAwMDEwNjY4NSAxMC44MjgyIDAuMDAwMTA2NjM3IDExLjM4MDVMMi4wMDAxMSAxMS4zODA1Wk01LjIxNDc1IDE3LjA2MzVDNS43NjcwNCAxNy4wNjM1IDYuMjE0NzUgMTYuNjE1OCA2LjIxNDc1IDE2LjA2MzVDNi4yMTQ3NSAxNS41MTEyIDUuNzY3MDQgMTUuMDYzNSA1LjIxNDc1IDE1LjA2MzVMNS4yMTQ3NSAxNy4wNjM1Wk01LjkwMTc3IDkuODg0MkwwLjMwMTc3NyAxNS4zNDc3TDEuNjk4NDQgMTYuNzc5M0w3LjI5ODQzIDExLjMxNThMNS45MDE3NyA5Ljg4NDJaTTAuMDAwMTA2NjM3IDExLjM4MDVMMC4wMDAxMDYyMjcgMTYuMDYzNUwyLjAwMDExIDE2LjA2MzVMMi4wMDAxMSAxMS4zODA1TDAuMDAwMTA2NjM3IDExLjM4MDVaTTEuMDAwMTEgMTcuMDYzNUw1LjIxNDc1IDE3LjA2MzVMNS4yMTQ3NSAxNS4wNjM1TDEuMDAwMTEgMTUuMDYzNUwxLjAwMDExIDE3LjA2MzVaIiBmaWxsPSJ3aGl0ZSIvPgo8cGF0aCBkPSJNMTAuNzAxOCA1Ljc0NzcyQzEwLjMwNjUgNi4xMzM0IDEwLjI5ODcgNi43NjY1MSAxMC42ODQ0IDcuMTYxODNDMTEuMDcgNy41NTcxNCAxMS43MDMyIDcuNTY0OTUgMTIuMDk4NSA3LjE3OTI3TDEwLjcwMTggNS43NDc3MlpNMTcuMDAwMSAxTDE4LjAwMDEgMUMxOC4wMDAxIDAuNDQ3NzE1IDE3LjU1MjQgMCAxNy4wMDAxIDBWMVpNMTYuMDAwMSA1LjY4Mjk0QzE2LjAwMDEgNi4yMzUyMyAxNi40NDc5IDYuNjgyOTQgMTcuMDAwMSA2LjY4Mjk0QzE3LjU1MjQgNi42ODI5NCAxOC4wMDAxIDYuMjM1MjMgMTguMDAwMSA1LjY4Mjk0SDE2LjAwMDFaTTEyLjc4NTUgMEMxMi4yMzMyIDAgMTEuNzg1NSAwLjQ0NzcxNSAxMS43ODU1IDFDMTEuNzg1NSAxLjU1MjI4IDEyLjIzMzIgMiAxMi43ODU1IDJWMFpNMTIuMDk4NSA3LjE3OTI3TDE3LjY5ODUgMS43MTU3OEwxNi4zMDE4IDAuMjg0MjI0TDEwLjcwMTggNS43NDc3MkwxMi4wOTg1IDcuMTc5MjdaTTE4LjAwMDEgNS42ODI5NFYxTDE2LjAwMDEgMVY1LjY4Mjk0SDE4LjAwMDFaTTE3LjAwMDEgMEwxMi43ODU1IDBWMkwxNy4wMDAxIDJWMFoiIGZpbGw9IndoaXRlIi8+Cjwvc3ZnPg==");
+                    background-repeat: no-repeat;
+                    background-position: center;
+                    background-size: 35%;
+                    }
+
+                    .overlay-image .hover,.overlay-video .hover {
+                    background-color: rgba(0,0,0,0.5);
+                    }
+
+                    .modal {
+                    display: none;
+                    position: fixed;
+                    z-index: 1;
+                    padding-top: 100px;
+                    left: 0;
+                    top: 0;
+                    width: 100%;
+                    height: 100%;
+                    overflow: auto;
+                    background-color: rgb(0,0,0,0.5);
+                    } /* Modal Content */
+
+                    .modal-content {
+                    position: relative;
+                    background-color: #fefefe;
+                    margin: auto;
+                    padding: 0;
+                    width: 50%;
+                    max-width: 1200px;
+                    } /* The Close Button */
+                    .close {
+                    color: white;
+                    position: absolute;
+                    top: 10px;
+                    right: 25px;
+                    font-size: 35px;
+                    font-weight: bold;
+                    }
+                    .close:hover,
+                    .close:focus {
+                    color: #999;
+                    text-decoration: none;
+                    cursor: pointer;
+                    }
+                    .mySlides {
+                    display: none;
+                    }
+                    .cursor {
+                    cursor: pointer;
+                    }
+
+
+                </style>
+                <style>
+
+                    .execution-resume .parameters-cell {
+                    padding: 5px 10px;
+                    display: flex;
+                    height: auto;
+                    border-top-width: 0px;
+                    border-bottom-width: 0px;
+                    }
+                    .parameters-cell ,
+                    .cs-param {
+                    flex-wrap : wrap;
+                    max-height: 100px;
+                    overflow: auto;
+                    }
+                    .parameter-css {
+                    margin: 2px;
+                    border: 1px solid rgba(0,0,0,0.2);
+                    border-radius: 4px;
+                    background-color: rgba(255,255,255,0.8);
+                    padding: 4px;
+                    }
+					.parameter-ats {
+                    margin: 2px;
+                    border: 1px solid rgba(86,86,110,0.6);
+                    border-radius: 6px;
+                    background-color: rgba(188,188,210,0.3);
+                    padding: 5px;
+                    }
+                    .parameter-css table {
+                    border-collapse: collapse;
+                    border-radius: 5px;
+                    }
+                    .parameter-css td,
+                    .parameter-css tr,
+                    .parameter-css th {
+                    padding: 0px;
+                    }
+                    .parameter-css td,
+                    .parameter-css tr,
+                    .parameter-css th {
+                    border: none;
+                    height: auto;
+                    padding-left: 5px;
+                    padding-right: 5px;
+                    text-align: left;
+                    font-size: 100%;
+                    font-family: 'Arial';
+                    }
+                    .parameter-css thead {
+                    color:rgba(0,0,0,0.8);
+                    font-family: 'Arial';
+                    font-style: normal;
+                    font-weight: 700;
+                    font-size: 11px;
+                    line-height: 15px;
+                    }
+                    .parameter-css tbody td {
+                    font-style: normal;
+                    font-weight: 400;
+                    font-size: 13px;
+                    line-height: 14px;
+                    color: rgba(0, 0, 0, 0.7);
+                    }
+                    .info-data div.cs-param {
+                    display:flex;
+                    }
+                    table .include_exclude {
+                    background-color: rgba(0,0,0,0);
+                    border-width: 2px;
+                    border-style: solid;
+                    border-color:rgba(230,230,230,1);
+                    border-radius: 6px;
+                    margin : 0px 5px;
+                    align-content: center;
+                    font-size: 14px;
+                    padding-right: 3px;
+                    }
+                    table .include_exclude td {
+                    padding: 0px;
+                    border:none;
+                    height: 25px;
+                    padding-bottom: 2px;
+                    }
+                    table .include_exclude td:first-child {
+                    color:rgba(0,0,0,0.8);
+                    font-weight: 700;
+                    padding-left: 3px;
+                    }
+                    .execution-resume .groups-cell {
+                    padding: 5px 10px;
+                    display: flex;
+                    height: auto;
+                    border-collapse: collapse;
+                    border-bottom: none;
+                    flex-direction: row;
+                    }
+                    .suite-resume .groups-cell {
+                    padding: 5px 10px;
+                    }
+					.align-middle {
+					  vertical-align: middle;
+					}
+                </style>
+                <style>
+
+                    /* xslt style generation */
+                    .ats-icon-true {
+                    background: url(<xsl:value-of select="//ats-report/pics/pic[@name='true']"/>
+                    ) no-repeat center;
+                    padding: 5px 10px 5px 36px;
+                    }
+
+                    .ats-icon-false {
+                    background: url(<xsl:value-of select="//ats-report/pics/pic[@name='false']"/>
+                    ) no-repeat center;
+                    padding: 5px 10px 5px 36px;
+                    }
+                    
+                    .api-icon {
+                    background: url(<xsl:value-of select="//ats-report/pics/pic[@name='api']"/>) 
+                    no-repeat center;
+                    padding: 100px 100px 100px 100px;
+                    }
+
+                    .ats-icon-no-stop {
+                    background: url(<xsl:value-of select="//ats-report/pics/pic[@name='noStop']"/>
+                    ) no-repeat center;
+                    padding: 5px 10px 5px 36px;
+                    }
+
+                    .ats-icon-warning {
+                    background: url(<xsl:value-of select="//ats-report/pics/pic[@name='warning']"/>
+                    ) no-repeat center;
+                    padding: 5px 10px 5px 36px;
+                    }
+
+                    .ats-icon-hl-10-w{
+                    background: url(<xsl:value-of select="//ats-report/pics/pic[@name='external_link_10_white']"/>
+                    ) no-repeat center;
+                    padding : 8 8 12;
+                    }
+                    .ats-icon-hl-12-blue{
+                    background: url(<xsl:value-of select="//ats-report/pics/pic[@name='external_link_12_blue']"/>
+                    ) no-repeat center;
+                    padding : 9;
+                    }
+
+                    a.ats-ext-report:visited{
+                    color: #55A18B
+                    }
+                    a.ats-ext-report:visited .ats-icon-hl-12-blue{
+                    background: url(<xsl:value-of
+                        select="//ats-report/pics/pic[@name='external_link_12_blue_visited']"/>
+                    ) no-repeat center;
+                    padding : 9;
+                    }
+                    .ats-icon-hl-12-grey{
+                    background: url(<xsl:value-of select="//ats-report/pics/pic[@name='external_link_12_grey']"/>
+                    ) no-repeat center;
+                    padding : 9;
+                    }
+                    .ats-icon-hl-16-grey{
+                    background: url(<xsl:value-of select="//ats-report/pics/pic[@name='external_link_16_grey']"/>
+                    ) no-repeat center;
+                    padding : 12 12 15;
+                    }
+                    .ats-icon-run-16-grey{
+                    background: url(<xsl:value-of select="//ats-report/pics/pic[@name='run_16']"/>
+                    ) no-repeat center;
+                    padding : 12 12 15;
+                    }
+                    .ats-icon-hl-16-w{
+                    background: url(<xsl:value-of select="//ats-report/pics/pic[@name='external_link_16_white']"/>
+                    ) no-repeat center;
+                    padding : 12 12 20;
+                    }
+					.screen-video {
+					background-repeat: no-repeat;
+					background-position: 16px 14px;
+					background-image: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAOCAYAAAAvxDzwAAAABmJLR0QArgDOAOl0s3seAAAACXBIWXMAAA7EAAAOxAGVKw4bAAAAB3RJTUUH5wIREgEz7JnFSQAAABl0RVh0Q29tbWVudABDcmVhdGVkIHdpdGggR0lNUFeBDhcAAADpSURBVDjLrZIxSsRQFEXPfUwCTiFpYiexmB3MCmxEkEAWYKr8QrFxA9PMMoZfTj2lioVo4wYEK7G0ttABm3wrJQwjmE9u+S4c3js8NU1zClzy/zwDZ9779c/AOVcA1yGE8QhYADs9gNO2bW+BJUBd10Wapg+SCklYTxgAZjYGqKpqP0mSe0nFb0dkyrLcy7LszswOuvNRDCyEsJvn+ZWZTTa7KKCkuaStqmJP/tN7tMOhgeuhgTPgcUjgB3C0DRrt0Hv/CZwAT5vAr1iH3vt34Bh47f7hBXDe46lfJK06m7455w6BmxBC+g0ZgTarYKYsNQAAAABJRU5ErkJggg==");
+					}
+					.screen-image {
+					background-repeat: no-repeat;
+					background-position: 16px 14px;
+					background-image: url("data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAABEAAAAQCAYAAADwMZRfAAAABmJLR0QArgDOAOl0s3seAAAACXBIWXMAAA7EAAAOxAGVKw4bAAAAB3RJTUUH5wIRETYligxudQAAABl0RVh0Q29tbWVudABDcmVhdGVkIHdpdGggR0lNUFeBDhcAAADkSURBVDjLrZMxbsJAEEXfruwbpOcQpE1PC7lBZpW0rkNPS4PkZtYNaaDwAdLShjvE6VymobNNY0uAbBkMv/uzmqf5X1ojIr/AiOHK7J0AgJHlATqDWGu3wDOwGwwpy3KlqntgcwvEiEh14vfAFxDd0tVlJ2Ng2QFYAIdrIO3nGpOq6hyYtIHaIIc6VqO/oijeAFR1F4bhtBcSBEGU5/mLtXZdj96TJPlv3uM4/gY+Ooutqir13r82XkRm3vu0LaJz7qfu8PwSY8zi1HcBBhXbp+DCz5xz4yt3n7ogn0P/TnZnmuwI/hI/C+UatvwAAAAASUVORK5CYII=");
+					}
+					
+					.right-arrow {
+                    background: url("data:image/png;base64,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elRYdFJhdyBwcm9maWxlIHR5cGUgaXB0YwAAeNo9icsNgDAMQ++ZghGcT0W7DsmFWw/sL6xIYMtOrCf3flKOVpj4DIsVhaB/aWnC/OQ73RyMswfvapIkVxO40kOsvgnICzFFFNHqgZF2AAAPVGlUWHRYTUw6Y29tLmFkb2JlLnhtcAAAAAAAPD94cGFja2V0IGJlZ2luPSLvu78iIGlkPSJXNU0wTXBDZWhpSHpyZVN6TlRjemtjOWQiPz4KPHg6eG1wbWV0YSB4bWxuczp4PSJhZG9iZTpuczptZXRhLyIgeDp4bXB0az0iWE1QIENvcmUgNC40LjAtRXhpdjIiPgogPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4KICA8cmRmOkRlc2NyaXB0aW9uIHJkZjphYm91dD0iIgogICAgeG1sbnM6aXB0Y0V4dD0iaHR0cDovL2lwdGMub3JnL3N0ZC9JcHRjNHhtcEV4dC8yMDA4LTAyLTI5LyIKICAgIHhtbG5zOnhtcE1NPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvbW0vIgogICAgeG1sbnM6c3RFdnQ9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9zVHlwZS9SZXNvdXJjZUV2ZW50IyIKICAgIHhtbG5zOnBsdXM9Imh0dHA6Ly9ucy51c2VwbHVzLm9yZy9sZGYveG1wLzEuMC8iCiAgICB4bWxuczpHSU1QPSJodHRwOi8vd3d3LmdpbXAub3JnL3htcC8iCiAgICB4bWxuczpkYz0iaHR0cDovL3B1cmwub3JnL2RjL2VsZW1lbnRzLzEuMS8iCiAgICB4bWxuczp4bXA9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC8iCiAgIHhtcE1NOkRvY3VtZW50SUQ9ImdpbXA6ZG9jaWQ6Z2ltcDpjZmU3ODM3My05NmRhLTQ4MTEtYTgyNi0wMzY1YmUxZTVkMjMiCiAgIHhtcE1NOkluc3RhbmNlSUQ9InhtcC5paWQ6MDVjYTA0ZmMtZDY2ZS00NDRiLWE2MjEtYmEyZTdjOTVkYzFlIgogICB4bXBNTTpPcmlnaW5hbERvY3VtZW50SUQ9InhtcC5kaWQ6Yzg2ZjY1MzgtNDg4OC00YWRiLWI2OWItMTEwZjgyOGRiMmFjIgogICBHSU1QOkFQST0iMi4wIgogICBHSU1QOlBsYXRmb3JtPSJXaW5kb3dzIgogICBHSU1QOlRpbWVTdGFtcD0iMTY4NTM4MzI3NTE2MjA4MiIKICAgR0lNUDpWZXJzaW9uPSIyLjEwLjgiCiAgIGRjOkZvcm1hdD0iaW1hZ2UvcG5nIgogICB4bXA6Q3JlYXRvclRvb2w9IkdJTVAgMi4xMCI+CiAgIDxpcHRjRXh0OkxvY2F0aW9uQ3JlYXRlZD4KICAgIDxyZGY6QmFnLz4KICAgPC9pcHRjRXh0OkxvY2F0aW9uQ3JlYXRlZD4KICAgPGlwdGNFeHQ6TG9jYXRpb25TaG93bj4KICAgIDxyZGY6QmFnLz4KICAgPC9pcHRjRXh0OkxvY2F0aW9uU2hvd24+CiAgIDxpcHRjRXh0OkFydHdvcmtPck9iamVjdD4KICAgIDxyZGY6QmFnLz4KICAgPC9pcHRjRXh0OkFydHdvcmtPck9iamVjdD4KICAgPGlwdGNFeHQ6UmVnaXN0cnlJZD4KICAgIDxyZGY6QmFnLz4KICAgPC9pcHRjRXh0OlJlZ2lzdHJ5SWQ+CiAgIDx4bXBNTTpIaXN0b3J5PgogICAgPHJkZjpTZXE+CiAgICAgPHJkZjpsaQogICAgICBzdEV2dDphY3Rpb249InNhdmVkIgogICAgICBzdEV2dDpjaGFuZ2VkPSIvIgogICAgICBzdEV2dDppbnN0YW5jZUlEPSJ4bXAuaWlkOmYyMGNjNmY4LTkzNzItNDRjZC1hM2U2LThlM2I5NTlmNzcyYSIKICAgICAgc3RFdnQ6c29mdHdhcmVBZ2VudD0iR2ltcCAyLjEwIChXaW5kb3dzKSIKICAgICAgc3RFdnQ6d2hlbj0iMjAyMy0wNS0yOVQyMDowMToxNSIvPgogICAgPC9yZGY6U2VxPgogICA8L3htcE1NOkhpc3Rvcnk+CiAgIDxwbHVzOkltYWdlU3VwcGxpZXI+CiAgICA8cmRmOlNlcS8+CiAgIDwvcGx1czpJbWFnZVN1cHBsaWVyPgogICA8cGx1czpJbWFnZUNyZWF0b3I+CiAgICA8cmRmOlNlcS8+CiAgIDwvcGx1czpJbWFnZUNyZWF0b3I+CiAgIDxwbHVzOkNvcHlyaWdodE93bmVyPgogICAgPHJkZjpTZXEvPgogICA8L3BsdXM6Q29weXJpZ2h0T3duZXI+CiAgIDxwbHVzOkxpY2Vuc29yPgogICAgPHJkZjpTZXEvPgogICA8L3BsdXM6TGljZW5zb3I+CiAgPC9yZGY6RGVzY3JpcHRpb24+CiA8L3JkZjpSREY+CjwveDp4bXBtZXRhPgogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAKICAgICAgICAgICAgICAgICAgICAgICAgICAgCjw/eHBhY2tldCBlbmQ9InciPz6G2A/7AAAABmJLR0QArgDOAOl0s3seAAAACXBIWXMAArRrAAK0awHwHqnYAAAAB3RJTUUH5wUdEgEPOwDaZgAAAm5JREFUSMeNlT1oVEEQx38XuygKBguFmI9CbJQ0yk2MIhji5cBGUaxEMMRYiFUeam+RbdJIjKUoWAnRSKIQI0fkJomNIApilUZsoygX8rE2+2Qz917uBl7x5v1m9s3s/nfw3uO9pzhanSyOVm+k73lP4IYacelT8N4jid4HHgAbwHl1Mk+GSaIJMAZsAiV1MkcDKxRHq8PA48j3NwQvmORNcdZagFPG1wrMSKLHjb83g5uVRHsaLXATqBj/HmBaEu2IfFncbuCV4bYvoE5qQBmwpR4GKpJoO4A6Wcvh2mOubg+892mP9wHLwBHDfAL61MmfwO0FloCjhvsMSMrFLSL84SowAKyYwJ7Q69bA/QJKGdyxmKurIDotHYACB02CuQIMVp1sRFwVOGS4d4Fb31ZBVMkKcDEcw9j6PTxqgjvnYaKuRWaRxdAGGzwkiU5G3FIjrq5Fpl0XgJdAwXy6q07GIq4MvM7g7rc0UPoqUMvwd5v33zlcZ24Fkmgf8DYoNrYn6uR6E9xTdXKtJSd5d2iNDaoERadcFzCVww1nbnI4fvPAfvNpASgHRafce6Ath6vVbbIkeiCoudMEfQNOBpEhibYBH4Euw30HTgTRbj+mQYFTGclXgIEoeWtoX1cG1x8n/19BCHoDnDZBP4DeIKqUmwXOGO4nUEy52HbN10pseZ4HwWAGyqA6+Qpw9t4im55n4Ua1XFmdfMm8rte3/DhwKSOopE6WU8faph8HruRwizsNnA9ALIYt4HLGKKwYzgNXG45MdfICGIl8t9TJTMb9NGW4EXUy3XDoRwPnDrCuTiZ2CpBEbwNenTykCfsHDhxSkHEitFwAAAAASUVORK5CYII=");
+                    no-repeat center;
+                    padding: 0px 0px 0px 30px;
+                    }
+
+                </style>
+            </HEAD>
+            <BODY>
+
+                <xsl:call-template name="modal">
+                </xsl:call-template>
+                <xsl:call-template name="modalVid">
+                </xsl:call-template>
+
+                <TABLE width="100%">
+                    <TBODY>
+                        <TR>
+                            <TD class="titleClass" width="60">
+                                <img align="left" alt="ATS logo">
+                                    <xsl:attribute name="src">
+                                        <xsl:value-of select="$picLogo"/>
+                                    </xsl:attribute>
+                                </img>
+                            </TD>
+                            <TD class="titleClass">
+                                <span class="ats-link">
+                                    <a>
+                                        <xsl:attribute name="href">
+                                            <xsl:value-of select="'https://gitlab.com/actiontestscript/'"/>
+                                        </xsl:attribute>
+                                        <FONT SIZE="6">
+                                            <B>
+                                                ActionTestScript
+                                            </B>
+                                        </FONT>
+                                    </a>
+                                    <FONT SIZE="3">
+                                        ( Ver.
+                                        <xsl:value-of select="$atsVersion"/> )
+                                    </FONT>
+                                    <FONT SIZE="6">
+                                        <B>
+                                            - Suites Execution Report
+                                        </B>
+                                    </FONT>
+
+                                    <br/>
+                                    <FONT SIZE="4" COLOR="#575757">
+                                        <I>
+<!--                                            <xsl:choose>
+                                                <xsl:when test="(//ats-report/@devReportLevel = '1')">
+                                                    <xsl:text>Execution</xsl:text>
+                                                </xsl:when>
+                                                <xsl:otherwise>
+                                                    <xsl:text>Detailed execution</xsl:text>
+                                                </xsl:otherwise>
+                                            </xsl:choose>-->
+                                            <xsl:text>Execution report </xsl:text>
+<!--                                            <xsl:choose>
+                                                <xsl:when test="(//ats-report/@devReportLevel = '3')">
+                                                    <xsl:text> with screenshots </xsl:text>
+                                                </xsl:when>
+                                            </xsl:choose>-->
+                                            <xsl:text> - </xsl:text>
+                                            <span class="ats-script-drag">
+                                                <a>
+                                                    <xsl:attribute name="href">
+                                                        <xsl:value-of
+                                                                select="concat('ats://', $projectUuid)"/>
+                                                    </xsl:attribute>
+                                                    <span class="ats-icon-hl-16-grey" width="16" height="16"/>
+                                                    <xsl:value-of select="$projectId"/>
+                                                </a>
+                                            </span>
+                                            <xsl:text> - </xsl:text>
+                                            <FONT SIZE="3" COLOR="#4d545d">
+                                            	<xsl:value-of select="count(suite)"/>
+                                            	<xsl:text> suite(s) launched on </xsl:text>
+                                            	<xsl:value-of select="$execStartedFormated"/>
+                                                <xsl:text> (</xsl:text>
+                                                <div id="creationDate" style="display:contents;">
+                                                	<xsl:value-of select="$execStartedFormatedZulu"/>
+                                                </div>
+                                                <xsl:text>)</xsl:text>
+                                            </FONT>
+                                        </I>
+                                    </FONT>
+                                </span>
+                            </TD>
+                            <TD COLSPAN="1" class="titleClass" width="120">
+                                <a target='_blank' href='summary.pdf'>
+                                    Summary
+                                    <img align="right" alt="Download PDF report">
+                                        <xsl:attribute name="src">
+                                            <xsl:value-of select="$picPdf"/>
+                                        </xsl:attribute>
+                                    </img>
+
+                                </a>
+                            </TD>
+                        </TR>
+                    </TBODY>
+                </TABLE>
+                <DIV>
+                    <xsl:apply-templates/>
+                </DIV>
+            </BODY>
+        </HTML>
+    </xsl:template>
+
+    <xsl:template match="pic">
+    </xsl:template>
+
+    <xsl:template name="splitOperatorData">
+        <xsl:param name="containsOperator"/>
+        <xsl:choose>
+            <xsl:when test="(contains($containsOperator, '&lt;&gt; ')) or (contains($containsOperator, '!= '))">
+                <xsl:text> is different of </xsl:text>
+                <xsl:call-template name="emptyVerif">
+                    <xsl:with-param name="field" select="substring-after($containsOperator,'&lt;&gt; ')"/>
+                </xsl:call-template>
+
+            </xsl:when>
+            <xsl:when test="contains($containsOperator, '=')">
+                <xsl:choose>
+                    <xsl:when test="contains($containsOperator, '&gt;=')">
+                        <xsl:text> is greater than or equal to </xsl:text>
+                        <xsl:call-template name="emptyVerif">
+                            <xsl:with-param name="field" select="substring-after($containsOperator,'&gt;= ')"/>
+                        </xsl:call-template>
+                    </xsl:when>
+                    <xsl:when test="contains($containsOperator, '&lt;=')">
+                        <xsl:text> is less than or equal to </xsl:text>
+                        <xsl:call-template name="emptyVerif">
+                            <xsl:with-param name="field" select="substring-after($containsOperator,'&lt;= ')"/>
+                        </xsl:call-template>
+                    </xsl:when>
+                    <xsl:when test="contains($containsOperator, '=~')">
+                        <xsl:text> matches regex </xsl:text>
+                        <xsl:call-template name="emptyVerif">
+                            <xsl:with-param name="field" select="substring-after($containsOperator,'=~ ')"/>
+                        </xsl:call-template>
+                    </xsl:when>
+                    <xsl:otherwise>
+                        <xsl:text> is equal to </xsl:text>
+                        <xsl:call-template name="emptyVerif">
+                            <xsl:with-param name="field" select="substring-after($containsOperator,'= ')"/>
+                        </xsl:call-template>
+                    </xsl:otherwise>
+                </xsl:choose>
+            </xsl:when>
+            <xsl:when test="contains($containsOperator, '&lt;')">
+                <xsl:text> is less than at </xsl:text>
+                <xsl:call-template name="emptyVerif">
+                    <xsl:with-param name="field" select="substring-after($containsOperator,'&lt; ')"/>
+                </xsl:call-template>
+            </xsl:when>
+            <xsl:when test="contains($containsOperator, '&gt;')">
+                <xsl:text> is greater than at </xsl:text>
+                <xsl:call-template name="emptyVerif">
+                    <xsl:with-param name="field" select="substring-after($containsOperator,'&gt; ')"/>
+                </xsl:call-template>
+            </xsl:when>
+        </xsl:choose>
+    </xsl:template>
+
+    <xsl:template name="modal">
+        <div id="myModal" class="modal" onclick="closeModal()">
+            <span class="close cursor" onclick="closeModal()">
+                X
+            </span>
+            <div class="modal-content">
+                <div id="imgCont" class="mySlides">
+                    <img id="modal_image" src="" style="width:100%;"/>
+                </div>
+                <div class="caption-container">
+                    <p id="caption"></p>
+                </div>
+            </div>
+        </div>
+    </xsl:template>
+
+    <xsl:template name="modalVid">
+        <div id="myModalVid" class="modal" onclick="closeModal()">
+            <span class="close cursor" onclick="closeModal()">
+                X
+            </span>
+            <div class="modal-content">
+                <div id="vidCont" class="mySlides">
+                    <video id="modal_video" type="video/mp4" src="" style="width:100%;"/>
+                </div>
+                <div class="caption-container">
+                    <p id="caption"></p>
+                </div>
+            </div>
+        </div>
+    </xsl:template>
+
+    <!-- ========================= -->
+    <!-- child element: suite -->
+    <!-- ========================= -->
+
+    <xsl:template match="suite">
+
+        <xsl:variable name="suiteName" select="@name"/>
+        <xsl:variable name="executedTests" select="count(tests/ats)"/>
+        <xsl:variable name="failedTests" select="count(tests/ats/script/summary[@status = '0'])"/>
+        <xsl:variable name="passedTests" select="count(tests/ats/script/summary[@status = '1'])"/>
+        <xsl:variable name="totalTests" select="@testsCount"/>
+        <xsl:variable name="skippedTests" select="$totalTests - $failedTests - $passedTests"/>
+        <xsl:variable name="resultBar" select="@resultBar"/>
+        <TABLE class="execution-resume" width="100%">
+            <THEAD>
+                <TR style="background-color:#4d545d;color:#ffffff" height="34">
+                    <TD colspan="2" style="padding: 0px 0px 0px 10px;border-style:solid;">
+                        <FONT SIZE="5">
+                            <B>
+                                Execution Suite :
+                                <span class="ats-suite-drag">
+                                    <a>
+                                        <xsl:attribute name="href">
+                                            <xsl:value-of
+                                                    select="concat('ats://', $projectUuid, '/exec/', @name)"/>
+                                        </xsl:attribute>
+                                        <span class="ats-icon-hl-16-w" width="16" height="16"/>
+                                        <xsl:value-of select="@name"/>
+                                    </a>
+                                </span>
+                            </B>
+                        </FONT>
+                        <i>
+                            -
+                            <xsl:value-of select="$executedTests"/>
+                            test(s) executed (total time :
+                            <xsl:call-template name="seconds-to-time">
+                                <xsl:with-param name="seconds" select="sum(@duration) div 1000"/>
+                            </xsl:call-template>
+                            )
+                        </i>
+                    </TD>
+                    <td style="border-style:solid;border-width: 1px; border-color:white; width:70px;" align="center">
+                        <FONT SIZE="3">
+                            <B>
+                                Result
+                            </B>
+                        </FONT>
+                    </td>
+                </TR>
+            </THEAD>
+            <TBODY>
+                <TR height="30">
+                    <TD style="padding: 0px 10px 0px 10px;" width="128px">
+                        <font size="2" color="#4d545d">
+                            <i>
+                                <b>Description</b>
+                            </i>
+                        </font>
+                    </TD>
+                    <TD style="padding: 0px 10px 0px 20px;">
+                        <font size="2">
+                            <xsl:value-of select="@description"/>
+                        </font>
+                    </TD>
+                    <TD ROWSPAN="4" style="text-align:center;">
+                        <xsl:choose>
+                            <xsl:when test="$failedTests = 0">
+                                <span class="ats-icon-true" width="32" height="32"/>
+                            </xsl:when>
+                            <xsl:otherwise>
+                                <span class="ats-icon-false" width="32" height="32"/>
+                            </xsl:otherwise>
+                        </xsl:choose>
+                    </TD>
+                </TR>
+                <TR height="30">
+                    <TD style="padding: 0px 10px 0px 10px;" width="128px">
+                        <font size="2" color="#4d545d">
+                            <i>
+                                <b>Execution parameters</b>
+                            </i>
+                        </font>
+                    </TD>
+                    <TD class="parameters-cell">
+                        <xsl:call-template name="parameters">
+                            <xsl:with-param name="parameters" select="parameters"/>
+                        </xsl:call-template>
+
+                    </TD>
+                </TR>
+                <TR height="30">
+                    <TD COLSPAN="1" style="padding: 0px 20px 0px 10px;" width="128">
+                        <font size="2" color="#4d545d">
+                            <i>
+                                <b>Filtered by groups</b>
+                            </i>
+                        </font>
+                    </TD>
+                    <TD COLSPAN="1" class="groups-cell">
+                        <xsl:choose>
+                            <xsl:when test="count(groups/included) = 0 and count(groups/excluded) = 0">
+                                <span style="padding: 0px 0px 0px 4px;color:#4d545d">
+                                    <font size="2">
+                                        <i>No groups filter defined !</i>
+                                    </font>
+                                </span>
+                            </xsl:when>
+                            <xsl:otherwise>
+                                <xsl:choose>
+                                    <xsl:when test="count(groups/included) > 0">
+                                        <table class="include_exclude">
+                                            <tr>
+                                                <td>Include</td>
+                                                <td>
+                                                    <xsl:for-each select="groups/included">
+                                                        <span class="group include">
+                                                            <a>
+                                                                <xsl:attribute name="href">
+                                                                    <xsl:value-of
+                                                                            select="concat('ats://', $projectUuid, '/group/', .)"/>
+                                                                </xsl:attribute>
+                                                                <span class="ats-icon-hl-10-w" width="10" height="10"/>
+                                                                <xsl:value-of select="."/>
+                                                            </a>
+                                                        </span>
+                                                    </xsl:for-each>
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </xsl:when>
+                                </xsl:choose>
+                                <xsl:choose>
+                                    <xsl:when test="count(groups/excluded) > 0">
+                                        <table class="include_exclude">
+                                            <tr>
+                                                <td>Exclude</td>
+                                                <td>
+                                                    <xsl:for-each select="groups/excluded">
+                                                        <span class="group exclude">
+                                                            <a>
+                                                                <xsl:attribute name="href">
+                                                                    <xsl:value-of
+                                                                            select="concat('ats://', $projectUuid, '/group/', .)"/>
+                                                                </xsl:attribute>
+                                                                <span class="ats-icon-hl-10-w" width="10" height="10"/>
+                                                                <xsl:value-of select="."/>
+                                                            </a>
+                                                        </span>
+                                                    </xsl:for-each>
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </xsl:when>
+                                </xsl:choose>
+                            </xsl:otherwise>
+                        </xsl:choose>
+                    </TD>
+                </TR>
+                <TR height="30">
+                    <TD colspan="1" style="padding: 0px 10px 0px 10px;" width="128">
+                        <font size="2" color="#4d545d">
+                            <i>
+                                <b>Result</b>
+                            </i>
+                        </font>
+                    </TD>
+                    <TD colspan="1" style="padding: 0px 0px 0px 3px;">
+						
+						<img class="align-middle" width="600" height="36">
+							<xsl:attribute name="src">
+								<xsl:value-of select="concat('data:image/png;base64,', $resultBar)"/>
+							</xsl:attribute>
+						</img>
+						
+                        <font size="2">
+							<i>
+								<span style="padding: 0px 0px 0px 2px; color:#4d545d;">(total : <xsl:value-of select="$totalTests"/> ,</span>
+	                            <span style="padding: 0px 0px 0px 2px;color:#4d545d;">passed : <xsl:value-of select="$passedTests"/> ,</span>
+	                            <span style="padding: 0px 0px 0px 2px; color:#4d545d;">failed : <xsl:value-of select="$failedTests"/> ,</span>
+	                            <span style="padding: 0px 0px 0px 2px; color:#4d545d;">filtered : <xsl:value-of select="$skippedTests"/>)</span>
+	                       </i>
+                        </font>
+                    </TD>
+                </TR>
+                <xsl:apply-templates select="test"/>
+            </TBODY>
+        </TABLE>
+        <HR/>
+        <xsl:apply-templates select="tests">
+            <xsl:with-param name="suiteName" select="$suiteName"/>
+        </xsl:apply-templates>
+    </xsl:template>
+
+
+    <xsl:template name="parameters">
+        <xsl:param name="parameters"/>
+        <xsl:for-each select="$parameters/parameter">
+			<xsl:choose>
+				<xsl:when test="starts-with(@name, 'ats-')">
+				<span class="parameter-css parameter-ats">
+	                <table>
+	                    <thead>
+	                        <tr>
+	                            <th>
+	                                <xsl:value-of select="@name"/>
+	                            </th>
+	                        </tr>
+	                    </thead>
+	                    <tbody>
+	                        <tr>
+	                            <td>
+	                                <xsl:value-of select="@value"/>
+	                            </td>
+	                        </tr>
+	                    </tbody>
+	                </table>
+	            </span>
+				</xsl:when>
+				<xsl:otherwise>
+	            <span class="parameter-css">
+	                <table>
+	                    <thead>
+	                        <tr>
+	                            <th>
+	                                <xsl:value-of select="@name"/>
+	                            </th>
+	                        </tr>
+	                    </thead>
+	                    <tbody>
+	                        <tr>
+	                            <td>
+	                                <xsl:value-of select="@value"/>
+	                            </td>
+	                        </tr>
+	                    </tbody>
+	                </table>
+	            </span>
+				</xsl:otherwise>
+			</xsl:choose>
+        </xsl:for-each>
+    </xsl:template>
+
+
+    <!-- ========================= -->
+    <!-- child element: tests -->
+    <!-- ========================= -->
+
+    <xsl:template match="tests">
+        <xsl:param name="suiteName"/>
+        <div class="divSuite">
+            <xsl:apply-templates select="ats">
+                <xsl:with-param name="suiteName" select="$suiteName"/>
+            </xsl:apply-templates>
+        </div>
+    </xsl:template>
+
+    <!-- ========================= -->
+    <!-- child element: ats -->
+    <!-- ========================= -->
+
+    <xsl:template match="ats">
+        <xsl:param name="suiteName"/>
+        <xsl:variable name="testName" select="concat($suiteName, '/', script[1]/@testName)"/>
+        <xsl:variable name="i" select="concat('-',script/started,'-',position())"/>
+        <xsl:variable name="actionsCount" select="script/summary/@actions"/>
+
+        <div class="ats-script" width="100%">
+            <FONT SIZE="4">
+                <B>
+                    Test Case :
+                    <span class="ats-script-drag">
+                        <a>
+                            <xsl:attribute name="href">
+                                <xsl:value-of
+                                        select="concat('ats://', $projectUuid, '/script/', script/@testName)"/>
+                            </xsl:attribute>
+                            <span class="ats-icon-hl-16-grey" width="16" height="16"/>
+                            <xsl:value-of select="script/@testName"/>
+                        </a>
+                    </span>
+                </B>
+            </FONT>
+            <i>
+                <FONT SIZE="2" COLOR="#565656">
+                    ( executed in
+                    <xsl:call-template name="seconds-to-time">
+                        <xsl:with-param name="seconds" select="sum(actions/action/duration) div 1000"/>
+                    </xsl:call-template>
+                    )
+                </FONT>
+            </i>
+            <span class="ats-script-drag">
+				<a>
+					<xsl:attribute name="href">
+						<xsl:value-of
+							select="concat('ats://', $projectUuid, '/run-script/', script/@testName, '/', $suiteName)"/>
+						</xsl:attribute>
+						<span class="ats-icon-run-16-grey" width="16" height="16"/>
+					execute
+            	</a>
+            </span>
+            <span style="float:right">
+                <span style="cursor: pointer" onclick="scrollToPrevAts(parentNode.parentNode)">
+                    prev
+                </span>
+                -
+                <span style="cursor: pointer" onclick="scrollToNextAts(parentNode.parentNode)">
+                    next
+                </span>
+            </span>
+        </div>
+
+        <TABLE class="suite-resume">
+            <THEAD>
+                <TR class="suite-resume-header">
+                    <TH></TH>
+                    <TH>Test Actions</TH>
+                    <TH>Started</TH>
+                    <TH>Author</TH>
+                    <TH>Test ID</TH>
+                    <TH>ExternalID</TH>
+                    <TH>Links</TH>
+                    <TH align="left">Result</TH>
+                </TR>
+            </THEAD>
+            <TBODY>
+                <TR>
+                    <TD align="left" style="width:132px;">
+                        <font size="2" color="#6f6f6f">
+                            <i>
+                                <b>Execution data</b>
+                            </i>
+                        </font>
+                    </TD>
+                    <TD align="center" style="width:70px;">
+                        <xsl:choose>
+                            <xsl:when test="$actionsCount != ''">
+                                <xsl:value-of select="$actionsCount"/>
+                            </xsl:when>
+                            <xsl:otherwise>
+                                0
+                            </xsl:otherwise>
+                        </xsl:choose>
+                    </TD>
+                    <TD align="center" style="width:160px;">
+                        <p id="runDate">
+                            <xsl:value-of select="script/startedFormated"/>
+                        </p>
+                    </TD>
+                    <TD align="left" style="width:280px;">
+                        <xsl:value-of select="script/author"/>
+                    </TD>
+                    <TD>
+                        <xsl:value-of select="script/@testId"/>
+                    </TD>
+                    <TD>
+                        <xsl:value-of select="script/@externalId"/>
+                    </TD>
+
+                    <TD class="linkButtons" align="center" style="white-space:nowrap;width:200px">
+                        <a class="ats-ext-report">
+                            <xsl:attribute name="href">
+                                <xsl:value-of select="concat($testName,'.atsv')"/>
+                            </xsl:attribute>
+                            <span class="ats-icon-hl-12-blue" width="12" height="12"/>
+                            ATSV
+                        </a>
+                        <a class="ats-ext-report" target="_blank">
+                            <xsl:attribute name="href">
+                                <xsl:value-of select="concat($testName,'_atsv.html')"/>
+                            </xsl:attribute>
+                            <span class="ats-icon-hl-12-blue" width="12" height="12"/>
+                            ATSV_HTML
+                        </a>
+						<a class="ats-ext-report" target="_blank">
+                            <xsl:attribute name="href">
+                                <xsl:value-of select="concat($testName,'_xml/ats-test-report.html')"/>
+                            </xsl:attribute>
+                            <span class="ats-icon-hl-12-blue" width="12" height="12"/>
+                            HTML
+                        </a>
+                    </TD>
+
+                    <TD align="left" style="white-space:nowrap;width:46px" rowspan="4" class="resultClass">
+                        <xsl:choose>
+                            <xsl:when test="script/summary/@status = '0'">
+                                <span class="ats-icon-false" width="22" height="22"
+                                      style="background-size: 22px 22px;"/>
+                            </xsl:when>
+                            <xsl:when test="script/summary/@status = '1'">
+                                <span class="ats-icon-true" width="22" height="22" style="background-size: 22px 22px;"/>
+                            </xsl:when>
+                        </xsl:choose>
+                    </TD>
+
+                </TR>
+                <xsl:choose>
+                    <xsl:when test="script/summary/error != ''">
+                        <TR>
+                            <TD colspan="1" width="132">
+                                <font color="#b32e42" size="2">
+                                    <i>
+                                        <b>
+                                            Execution error
+                                        </b>
+                                    </i>
+                                </font>
+                            </TD>
+                            <TD colspan="6">
+                                <span class="ats-script-drag">
+                                    <b>
+                                        <a>
+                                            <xsl:attribute name="href">
+                                                <xsl:value-of
+                                                        select="concat('ats://', $projectUuid, '/script/', script/summary/error/@script, '/', script/summary/error/@line)"/>
+                                            </xsl:attribute>
+                                            <span class="ats-icon-hl-16-grey" width="16" height="16"/>
+                                            <xsl:value-of select="script/summary/error/@script"/>
+                                        </a>
+                                    </b>
+                                    <i>( line
+                                        <xsl:value-of select="script/summary/error/@line"
+                                                      disable-output-escaping="yes"/> )
+                                    </i>
+                                    <br/>
+                                </span>
+                                <xsl:value-of select="script/summary/error" disable-output-escaping="yes"/>
+                            </TD>
+                        </TR>
+                    </xsl:when>
+                </xsl:choose>
+                <xsl:choose>
+                    <xsl:when test="script/summary/data != '[empty]'">
+                        <TR>
+                            <TD colspan="1">
+                                <font size="2" color="#6f6f6f">
+                                    <i>
+                                        <b>Execution summary</b>
+                                    </i>
+                                </font>
+                            </TD>
+                            <TD colspan="6" style="padding-top: 5px;padding-bottom: 5px;">
+                                <span style="padding: 0px 0px 0px 4px">
+                                    <xsl:value-of select="script/summary/data" disable-output-escaping="yes"/>
+                                </span>
+                            </TD>
+                        </TR>
+                    </xsl:when>
+                </xsl:choose>
+
+                <TR height="30">
+                    <TD COLSPAN="1" style="padding: 0px 20px 0px 10px;" width="132">
+                        <font size="2" color="#6f6f6f">
+                            <i>
+                                <b>Groups</b>
+                            </i>
+                        </font>
+                    </TD>
+                    <TD COLSPAN="6" class="groups-cell">
+                        <xsl:choose>
+                            <xsl:when test="count(script/groups/group) > 0">
+                                <xsl:for-each select="script/groups/group">
+                                    <span class="script group">
+                                        <a>
+                                            <xsl:attribute name="href">
+                                                <xsl:value-of
+                                                        select="concat('ats://', $projectUuid, '/group/', .)"/>
+                                            </xsl:attribute>
+                                            <span class="ats-icon-hl-10-w" width="10" height="10"/>
+                                            <xsl:value-of select="."/>
+                                        </a>
+                                    </span>
+                                </xsl:for-each>
+                            </xsl:when>
+                            <xsl:otherwise>
+                                <span style="padding: 0px 0px 0px 4px;color:#4d545d">
+                                    <font size="2">
+                                        <i>No groups defined</i>
+                                    </font>
+                                </span>
+                            </xsl:otherwise>
+                        </xsl:choose>
+                    </TD>
+                </TR>
+
+                <xsl:choose>
+                    <xsl:when test="script/prerequisite != ''">
+                        <TR>
+                            <TD colspan="1">
+                                <font size="2" color="#6f6f6f">
+                                    <i>
+                                        <b>Prerequisite</b>
+                                    </i>
+                                </font>
+                            </TD>
+                            <TD colspan="6">
+                                <span style="padding: 0px 0px 0px 4px">
+                                    <xsl:value-of select="script/prerequisite" disable-output-escaping="yes"/>
+                                </span>
+                            </TD>
+                        </TR>
+                    </xsl:when>
+                </xsl:choose>
+                <xsl:choose>
+                    <xsl:when test="script/description != ''">
+                        <TR>
+                            <TD colspan="1">
+                                <font size="2" color="#6f6f6f">
+                                    <i>
+                                        <b>Description</b>
+                                    </i>
+                                </font>
+                            </TD>
+                            <TD colspan="6">
+                                <span style="padding: 0px 0px 0px 4px">
+                                    <xsl:value-of select="script/description" disable-output-escaping="yes"/>
+                                </span>
+                            </TD>
+                        </TR>
+                    </xsl:when>
+                </xsl:choose>
+            </TBODY>
+        </TABLE>
+        <div class="divActions">
+            <input id="toggle{$suiteName}{$i}" class="toggle" type="checkbox" target-data="actions{$i}"/>
+            <label for="toggle{$suiteName}{$i}" class="lbl-toggle">Actions</label>
+            <div id="demo{$i}" class="collapsible-content">
+                <xsl:apply-templates select="actions">
+                    <xsl:with-param name="fullTestName" select="$testName"/>
+                    <xsl:with-param name="i" select="$i"/>
+                </xsl:apply-templates>
+            </div>
+            <div style="height:1px;width:100%;border:none;margin-bottom:40px"/>
+        </div>
+    </xsl:template>
+
+    <!-- ========================= -->
+    <!-- child element: actions	-->
+    <!-- ========================= -->
+
+    <xsl:template match="actions">
+        <xsl:param name="fullTestName"/>
+        <xsl:param name="i"/>
+        <xsl:apply-templates select="action">
+            <xsl:with-param name="fullTestName" select="$fullTestName"/>
+            <xsl:with-param name="id" select="$i"/>
+        </xsl:apply-templates>
+    </xsl:template>
+
+    <!-- ========================= -->
+    <!-- child element: Channel	-->
+    <!-- ========================= -->
+
+    <xsl:template match="channel">
+        Location : <i>(<xsl:value-of select="bound/x"/> , <xsl:value-of select="bound/y"/>)</i>&#160;&#160;&#160;&#160;Size : <i>(<xsl:value-of select="bound/width"/> x <xsl:value-of select="bound/height"/>)</i>
+    </xsl:template>
+
+    <!-- ========================= -->
+    <!-- child element: element	   -->
+    <!-- ========================= -->
+
+    <xsl:template match="element">
+        <tr>
+            <td class="info-label data-css">
+                <span class="data-label">Element</span>
+            </td>
+            <td class="info-data-small data-css absorbing-column">
+                <table style="width:100%; border-collapse: collapse;">
+                    <tr>
+                        <td class="info-data-element data-css">
+	                    	<b><xsl:text>Selector : </xsl:text></b>
+	                    	<i><xsl:value-of select="criterias"/></i>
+							<br/>
+	                        <b><xsl:text>Bounding rectangle : </xsl:text></b>
+	                        <i><xsl:value-of select="bound/x"/>, <xsl:value-of select="bound/y"/>, <xsl:value-of select="bound/width"/>, <xsl:value-of select="bound/height"/></i>
+							<br/>
+							<b><xsl:text>Search duration : </xsl:text></b>
+	                        <i><xsl:value-of select="searchDuration"/><xsl:text>&#160;ms</xsl:text></i>
+							<br/>
+	                        <b><xsl:text>Elements found : </xsl:text></b>
+	                        <i><xsl:value-of select="foundElements"/></i>
+                        </td>
+                    </tr>
+                    <xsl:choose>
+                        <xsl:when test="(bound/vpos != '') or (bound/hpos != '')">
+                            <tr>
+                                <td class="info-data-element data-css">
+                                    Click location :
+                                    <i>(<xsl:value-of select="bound/vpos"/>,<xsl:value-of
+                                            select="bound/hpos"/>)
+                                    </i>
+                                </td>
+                            </tr>
+                        </xsl:when>
+                    </xsl:choose>
+                </table>
+            </td>
+        </tr>
+    </xsl:template>
+
+    <!-- ========================= -->
+    <!-- child element: screen	   -->
+    <!-- ========================= -->
+    <xsl:template name="screen">
+
+        <xsl:param name="id"/>
+        <xsl:param name="data"/>
+
+        <div class="overlay-image">
+            <img class="cursor image-style image" alt="image unavailable or loading ..." loading="lazy">
+                <xsl:attribute name="src">
+                    <xsl:value-of select="$data"/>
+                </xsl:attribute>
+                <xsl:attribute name="id">
+                    <xsl:value-of select="$id"/>
+                </xsl:attribute>
+            </img>
+            <div class="hover cursor">
+                <xsl:attribute name="onclick">
+                    openModal('<xsl:value-of select="$id"/>')
+                </xsl:attribute>
+            </div>
+        </div>
+    </xsl:template>
+
+    <!-- ========================= -->
+    <!-- child element: video	   -->
+    <!-- ========================= -->
+    <xsl:template name="video">
+
+        <xsl:param name="id"/>
+        <xsl:param name="data"/>
+
+        <div class="overlay-video">
+            <video class="cursor image-style image video" alt="video unavailable or loading ..." loading="lazy">
+                <xsl:attribute name="src">
+                    <xsl:value-of select="$data"/>
+                </xsl:attribute>
+                <xsl:attribute name="id">
+                    <xsl:value-of select="$id"/>
+                </xsl:attribute>
+            </video>
+
+            <div class="hover cursor">
+                <xsl:attribute name="onclick">
+                    openModalVid('<xsl:value-of select="$id"/>')
+                </xsl:attribute>
+            </div>
+        </div>
+    </xsl:template>
+
+    <!-- ============================ -->
+    <!-- child element: Element       -->
+    <!-- ============================ -->
+    <xsl:template name="element">
+        <xsl:choose>
+            <xsl:when test="element != ''">
+                <xsl:apply-templates select="element">
+                </xsl:apply-templates>
+            </xsl:when>
+        </xsl:choose>
+    </xsl:template>
+
+    <!-- ============================ -->
+    <!-- child element: error         -->
+    <!-- ============================ -->
+    <xsl:template name="error">
+        <xsl:choose>
+            <xsl:when test="(error != 0)">
+                <tr>
+                    <td class="info-label data-css">
+                        <span class="data-label">Error</span>
+                    </td>
+                    <td class="info-data data-css absorbing-column">
+                        (Err#: <xsl:value-of select="error"/>)
+                        <xsl:value-of select="data"/>
+                        <xsl:value-of select="dataJson/parameter[@type='error']/@value"/>
+                    </td>
+                </tr>
+            </xsl:when>
+        </xsl:choose>
+    </xsl:template>
+
+    <!-- ============================ -->
+    <!-- child element: infosSelector -->
+    <!-- ============================ -->
+    <xsl:template name="infosSelector">
+        <xsl:choose>
+            <xsl:when test="contains(@type, 'com.ats.script.actions.ActionMouse')">
+                <xsl:call-template name="mouseActionSelector">
+                </xsl:call-template>
+            </xsl:when>
+            <xsl:when
+                    test="(@type = 'com.ats.script.actions.ActionChannelStart')">
+                <xsl:call-template name="ActionChannelStart">
+                </xsl:call-template>
+            </xsl:when>
+			<xsl:when
+                    test="(@type = 'com.ats.script.actions.ActionChannelClose')">
+                <xsl:call-template name="ActionChannelStop">
+                </xsl:call-template>
+            </xsl:when>
+            <xsl:when test="@type = 'com.ats.script.actions.ActionWindowSwitch'">
+                <xsl:call-template name="ActionWS">
+                </xsl:call-template>
+            </xsl:when>
+
+            <xsl:when test="@type = 'com.ats.script.actions.ActionChannelSwitch'">
+                <xsl:call-template name="ActionChannelSwitch">
+                </xsl:call-template>
+            </xsl:when>
+            <xsl:when test="@type = 'com.ats.script.actions.ActionWindowResize'">
+                <xsl:call-template name="ActionWR">
+                </xsl:call-template>
+            </xsl:when>
+            <xsl:when test="@type = 'com.ats.script.actions.ActionGotoUrl'">
+                <xsl:call-template name="ActionGTU">
+                </xsl:call-template>
+            </xsl:when>
+            <xsl:when test="@type = 'com.ats.script.actions.ActionText'">
+                <xsl:call-template name="ActionText">
+                </xsl:call-template>
+            </xsl:when>
+            <xsl:when test="@type = 'com.ats.script.actions.ActionAssertCount'">
+                <xsl:call-template name="ActionAC">
+                </xsl:call-template>
+            </xsl:when>
+            <xsl:when test="@type = 'com.ats.script.actions.ActionAssertProperty'">
+                <xsl:call-template name="ActionAP">
+                </xsl:call-template>
+            </xsl:when>
+            <xsl:when test="@type = 'com.ats.script.actions.ActionProperty'">
+                <xsl:call-template name="ActionP">
+                </xsl:call-template>
+            </xsl:when>
+            <xsl:when test="@type = 'com.ats.script.actions.ActionAssertValue'">
+                <xsl:call-template name="ActionAV">
+                </xsl:call-template>
+            </xsl:when>
+            <xsl:when test="@type = 'com.ats.script.actions.ActionScripting'">
+                <xsl:call-template name="ActionScripting">
+                </xsl:call-template>
+            </xsl:when>
+            <xsl:when test="@type = 'com.ats.script.actions.ActionSelect'">
+                <xsl:call-template name="ActionScripting">
+                </xsl:call-template>
+            </xsl:when>
+            <xsl:when test="@type = 'com.ats.script.actions.ActionComment'">
+                <xsl:call-template name="ActionComment">
+                </xsl:call-template>
+            </xsl:when>
+            <xsl:when test="@type = 'com.ats.script.actions.ActionApi'">
+                <xsl:call-template name="ActionApi">
+                </xsl:call-template>
+            </xsl:when>
+            <xsl:when test="@type = 'com.ats.script.actions.ActionWindowState'">
+                <xsl:call-template name="ActionWState">
+                </xsl:call-template>
+            </xsl:when>
+            <xsl:when test="@type = 'com.ats.script.actions.ActionPropertySet'">
+                <xsl:call-template name="ActionPS">
+                </xsl:call-template>
+            </xsl:when>
+            <xsl:when test="@type = 'com.ats.script.actions.ActionCallscript'">
+                <xsl:call-template name="ActionCS">
+                </xsl:call-template>
+            </xsl:when>
+            <xsl:otherwise>
+                <xsl:call-template name="infos">
+                </xsl:call-template>
+            </xsl:otherwise>
+        </xsl:choose>
+    </xsl:template>
+
+    <!-- ============================ -->
+    <!-- child element: mouseSelector -->
+    <!-- ============================ -->
+    <xsl:template name="mouseActionSelector">
+        <xsl:choose>
+            <xsl:when test="@type = 'com.ats.script.actions.ActionMouseScroll'">
+                <xsl:call-template name="ActionMS">
+                </xsl:call-template>
+            </xsl:when>
+            <xsl:otherwise>
+                <xsl:call-template name="ActionM">
+                </xsl:call-template>
+            </xsl:otherwise>
+        </xsl:choose>
+    </xsl:template>
+
+    <!-- ======================= -->
+    <!-- child element: infos	 -->
+    <!-- ======================= -->
+    <xsl:template name="infos">
+        <table class="info">
+            <tr>
+                <td class="info-label data-css">
+                    <span class="data-label">TimeLine</span>
+                </td>
+                <td class="info-data data-css absorbing-column">
+                </td>
+                <td>
+                    <xsl:value-of select="timeLine"/>
+                </td>
+            </tr>
+            <tr>
+                <td class="info-label data-css">
+                    <span class="data-label">Error's Number</span>
+                </td>
+                <td class="info-data data-css absorbing-column">
+                    <xsl:value-of select="error"/>
+                </td>
+            </tr>
+            <tr>
+                <td class="info-label data-css">
+                    <span class="data-label">Stop</span>
+                </td>
+                <td class="info-data data-css absorbing-column">
+                    <xsl:value-of select="stop"/>
+                </td>
+            </tr>
+            <tr>
+                <td class="info-label data-css">
+                    <span class="data-label">Value</span>
+                </td>
+                <td class="info-data data-css absorbing-column">
+                    <xsl:value-of select="value"/>
+                </td>
+            </tr>
+            <tr>
+                <td class="info-label data-css">
+                    <span class="data-label">Image Name</span>
+                </td>
+                <td class="info-data data-css absorbing-column">
+                    <xsl:value-of select="img/@src"/>
+                </td>
+            </tr>
+            <tr>
+                <td class="info-label data-css">
+                    <span class="data-label">Data</span>
+                </td>
+                <td class="info-data data-css absorbing-column">
+                    <xsl:value-of select="data"/>
+                </td>
+            </tr>
+            <xsl:call-template name="element">
+            </xsl:call-template>
+        </table>
+    </xsl:template>
+
+
+    <!-- ========================= -->
+    <!-- child element: info	   -->
+    <!-- ActionCallScript		   -->
+    <!-- ========================= -->
+    <xsl:template name="ActionCS">
+        <table class="info">
+        	<tr>
+                <td class="info-label data-css">
+                    <span class="data-label">SubScript</span>
+                </td>
+                <td class="info-data data-css absorbing-column">
+                	<span class="ats-script-drag">
+                        <a>
+                            <xsl:attribute name="href">
+                                <xsl:value-of
+                                        select="concat('ats://', $projectUuid, '/script/', value)"/>
+                            </xsl:attribute>
+                            <span class="ats-icon-hl-12-grey" width="12" height="12"/>
+                            <xsl:value-of select="value"/>
+                        </a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="info-label data-css">
+                    <span class="data-label">Parameters</span>
+                </td>
+                <td class="info-data data-css absorbing-column">
+                    <xsl:choose>
+                        <xsl:when test="./dataJson">
+                            <xsl:call-template name="ScriptParams">
+                                <xsl:with-param name="dataJson" select="./dataJson"/>
+                            </xsl:call-template>
+                        </xsl:when>
+                    </xsl:choose>
+
+                </td>
+            </tr>
+            <xsl:call-template name="error">
+            </xsl:call-template>
+        </table>
+    </xsl:template>
+
+    <!-- ========================= -->
+    <!-- child element: Parameter  -->
+    <!-- script Parameter		   -->
+    <!-- ========================= -->
+    <xsl:template name="ScriptParams">
+        <xsl:param name="dataJson"/>
+        <xsl:choose>
+            <xsl:when test="$dataJson/parameter/@type = 'num'">
+                <div class="cs-param">
+                    <xsl:call-template name="parameters">
+                        <xsl:with-param name="parameters" select="$dataJson"/>
+                    </xsl:call-template>
+                </div>
+            </xsl:when>
+            <xsl:otherwise>
+                <xsl:choose>
+                    <xsl:when test="$dataJson/parameter/@type = 'asset'">
+                        <xsl:call-template name="CSLink">
+                            <xsl:with-param name="link" select="
+                    concat('ats://', $projectUuid, '/asset/', substring-after($dataJson/parameter/@value,'assets:///'))"/>
+                            <xsl:with-param name="value" select="$dataJson/parameter/@value"/>
+                        </xsl:call-template>
+                    </xsl:when>
+                    <xsl:otherwise>
+                        <xsl:call-template name="CSLink">
+                            <xsl:with-param name="link" select="$dataJson/parameter/@value"/>
+                            <xsl:with-param name="value" select="$dataJson/parameter/@value"/>
+                        </xsl:call-template>
+                    </xsl:otherwise>
+                </xsl:choose>
+
+            </xsl:otherwise>
+        </xsl:choose>
+    </xsl:template>
+
+    <!-- ========================= -->
+    <!-- child element: Parameter  -->
+    <!-- Call Script Link		   -->
+    <!-- ========================= -->
+    <xsl:template name="CSLink">
+        <xsl:param name="link"/>
+        <xsl:param name="value"/>
+        <font size="2">
+            <a class="filePath">
+                <xsl:attribute name="href">
+                    <xsl:value-of select="$link"/>
+                </xsl:attribute>
+                <span class="ats-icon-hl-12-grey" width="12" height="12"/>
+                <xsl:value-of select="$value"/>
+            </a>
+        </font>
+    </xsl:template>
+
+    <!-- ========================= -->
+    <!-- child element: info	   -->
+    <!-- Channel start and close   -->
+    <!-- ========================= -->
+    <xsl:template name="ActionChannelStart">
+        <table class="info">
+            <tr>
+                <td class="info-label data-css">
+                    <span class="data-label">Channel</span>
+                </td>
+                <td class="info-data data-css absorbing-column">
+                <xsl:value-of select="channel/@name"/>
+					<span class="align-middle" style="padding-left:10px;padding-right:10px;font-style:italic;color:grey;font-weight:normal;">
+                    	( <xsl:value-of select="dataJson/parameter[@type='app']/@value"/>
+					</span>
+					<img class="align-middle" width="24" height="24">
+						<xsl:attribute name="src">
+							<xsl:value-of select="concat('data:image/gif;base64,', dataJson/parameter[@type='appIcon']/@value)"/>
+						</xsl:attribute>
+					</img>
+					<span class="align-middle" style="padding-left:4px;font-style:italic;color:grey;font-weight:normal;">)</span>
+                </td>
+            </tr>
+            <xsl:call-template name="error">
+            </xsl:call-template>
+            <tr>
+                <td class="info-label data-css">
+                    <span class="data-label">Channel Bound</span>
+                </td>
+                <td class="info-data-small data-css absorbing-column">
+                    <xsl:apply-templates select="channel"></xsl:apply-templates>
+                </td>
+            </tr>
+        </table>
+    </xsl:template>
+    
+	<xsl:template name="ActionChannelStop">
+        <table class="info">
+            <tr>
+                <td class="info-label data-css">
+                    <span class="data-label">Channel</span>
+                </td>
+                <td class="info-data data-css absorbing-column">
+                    <xsl:value-of select="dataJson/parameter[@type='name']/@value"/> (<xsl:value-of select="dataJson/parameter[@type='app']/@value"/>)
+                </td>
+            </tr>
+            <xsl:call-template name="error"></xsl:call-template>
+        </table>
+    </xsl:template>
+
+    <!-- ========================= -->
+    <!-- child element: info	   -->
+    <!-- Channel Switch			   -->
+    <!-- ========================= -->
+    <xsl:template name="ActionChannelSwitch">
+        <table class="info">
+            <tr>
+                <td class="info-label data-css">
+                    <span class="data-label">Switch channel</span>
+                </td>
+                <td class="info-data data-css absorbing-column">From "<xsl:value-of
+                        select="channel/@name"/>" to
+                    "<xsl:value-of select="value"/>"
+                </td>
+            </tr>
+            <xsl:call-template name="error">
+            </xsl:call-template>
+        </table>
+    </xsl:template>
+
+    <!-- ========================= -->
+    <!-- child element: info	   -->
+    <!-- Windows Switch			   -->
+    <!-- ========================= -->
+    <xsl:template name="ActionWS">
+        <table class="info">
+            <tr>
+                <td class="info-label data-css">
+                    <span class="data-label">Switch windows</span>
+                </td>
+                <td class="info-data data-css absorbing-column">From "<xsl:value-of
+                        select="channel/@name"/>" to
+                    "<xsl:value-of select="value"/>"
+                </td>
+            </tr>
+            <xsl:call-template name="error">
+            </xsl:call-template>
+        </table>
+    </xsl:template>
+
+    <!-- ========================= -->
+    <!-- child element: info	   -->
+    <!-- Windows Resize			   -->
+    <!-- ========================= -->
+    <xsl:template name="ActionWR">
+        <table class="info">
+            <tr>
+                <td class="info-label data-css">
+                    <span class="data-label">Channel</span>
+                </td>
+                <td class="info-data data-css absorbing-column">
+                    <xsl:value-of select="channel/@name"/>
+                </td>
+            </tr>
+            <tr>
+                <td class="info-label data-css">
+                    <span class="data-label">Resizing</span>
+                </td>
+                <td class="info-data data-css absorbing-column">
+                	<xsl:apply-templates select="channel"></xsl:apply-templates>
+                	&#160;&#160;&#160;<span class="right-arrow" width="24" height="20" style="background-size: 30px 16px;"/>&#160;&#160;&#160;
+                	Location : (<xsl:value-of select="substring-before(value,',')"/>,<xsl:value-of select="substring-before(substring-after(value,','),',')"/>)  
+                	&#160;&#160;&#160;&#160;
+                	Size : (<xsl:value-of select="substring-before(substring-after(substring-after(value,','),','),',')"/>,<xsl:value-of select="substring-after(substring-after(substring-after(value,','),','),',')"/>)
+                </td>
+            </tr>
+            <xsl:call-template name="error">
+            </xsl:call-template>
+        </table>
+    </xsl:template>
+
+    <!-- ========================= -->
+    <!-- child element: info	   -->
+    <!-- Go to URL				   -->
+    <!-- ========================= -->
+    <xsl:template name="ActionGTU">
+        <table class="info">
+            <tr>
+                <td class="info-label data-css">
+                    <span class="data-label">Url</span>
+                </td>
+                <td class="info-data data-css absorbing-column">
+                    <xsl:value-of select="value"/>
+                </td>
+            </tr>
+            <xsl:call-template name="error">
+            </xsl:call-template>
+        </table>
+    </xsl:template>
+
+    <!-- ========================= -->
+    <!-- child element: info	   -->
+    <!-- Mouse Key				   -->
+    <!-- ========================= -->
+    <xsl:template name="ActionM">
+        <table class="info">
+            <tr>
+                <td class="info-label data-css">
+                    <span class="data-label">Type</span>
+                </td>
+                <td class="info-data data-css absorbing-column">
+                    <xsl:value-of select="value"/>
+                </td>
+            </tr>
+            <xsl:call-template name="error">
+            </xsl:call-template>
+            <xsl:call-template name="element">
+            </xsl:call-template>
+        </table>
+    </xsl:template>
+
+    <!-- ========================= -->
+    <!-- child element: info	   -->
+    <!-- Mouse scroll			   -->
+    <!-- ========================= -->
+    <xsl:template name="ActionMS">
+        <table class="info">
+            <tr>
+                <td class="info-label data-css">
+                    <span class="data-label">delta (+/-)</span>
+                </td>
+                <td class="info-data data-css absorbing-column">
+                    <xsl:choose>
+                        <xsl:when test="value = '0'">
+                            Automatic scroll to the element below.
+                        </xsl:when>
+                        <xsl:otherwise>
+                            <xsl:value-of select="value"/>
+                        </xsl:otherwise>
+                    </xsl:choose>
+                </td>
+            </tr>
+            <xsl:call-template name="error">
+            </xsl:call-template>
+            <xsl:call-template name="element">
+            </xsl:call-template>
+        </table>
+    </xsl:template>
+
+    <!-- ========================= -->
+    <!-- child element: info	   -->
+    <!-- Text					   -->
+    <!-- ========================= -->
+    <xsl:template name="ActionText">
+        <table class="info">
+            <tr>
+                <td class="info-label data-css">
+                    <span class="data-label">Text</span>
+                </td>
+                <td class="info-data data-css absorbing-column">
+                    <xsl:value-of select="value"/>
+                </td>
+            </tr>
+            <xsl:call-template name="error">
+            </xsl:call-template>
+            <xsl:call-template name="element">
+            </xsl:call-template>
+        </table>
+    </xsl:template>
+
+    <!-- ========================= -->
+    <!-- child element: info	   -->
+    <!-- AssertCount			   -->
+    <!-- ========================= -->
+    <xsl:template name="ActionAC">
+        <xsl:variable name="ErrorCode" select="-8"/>
+        <table class="info">
+            <xsl:choose>
+                <xsl:when test="(error != $ErrorCode)">
+                    <xsl:call-template name="error">
+                    </xsl:call-template>
+                    <xsl:call-template name="element">
+                    </xsl:call-template>
+                </xsl:when>
+            </xsl:choose>
+            <tr>
+                <xsl:choose>
+                    <xsl:when test="(error = $ErrorCode)">
+                        <td class="info-label data-css" style="background: #C72913;">
+                            <span class="data-label" style="color: #ffffff;">Verification failed</span>
+                        </td>
+                        <td class="info-data data-css absorbing-column"
+                            style="background: linear-gradient(90deg, #FFCFC9 0%, rgba(255, 214, 214, 0) 72.92%);">
+                            <xsl:text>Expected elements number :</xsl:text>
+                            <xsl:call-template name="emptyVerif">
+                                <xsl:with-param name="field" select="substring-after(data, '= ')"/>
+                            </xsl:call-template>
+                            <xsl:text>, found elements</xsl:text>
+                            <xsl:call-template name="emptyVerif">
+                                <xsl:with-param name="field" select="value"/>
+                            </xsl:call-template>
+                        </td>
+                    </xsl:when>
+                    <xsl:when test="(error = 0)">
+                        <td class="info-label data-css" style="background: #259B12;">
+                            <span class="data-label" style="color: #ffffff;">Verification passed</span>
+                        </td>
+                        <td class="info-data data-css absorbing-column"
+                            style="background: linear-gradient(90deg, #D1EEC6 0%, rgba(209, 238, 198, 0) 72.92%);">
+                            <xsl:text>Expected elements number :</xsl:text>
+                            <xsl:call-template name="emptyVerif">
+                                <xsl:with-param name="field" select="substring-after(data, '= ')"/>
+                            </xsl:call-template>
+                            <xsl:text>, found elements :</xsl:text>
+                            <xsl:call-template name="emptyVerif">
+                                <xsl:with-param name="field" select="value"/>
+                            </xsl:call-template>
+                        </td>
+                    </xsl:when>
+                </xsl:choose>
+            </tr>
+        </table>
+    </xsl:template>
+
+    <!-- ========================= -->
+    <!-- child element: info	   -->
+    <!-- Assert property		   -->
+    <!-- ========================= -->
+    <xsl:template name="ActionAP">
+        <xsl:variable name="ErrorCode" select="-6"/>
+        <table class="info">
+            <tr>
+                <xsl:choose>
+                    <xsl:when test="(error = $ErrorCode)">
+                        <td class="info-label data-css" style="background: #C72913;">
+                            <span class="data-label" style="color: #ffffff;">Verification failed</span>
+                        </td>
+                        <td class="info-data data-css absorbing-column"
+                            style="background: linear-gradient(90deg, #FFCFC9 0%, rgba(255, 214, 214, 0) 72.92%);">
+
+                            <xsl:call-template name="emptyVerif">
+                                <xsl:with-param name="field" select="substring-before(value, ' ')"/>
+                            </xsl:call-template>
+                            <xsl:text>property element equal to</xsl:text>
+                            <xsl:call-template name="emptyVerif">
+                                <xsl:with-param name="field" select="data"/>
+                            </xsl:call-template>
+                            <xsl:text>, expected value :</xsl:text>
+                            <xsl:call-template name="emptyVerif">
+                                <xsl:with-param name="field" select="substring-after(value, '== ')"/>
+                            </xsl:call-template>
+                            <!-- Data is dissociate and display in comparator -->
+                        </td>
+                    </xsl:when>
+                    <xsl:when test="(error = 0)">
+                        <td class="info-label data-css" style="background: #259B12;">
+                            <span class="data-label" style="color: #ffffff;">Verification passed</span>
+                        </td>
+                        <td class="info-data data-css absorbing-column"
+                            style="background: linear-gradient(90deg, #D1EEC6 0%, rgba(209, 238, 198, 0) 72.92%);">
+                            <xsl:call-template name="emptyVerif">
+                                <xsl:with-param name="field" select="substring-before(value, ' ')"/>
+                            </xsl:call-template>
+                            <xsl:text>property element equal to</xsl:text>
+                            <xsl:call-template name="emptyVerif">
+                                <xsl:with-param name="field" select="data"/>
+                            </xsl:call-template>
+                            <!--							<xsl:text>, expected value : </xsl:text>-->
+                            <!--							<xsl:call-template name="emptyVerif">-->
+                            <!--								<xsl:with-param name="field" select="substring-after(value, '== ')"/>-->
+                            <!--							</xsl:call-template>-->
+                            <!-- Data is dissociate and display in comparator -->
+                        </td>
+                    </xsl:when>
+                </xsl:choose>
+            </tr>
+            <xsl:choose>
+                <xsl:when test="(error != $ErrorCode)">
+                    <xsl:call-template name="error">
+                    </xsl:call-template>
+                    <xsl:call-template name="element">
+                    </xsl:call-template>
+                </xsl:when>
+            </xsl:choose>
+        </table>
+    </xsl:template>
+
+    <!-- ========================= -->
+    <!-- child element: info	   -->
+    <!-- property 	 			   -->
+    <!-- ========================= -->
+    <xsl:template name="ActionP">
+        <table class="info">
+            <tr>
+                <td class="info-label data-css">
+                    <span class="data-label">Property</span>
+                </td>
+                <td class="info-data data-css absorbing-column">
+                    <b>Name : </b><i><xsl:value-of select="value"/></i><br/><b>Value : </b><i><xsl:value-of select="data"/></i>
+                </td>
+            </tr>
+            <xsl:call-template name="error">
+            </xsl:call-template>
+            <xsl:call-template name="element">
+            </xsl:call-template>
+        </table>
+    </xsl:template>
+
+    <!-- ========================= -->
+    <!-- child element: info	   -->
+    <!-- Assert value 	 		   -->
+    <!-- ========================= -->
+    <xsl:template name="ActionAV">
+        <xsl:variable name="ErrorCode" select="-7"/>
+        <table class="info">
+            <tr>
+                <xsl:choose>
+                    <xsl:when test="(error = $ErrorCode)">
+                        <td class="info-label data-css" style="background: #C72913;">
+                            <span class="data-label" style="color: #ffffff;">Verification failed</span>
+                        </td>
+                        <td class="info-data data-css absorbing-column"
+                            style="background: linear-gradient(90deg, #FFCFC9 0%, rgba(255, 214, 214, 0) 72.92%);">
+                            <xsl:call-template name="emptyVerif">
+                                <xsl:with-param name="field" select="value"/>
+                            </xsl:call-template>
+                            <xsl:call-template name="splitOperatorData">
+                                <xsl:with-param name="containsOperator" select="data"/>
+                            </xsl:call-template>
+                            <!-- Data is dissociate and display in comparator -->
+                        </td>
+                    </xsl:when>
+                    <xsl:when test="(error = 0)">
+                        <td class="info-label data-css" style="background: #259B12;">
+                            <span class="data-label" style="color: #ffffff;">Verification passed</span>
+                        </td>
+                        <td class="info-data data-css absorbing-column"
+                            style="background: linear-gradient(90deg, #D1EEC6 0%, rgba(209, 238, 198, 0) 72.92%);">
+                            <xsl:call-template name="emptyVerif">
+                                <xsl:with-param name="field" select="value"/>
+                            </xsl:call-template>
+                            <xsl:call-template name="splitOperatorData">
+                                <xsl:with-param name="containsOperator" select="data"/>
+                            </xsl:call-template>
+                            <!-- Data is dissociate and display in comparator -->
+                        </td>
+                    </xsl:when>
+                </xsl:choose>
+            </tr>
+            <xsl:choose>
+                <xsl:when test="(error != $ErrorCode)">
+                    <xsl:call-template name="error">
+                    </xsl:call-template>
+                </xsl:when>
+            </xsl:choose>
+
+            <xsl:call-template name="element">
+            </xsl:call-template>
+        </table>
+    </xsl:template>
+
+    <!-- ========================= -->
+    <!-- child element: info	   -->
+    <!-- not Empty	 		 	   -->
+    <!-- ========================= -->
+    <xsl:template name="emptyVerif">
+        <xsl:param name="field"/>
+        <xsl:choose>
+            <xsl:when test="contains($field,'empty') or ($field = ' ')  or ($field = '')">
+                <i>
+                    <font size="2">
+                        <span class="ats-empty-field">
+                            emptyField
+                        </span>
+                    </font>
+                </i>
+            </xsl:when>
+            <xsl:otherwise>
+                <xsl:text>"</xsl:text>
+                <xsl:value-of select="$field"/>
+                <xsl:text>"</xsl:text>
+            </xsl:otherwise>
+        </xsl:choose>
+    </xsl:template>
+
+
+    <!-- ========================= -->
+    <!-- child element: info	   -->
+    <!-- Scripting 	 		 	   -->
+    <!-- ========================= -->
+    <xsl:template name="ActionScripting">
+        <table class="info">
+            <tr>
+                <td class="info-label data-css">
+                    <span class="data-label">Value</span>
+                </td>
+                <td class="info-data data-css absorbing-column">
+                    <xsl:value-of select="value"/>
+                </td>
+            </tr>
+            <xsl:call-template name="error">
+            </xsl:call-template>
+            <xsl:call-template name="element">
+            </xsl:call-template>
+        </table>
+    </xsl:template>
+
+    <!-- ========================= -->
+    <!-- child element: info	   -->
+    <!-- Select 	 		 	   -->
+    <!-- ========================= -->
+    <xsl:template name="ActionSelect">
+        <table class="info">
+            <xsl:call-template name="error">
+            </xsl:call-template>
+            <xsl:call-template name="element">
+            </xsl:call-template>
+        </table>
+    </xsl:template>
+
+    <!-- ========================= -->
+    <!-- child element: info	   -->
+    <!-- Api		 		 	   -->
+    <!-- ========================= -->
+    <xsl:template name="ActionApi">
+        <table class="info">
+            <tr>
+                <td class="info-label data-css">
+                    <span class="data-label">Data</span>
+                </td>
+                <td class="info-data data-css absorbing-column">
+                    <span style="padding: 0px 0px 0px 4px;color:#4d545d">
+                        <font size="2">
+                            <i>Data not available at this time</i>
+                        </font>
+                    </span>
+                </td>
+            </tr>
+            <xsl:call-template name="error">
+            </xsl:call-template>
+            <xsl:call-template name="element">
+            </xsl:call-template>
+        </table>
+    </xsl:template>
+
+    <!-- ========================= -->
+    <!-- child element: info	   -->
+    <!-- Window State		 	   -->
+    <!-- ========================= -->
+    <xsl:template name="ActionWState">
+        <table class="info">
+            <tr>
+                <td class="info-label data-css">
+                    <span class="data-label">Type</span>
+                </td>
+                <td class="info-data data-css absorbing-column">
+                    <xsl:value-of select="value"/>
+                </td>
+            </tr>
+            <xsl:choose>
+                <xsl:when test="(value = 'restore')">
+                    <tr>
+                        <td class="info-label data-css">
+                            <span class="data-label">Channel</span>
+                        </td>
+                        <td class="info-data data-css absorbing-column">
+                            <xsl:apply-templates select="channel">
+                            </xsl:apply-templates>
+                        </td>
+                    </tr>
+                </xsl:when>
+            </xsl:choose>
+            <xsl:call-template name="error">
+            </xsl:call-template>
+            <xsl:call-template name="element">
+            </xsl:call-template>
+        </table>
+    </xsl:template>
+
+
+    <!-- ========================= -->
+    <!-- child element: info	   -->
+    <!-- Property Set		 	   -->
+    <!-- ========================= -->
+    <xsl:template name="ActionPS">
+        <table class="info">
+            <tr>
+                <td class="info-label data-css">
+                    <span class="data-label">Assignation</span>
+                </td>
+                <td class="info-data data-css absorbing-column">
+                    Assign "<xsl:value-of select="data"/>" value of "<xsl:value-of select="value"/>" system property
+                </td>
+            </tr>
+            <xsl:call-template name="error">
+            </xsl:call-template>
+            <xsl:call-template name="element">
+            </xsl:call-template>
+        </table>
+    </xsl:template>
+
+
+    <!-- ========================= -->
+    <!-- child element: info	   -->
+    <!-- Comment 	 		 	   -->
+    <!-- ========================= -->
+    <xsl:template name="ActionComment">
+        <table class="info">
+            <tr height="28px">
+                <td style="padding-left: 16px; border: 0px" colspan="4">
+                    <div>
+                        <xsl:value-of select="data" disable-output-escaping="yes"/>
+                    </div>
+                </td>
+            </tr>
+        </table>
+    </xsl:template>
+
+    <xsl:template name="action-header">
+        <thead>
+            <tr height="36px" class="action-Header">
+                <td>
+                    <div>
+                        <xsl:call-template name="substring-after-last">
+                            <xsl:with-param name="string" select="@type"/>
+                            <xsl:with-param name="delimiter" select="'.'"/>
+                        </xsl:call-template>
+                    </div>
+                </td>
+                <td width="100%">
+                    <i>
+                        <font size="2">
+                            <span class="ats-script-action">
+                                <a>
+                                    <xsl:attribute name="href">
+                                        <xsl:value-of
+                                                select="concat('ats://', $projectUuid, '/script/', script, '/', line)"/>
+                                    </xsl:attribute>
+                                    <span class="ats-icon-hl-12-grey" width="12" height="12"/>
+                                    <xsl:value-of select="script"/>
+                                    ( line
+                                    <xsl:value-of select="line"/>
+                                    )
+                                </a>
+                            </span>
+                        </font>
+                    </i>
+                </td>
+                <td width="300">
+                    <i>
+                        <FONT SIZE="2">
+                            <span style="white-space: nowrap">
+                                <xsl:choose>
+                                    <xsl:when test="@type != 'com.ats.script.actions.ActionComment'">
+                                        <xsl:value-of select="duration"/>
+                                        ms
+                                    </xsl:when>
+                                    <xsl:otherwise>
+                                    </xsl:otherwise>
+                                </xsl:choose>
+                            </span>
+                        </FONT>
+                    </i>
+                </td>
+                <td class="ats-icon" style="padding:0px;">
+                    <xsl:choose>
+                        <xsl:when test="@type != 'com.ats.script.actions.ActionComment'">
+                            <xsl:choose>
+                                <xsl:when test="passed = 'true'">
+                                    <span class="ats-icon-true" width="24" height="24"
+                                          style="background-size: 24px 24px;"/>
+                                </xsl:when>
+                                <xsl:when test="passed = 'warning'">
+                                    <span class="ats-icon-warning" width="24" height="24"
+                                          style="background-size: 24px 24px;"/>
+                                </xsl:when>
+                                <xsl:when test="passed = 'false'">
+                                    <xsl:choose>
+                                        <xsl:when test="stop = 'true'">
+                                            <span class="ats-icon-false" width="24" height="24"
+                                                  style="background-size: 24px 24px;"/>
+                                        </xsl:when>
+                                        <xsl:otherwise>
+                                            <span class="ats-icon-no-stop" width="30" height="24"
+                                                  style="background-size: 30px 24px;"/>
+                                        </xsl:otherwise>
+                                    </xsl:choose>
+                                </xsl:when>
+                            </xsl:choose>
+                        </xsl:when>
+                    </xsl:choose>
+                </td>
+            </tr>
+        </thead>
+    </xsl:template>
+
+
+    <!-- ========================== -->
+    <!-- child element: QA_level_2  -->
+    <!-- ========================== -->
+    <xsl:template name="data2">
+        <xsl:param name="fullTestName"/>
+        <tr>
+            <td colspan="4" style="border:0px;">
+                <table width="100%">
+                    <THEAD>
+                        <tr class="action-details">
+                            <th>Informations</th>
+                        </tr>
+                        <tr class="action-details">
+                            <th class="hr">
+                                <hr></hr>
+                            </th>
+                        </tr>
+                    </THEAD>
+                    <TBODY class="table-infos">
+                        <xsl:call-template name="infosSelector">
+                        </xsl:call-template>
+                    </TBODY>
+                </table>
+            </td>
+        </tr>
+    </xsl:template>
+
+    <!-- ========================= -->
+    <!-- child element: QA level3  -->
+    <!-- ========================= -->
+    <xsl:template name="data3">
+        <xsl:param name="fullTestName"/>
+        <tr>
+            <td colspan="4" style="border:0px;">
+                <table width="100%">
+                    <THEAD>
+                        <tr class="action-details">
+                            <xsl:choose>
+                                <xsl:when test="img/@video = 'true'">
+                                    <th class="screen-video">&#160;&#160;&#160;&#160;&#160;&#160;Screen record</th>
+                                </xsl:when>
+                                <xsl:otherwise>
+                                    <th class="screen-image">&#160;&#160;&#160;&#160;&#160;&#160;Screen capture</th>
+                                </xsl:otherwise>
+                            </xsl:choose>
+                            <th>Informations</th>
+                        </tr>
+                        <tr class="action-details">
+                            <th class="hr">
+                                <hr></hr>
+                            </th>
+                            <th class="hr">
+                                <hr></hr>
+                            </th>
+                        </tr>
+                    </THEAD>
+                    <TBODY>
+                        <tr>
+							<xsl:choose>
+								<xsl:when test="img/@type = 'api'">
+									 <td class="api-img">
+                                      	<span class="api-icon" width="100" height="100"/>
+                                     </td>
+                                </xsl:when>
+                                <xsl:otherwise>
+									<td class="action-img">
+	                                <xsl:choose>
+	                                    <xsl:when test="img/@type = 'video'">
+	                                        <xsl:call-template name="video">
+	                                            <xsl:with-param name="id" select="img/@id"/>
+	                                            <xsl:with-param name="data" select="concat('data:video/', img/@type, ';base64,', img/@src)"/>
+	                                        </xsl:call-template>
+	                                    </xsl:when>
+	                                    <xsl:otherwise>
+                                       		<xsl:call-template name="screen">
+	                                       		<xsl:with-param name="id" select="img/@id"/>
+	                                       		<xsl:with-param name="data" select="concat('data:image/', img/@type, ';base64,', img/@src)"/>
+	                                        </xsl:call-template>
+	                                    </xsl:otherwise>
+	                                </xsl:choose>
+	                            </td>
+								</xsl:otherwise>
+							</xsl:choose>
+
+                            <td style="border: 0px; vertical-align:top;">
+                                <xsl:call-template name="infosSelector">
+                                </xsl:call-template>
+                            </td>
+                        </tr>
+                    </TBODY>
+                </table>
+            </td>
+        </tr>
+    </xsl:template>
+
+
+    <!-- ========================= -->
+    <!-- child element: action -->
+    <!-- ========================= -->
+    <xsl:template match="action">
+        <xsl:param name="suiteLvl" select="../../../../../@devReportLevel"/>
+        <xsl:param name="fullTestName"/>
+        <xsl:param name="i"/>
+        <xsl:variable name="j" select="line"/>
+        <div class="divAction">
+            <xsl:choose>
+                <xsl:when test="($suiteLvl = '1')">
+                    <table class="action-table" style="padding-bottom:0px">
+                        <xsl:call-template name="action-header">
+                        </xsl:call-template>
+                        <xsl:choose>
+                            <xsl:when test="(@type = 'com.ats.script.actions.ActionComment')">
+                                <tbody id="actions{$i}" class="collapse action-info">
+                                    <tr>
+                                        <td colspan="4" style="border:0px;">
+                                            <xsl:call-template name="ActionComment">
+                                            </xsl:call-template>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </xsl:when>
+                        </xsl:choose>
+                    </table>
+                </xsl:when>
+                <xsl:otherwise>
+                    <table class="action-table">
+                        <xsl:call-template name="action-header">
+                        </xsl:call-template>
+                        <tbody id="actions{$i}" class="collapse action-info">
+                            <xsl:choose>
+                                <xsl:when test="($suiteLvl = '3')">
+                                    <xsl:choose>
+                                        <xsl:when test="(@type = 'com.ats.script.actions.ActionApi')">
+                                            <xsl:call-template name="data2">
+                                                <xsl:with-param name="fullTestName" select="$fullTestName"/>
+                                            </xsl:call-template>
+                                        </xsl:when>
+                                        <xsl:otherwise>
+                                            <xsl:call-template name="data3">
+                                                <xsl:with-param name="fullTestName" select="$fullTestName"/>
+                                            </xsl:call-template>
+                                        </xsl:otherwise>
+                                    </xsl:choose>
+                                </xsl:when>
+                                <xsl:when test="($suiteLvl = '2')">
+                                    <xsl:call-template name="data2">
+                                        <xsl:with-param name="fullTestName" select="$fullTestName"/>
+                                    </xsl:call-template>
+                                </xsl:when>
+                            </xsl:choose>
+                        </tbody>
+                    </table>
+                </xsl:otherwise>
+            </xsl:choose>
+        </div>
+    </xsl:template>
+</xsl:stylesheet>
